@@ -16,7 +16,7 @@ module.exports = async function db(query) {
       host: DB_HOST || "127.0.0.1",
       user: DB_USER || "root",
       password: DB_PASS || "root",
-      database: DB_NAME || "my_express_app",
+      database: DB_NAME || "next_tenant",
       multipleStatements: true
     });
 
