@@ -12,7 +12,7 @@
 ### Database Prep
 
 - Access the MySQL interface in your terminal by running `mysql -u root -p`
-- Create a new database called facebook: `create database next_tenant `
+- Create a new database called Next Tenant: `create database next_tenant `
 - Check the `.env` file has YOUR MySQL password.
 - Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create three tables called 'users', 'properties' and 'reviews' in your database.
 

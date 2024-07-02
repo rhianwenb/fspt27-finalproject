@@ -18,7 +18,7 @@ CREATE TABLE users(
     EmailAddress VARCHAR(30),
     Password VARCHAR(20),
     Age INT,
-
+    Type VARCHAR(20)  -- tenant or landlord 
 );
 
 CREATE TABLE properties(
@@ -42,6 +42,8 @@ CREATE TABLE reviews(
     Rating1 INT,
     Rating2 INT,
     Rating3 Int,
+    Rating4 Int,
+    Rating5 Int,
+    Rating6 Int,
     Comments TEXT(8000) 
-
 );
