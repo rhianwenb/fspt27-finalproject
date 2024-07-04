@@ -5,8 +5,8 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var propertyRouter = require('./routes/properties');
-var reviewsRouter = require('./routes/reviews');
 var usersRouter = require('./routes/users');
+var reviewsRouter = require('./routes/reviews');
 
 var app = express();
 
@@ -17,8 +17,9 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
-app.use('/api/property', propertyRouter);
-app.use('/api/reviews', reviewsRouter)
+
+app.use('/api/properties', propertyRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/reviews', reviewsRouter);
 
 module.exports = app;
