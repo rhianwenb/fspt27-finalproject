@@ -1,9 +1,7 @@
 import { useState} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar'
 import './App.css'
 
-import { useNavigate } from 'react-router-dom';
 
 
 import Search from './pages/Search'
@@ -11,14 +9,13 @@ import DisplayOnMap from './pages/DisplayOnMap'
 import AddAReview from './pages/AddAReview'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
-// import NavContext from './context/NavContext';
+import NavContext from './context/NavContext';
 
 
 
 function App() {
-  // const [currentPage, setCurrentPage] = useState("Search");
+  const [currentPage, setCurrentPage] = useState("Search");
 
-  // const changePage = useNavigate();
 
   return (
     <>
@@ -26,7 +23,7 @@ function App() {
         <h1>FSPT27 Final Project!</h1>
       </div>
 
-      {/* <NavContext.Provider value={{currentPage}}> */}
+      <NavContext.Provider value={{currentPage, setCurrentPage}}>
 
         <Router>
           <Routes>
@@ -38,7 +35,7 @@ function App() {
           </Routes>
         </Router>
 
-      {/* </NavContext.Provider> */}
+      </NavContext.Provider>
         
       
     </>
