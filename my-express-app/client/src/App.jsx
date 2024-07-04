@@ -2,6 +2,7 @@ import { useState} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import './App.css'
+
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,6 +12,10 @@ import AddAReview from './pages/AddAReview'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 // import NavContext from './context/NavContext';
+
+  
+import Map from './components/Map.jsx'
+
 
 function App() {
   // const [currentPage, setCurrentPage] = useState("Search");
@@ -39,6 +44,9 @@ function App() {
         
       
 
+      <div>
+        <Map/>
+      </div>
     </>
   )
 }

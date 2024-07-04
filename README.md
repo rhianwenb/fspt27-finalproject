@@ -26,10 +26,12 @@
 
 ### Postman / API 
 
-- The currently available database routes are as follows:  
+- Available database routes are as follows:  
 
     GET:
-        http://localhost:5000/api/index
+        http://localhost:5000/api/properties
+        http://localhost:5000/api/users
+        http://localhost:5000/api/reviews
 
 
 

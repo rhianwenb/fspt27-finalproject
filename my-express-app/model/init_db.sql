@@ -3,8 +3,8 @@
 --
 
 SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS properties;
+
+DROP TABLE IF EXISTS users, properties, reviews;
 SET foreign_key_checks = 1;
 
 --
@@ -19,7 +19,7 @@ CREATE TABLE users(
     EmailAddress VARCHAR(30),
     Password VARCHAR(20),
     Age INT,
-    Type VARCHAR(20)  -- tenant or landlord 
+    Type VARCHAR(20)  
 );
 
 CREATE TABLE properties(
