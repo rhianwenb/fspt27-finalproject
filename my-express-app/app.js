@@ -17,6 +17,7 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
+
 app.use('/api/properties', propertyRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/reviews', reviewsRouter);
