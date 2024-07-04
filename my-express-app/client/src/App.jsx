@@ -13,8 +13,6 @@ import Community from './pages/Community'
 import Profile from './pages/Profile'
 // import NavContext from './context/NavContext';
 
-  
-import Map from './components/Map.jsx'
 
 
 function App() {
@@ -43,10 +41,6 @@ function App() {
       {/* </NavContext.Provider> */}
         
       
-
-      <div>
-        <Map/>
-      </div>
     </>
   )
 }
