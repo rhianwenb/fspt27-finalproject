@@ -36,15 +36,18 @@ CREATE TABLE properties(
 );
 
 CREATE TABLE reviews(
-    ReviewID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
-    FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID),
+    ReviewID INT NOT NULL AUTO_INCREMENT,
+    UserID INT,
+    PropertyID INT,
     ReviewDate DATE,
     Rating1 INT,
     Rating2 INT,
-    Rating3 Int,
-    Rating4 Int,
-    Rating5 Int,
-    Rating6 Int,
-    Comments TEXT(8000) 
+    Rating3 INT,
+    Rating4 INT,
+    Rating5 INT,
+    Rating6 INT,
+    Comments TEXT,
+    PRIMARY KEY (ReviewID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
