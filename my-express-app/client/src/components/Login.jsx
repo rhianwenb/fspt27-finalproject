@@ -1,0 +1,80 @@
+import React from 'react';
+import { useState } from 'react';
+import axios from "axios"; 
+import { useNavigate } from 'react-router-dom';
+
+export default function Login() {
+
+    const [credentials, setCredentials] = useState({
+        UserName: "",
+        EmailAddress: "",
+        Password: ""
+    });
+
+    const {UserName, EmailAddress, Password} = credentials;
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setCredentials({...credentials, [name]: value});
+    };
+
+    const login = async () => {
+        try {
+          const { data } = await axios("/api/users/login", {
+            method: "POST",
+            data: credentials
+          });
+          localStorage.setItem("token", data.token);
+          console.log("Login successful");
+        }
+        catch (error) {
+          console.log(error);
+        }   
+      };
+
+      const logout = () => {
+        localStorage.removeItem("token");
+        console.log("Logout successful");
+      };
+
+  return (
+    <div>
+        <div className="container"> 
+            Login: Enter username or email address 
+            <div className="col-md">
+                <form>
+                    <div className="form-box">
+                        <div className="col">
+                            <input className="form-control"
+                            name="UserName" value={UserName}
+                            placeholder="Username " type="text"
+                            onChange={handleChange}/>
+                        </div>
+                        <div className="col">
+                            <input className="form-control"
+                            name="EmailAddress" value={EmailAddress}
+                            placeholder="Email address " type="text"
+                            onChange={handleChange}/>
+                        </div>
+                        <div className="col">
+                            <input className="form-control"
+                            name="Password" value={Password}
+                            placeholder="Password " type="password"
+                            onChange={handleChange}/>
+                        </div>
+                        <div className="d-flex gap-2 justify-content-center mt-3">
+                            <button className="btn btn-outline-dark ml-2" onClick={login}>
+                                Log In
+                            </button>
+                            <button className="btn btn-outline-dark ml-2" onClick={logout}>
+                                Log Out
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>        
+        </div>
+    </div>
+  )
+};

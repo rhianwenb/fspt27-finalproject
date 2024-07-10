@@ -17,7 +17,7 @@ CREATE TABLE users(
     LastName VARCHAR(30),
     UserName VARCHAR(30) NOT NULL,
     EmailAddress VARCHAR(30),
-    Password VARCHAR(20),
+    Password VARCHAR(100),
     Age INT,
     Type VARCHAR(20)  
 );
