@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import "../styles/AddAReview.css"
 
+import AddressForm from '../components/AddressForm'
+
 export default function AddAReview() {
   const [step,setStep] = useState(1);
 
@@ -21,8 +23,8 @@ export default function AddAReview() {
       {step===1 && 
         <>
           <h3>Basic informations</h3>
-
-          <form>
+          <AddressForm handleNextStep = {handleNextStep}/>
+          {/* <form>
             <label style={{gridArea:"1/1/span 1/span 1"}}>
               <p>Number*</p>
               <input type='number'/>
@@ -52,7 +54,7 @@ export default function AddAReview() {
               onClick={(event)=>handleNextStep(event)}
             >Next step</button></div>
 
-          </form>
+          </form> */}
         </>
       }
 
