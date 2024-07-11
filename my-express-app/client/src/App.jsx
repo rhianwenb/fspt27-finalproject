@@ -19,9 +19,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1>FSPT27 Final Project!</h1>
-      </div>
+        <h1 style={{margin:"5px auto"}}>NextTenant</h1>
 
       <NavContext.Provider value={{currentPage, setCurrentPage}}>
 

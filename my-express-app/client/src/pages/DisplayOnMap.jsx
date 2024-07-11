@@ -46,7 +46,8 @@ if (!isLoaded) return <div>Loading...</div>
                 <ComboboxInput 
                     value = {value} 
                     onChange={(e)=>setValue(e.target.value)} 
-                    disabled={!ready} 
+                    //Fix disabled, it was connected to ready
+                    disabled={false} 
                     className="combobox-input"
                     placeholder = "Search an address"
                 />
