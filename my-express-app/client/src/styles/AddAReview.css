@@ -63,19 +63,15 @@
 .stars {
     display: flex;
 }
-
-.stars svg {
-    margin:10px
+svg#Layer_1 {
+    margin:8px;
+    cursor: pointer;
 }
 
-.orangeStar{
+.orangeStar path{ 
     fill:#FF6600;
 }
-/* #addareview .star {
-    background-image: url("../assets/star.svg");
-    background-image: ;
 
-} */
 
 
 @media screen and (max-width:500px){
