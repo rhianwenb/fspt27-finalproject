@@ -58,11 +58,14 @@ router.post("/register", async (req, res, next) => {
 // existing user login 
 router.post("/login", async (req, res) => {
   const {UserName, Password} = req.body;
+
   try {
     const results = await db(
-      `SELECT "${UserName}" FROM users`
+      `SELECT * FROM users WHERE UserName = "${UserName}"`
     );
+ 
     const existingUser = results.data[0];
+  
     if (existingUser) {
       const userId = existingUser.UserId;
       const correctPassword = await bcrypt.compare(Password, existingUser.Password);
@@ -73,6 +76,7 @@ router.post("/login", async (req, res) => {
       throw new Error("User does not exist");
     }
   } catch (e) {
+    console.log(e);
     res.status(400).send({message: e.message});
   }
 });
