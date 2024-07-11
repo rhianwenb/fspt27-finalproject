@@ -6,8 +6,23 @@
 ### Dependencies
 
 - Run `npm install` in project directory. This will install server-related dependencies such as `express`.
+- Delete the line reach/combobox on package.json (client)
 - `cd client` and run `npm install`. This will install client dependencies (React).
+- Run these two commands separately : `npm config set legacy-peer-deps true` and then `npm i @reach/combobox`
 
+### .env file(s)
+- Create .env in your project directory and add info for your MySQL database:
+  ```
+  DB_HOST=localhost
+  DB_USER=YOUR_USERNAME
+  DB_PASS=YOUR_PASSWORD
+  DB_NAME=next_tenant
+  SUPER_SECRET=YOUR_SECRET_KEY
+  ```
+- Create .env in the client directory and add key for google maps APIs:
+```
+    
+```
 
 ### Database Prep
 
