@@ -1,5 +1,8 @@
 import { useState} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar'
+import RegisterUser from './components/RegisterUser.jsx';
+import Login from './components/Login.jsx';
 import './App.css'
 
 
@@ -19,7 +22,9 @@ function App() {
 
   return (
     <>
+
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
+
 
       <NavContext.Provider value={{currentPage, setCurrentPage}}>
 

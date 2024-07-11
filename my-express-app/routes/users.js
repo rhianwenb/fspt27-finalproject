@@ -47,7 +47,7 @@ router.post("/register", async (req, res, next) => {
     // lookup users in decending order by id and return one entry from bottom of list (will be the newest entry)
     const result = await db("SELECT * FROM users AS new_user ORDER BY UserID DESC LIMIT 1"); 
     // send that data back as an object 
-    res.status(201).send(result.data);  
+    res.status(201).send("Registration successful");  
   }
   catch (e) {
     res.status(500).send({error: e.message});
@@ -56,11 +56,11 @@ router.post("/register", async (req, res, next) => {
 
 
 // existing user login 
-router.post("/login", userMustExist, async (req, res) => {
-  const {UserName, EmailAddress, Password} = req.body;
+router.post("/login", async (req, res) => {
+  const {UserName, Password} = req.body;
   try {
     const results = await db(
-      `SELECT * FROM users WHERE UserName = "${UserName}" OR EmailAddress = "${EmailAddress}" `
+      `SELECT "${UserName}" FROM users`
     );
     const existingUser = results.data[0];
     if (existingUser) {
