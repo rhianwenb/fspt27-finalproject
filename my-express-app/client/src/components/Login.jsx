@@ -8,7 +8,7 @@ export default function Login() {
 
     const [credentials, setCredentials] = useState({
         UserName: "",
-        Password: ""
+        Password: "",
     });
 
     const {UserName, Password} = credentials;
@@ -18,14 +18,19 @@ export default function Login() {
         setCredentials({...credentials, [name]: value});
     };
 
-    const login = async () => {
+    const login = async (e) => {
+        e.preventDefault();
         try {
           const { data } = await axios("/api/users/login", {
             method: "POST",
             data: credentials
           });
           localStorage.setItem("token", data.token);
-          console.log(data.message, "Login successful");
+          console.log(data.message);
+          setCredentials({
+            UserName: "",
+            Password: "",
+          })
         }
         catch (error) {
           console.log(error);
@@ -33,6 +38,7 @@ export default function Login() {
       };
 
       const logout = () => {
+        e.preventDefault();
         localStorage.removeItem("token");
         console.log("Logout successful");
       };

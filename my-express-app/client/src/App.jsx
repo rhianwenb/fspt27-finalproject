@@ -22,6 +22,8 @@ function App() {
 
   return (
     <>
+      {/* <RegisterUser />
+      <Login /> */}
 
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
 
