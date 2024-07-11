@@ -28,6 +28,7 @@ function App() {
     <>
       <div>
         <h1>FSPT27 Final Project!</h1>
+     
       </div>
 
       {/* <NavContext.Provider value={{currentPage}}> */}
@@ -47,7 +48,7 @@ function App() {
       
 
       <div>
-        {/* <Map/> */}
+        <Map/>
       </div>
     </>
   )

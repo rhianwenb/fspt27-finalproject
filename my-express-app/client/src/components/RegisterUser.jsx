@@ -21,6 +21,7 @@ export default function RegisterUser() {
     }
 
     const handleUserSubmit = (e) => {
+      e.preventDefault();
         registerUser(newUser);
         setNewUser({    
             FirstName: "",
