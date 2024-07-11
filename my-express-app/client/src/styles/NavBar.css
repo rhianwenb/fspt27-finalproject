@@ -23,12 +23,16 @@
     fill:white;
     width:100%;
     max-height: 100%;
+    cursor: pointer;
 }
 
-#navbar button svg:hover{
+#navbar .inactive svg:hover{
     fill: #4DBEFF;
-    cursor: pointer;
 } 
+
+#navbar .active svg {
+    fill:#FF9900;
+}
 
 
 @media screen and (max-width:600px) {
