@@ -12,8 +12,9 @@ export default function AddressForm({hanleNextStep}){
     }
 
     const [address, setAddress] = useState(emptyAddress)
-    const [validationMessage, setValidationMessage] = useState('');
+    const [validatedAddress, setValidatedAddress] = useState({});
     const [validAddress, setValidAddress] = useState(false)
+    const [postCodeValid, setPostCodeValid] = useState(true) // use this to change styling of input ?
 
     function handleChange(e){
         const value = e.target.value;
@@ -34,33 +35,57 @@ export default function AddressForm({hanleNextStep}){
     }
 
     const validateAddress = async (a) => {
-        console.log(Object.values(a).join(', '))
-        let search = Object.values(a).join(', ')
-        try {
-          const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-            params: {
-              address: search,
-              components: 'country:UK',
-              key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-            },
-          });
-          console.log(response.data.results[0])
+        let search = Object.values(a).filter(n => n) // api accepts 1 string for the address
+        // let search = [a.line1, a.line2, a.line3, a.city].filter(n=>n)
+        console.log(search)
 
-        //   setValidAddress(true)
-        
-          if (response.data.status === 'OK') {
-            console.log('Response OK')
-            const formattedAddress = response.data.results[0].formatted_address;
-            setValidationMessage(`Valid address: ${formattedAddress}`);
-          } else {
-            console.log('Response NOT ok')
-            setValidationMessage('Invalid address');
-          }
+        try {
+            const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+            const response = await axios.post(`https://addressvalidation.googleapis.com/v1:validateAddress?key=${API_KEY}`,{
+                    address: {
+                    regionCode: "GB",
+                    addressLines: [search], 
+                    // postalCode:a.postcode
+                    },
+                }
+            );
+            console.log('RESPONSE:')
+            console.log(response.data.result)
+            // setValidatedAddress(response.data.result)
+            
+            if (!response.data.result.address.missingComponentTypes) {
+                const formattedAddress = response.data.result.address.formattedAddress   
+                // console.log('Formatted address:')
+                // console.log(formattedAddress)
+                
+                const location = response.data.result.geocode.location
+                // const [lat, lng] = [location.latitude, location.longitude]
+                // console.log('Geolocation:')
+                // console.log(lat, lng)
+
+                setValidatedAddress({formattedAddress, location})
+                setAddress(emptyAddress)
+                setPostCodeValid(true)
+
+            } else {
+                console.log('MISSING COMPONENT')
+                const missing = response.data.result.address.missingComponentTypes
+                console.log()
+                if (missing[0] === 'postal_code') {
+                    alert('Please double check that you have entered the correct post code')
+                    setPostCodeValid(false)
+                }
+            }
+
         } catch (error) {
           console.error(error);
           setValidationMessage('Error occurred while validating the address');
         }
       };
+
+      function AddNewProperty(){
+        
+      }
 
     return (
         <>
@@ -81,7 +106,8 @@ export default function AddressForm({hanleNextStep}){
                     type='text'
                     onChange = {handleChange}
                     name = 'line2'
-                    value = {address.line2}/>
+                    value = {address.line2}
+                    placeholder = 'optional'/>
             </label>
 
             <label style={{gridArea:"3/1/span 1/span 4"}}>
@@ -90,11 +116,12 @@ export default function AddressForm({hanleNextStep}){
                     type='text'
                     onChange = {handleChange}
                     name = 'line3'
-                    value = {address.line3}/>
+                    value = {address.line3}
+                    placeholder = 'optional'/>
             </label>
 
             <label style={{gridArea:"4/1/span 1/span 2"}}>
-                <p>City/Town*</p>
+                <p>City/Town</p>
                 <input 
                     type='text'
                     onChange = {handleChange}
@@ -108,7 +135,7 @@ export default function AddressForm({hanleNextStep}){
                     type='text'
                     onChange = {handleChange}
                     name = 'postcode'
-                    value = {address.postcode}/>
+                    value = {address.postcode} />
             </label>
             
             <div style={{gridArea:"5/1/span 1/span 4", marginTop:"20px"}}>
@@ -122,4 +149,6 @@ export default function AddressForm({hanleNextStep}){
             </form>
         </>
     )
+
+    
 }
