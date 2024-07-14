@@ -13,7 +13,7 @@ export default function AddressForm({hanleNextStep}){
 
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
-    const [validAddress, setValidAddress] = useState(false)
+    const [propertyAdded, setPropertyAdded] = useState(false)
     const [postCodeValid, setPostCodeValid] = useState(true) // use this to change styling of input ?
 
     function handleChange(e){
@@ -31,13 +31,12 @@ export default function AddressForm({hanleNextStep}){
         validateAddress(address)
 
         // if successful -> handleNextStep(e)
-        if (validAddress) handleNextStep(e)
+        if (propertyAdded) handleNextStep(e)
     }
 
     const validateAddress = async (a) => {
         let search = Object.values(a).filter(n => n) // api accepts 1 string for the address
-        // let search = [a.line1, a.line2, a.line3, a.city].filter(n=>n)
-        console.log(search)
+        // console.log(search)
 
         try {
             const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -45,7 +44,6 @@ export default function AddressForm({hanleNextStep}){
                     address: {
                     regionCode: "GB",
                     addressLines: [search], 
-                    // postalCode:a.postcode
                     },
                 }
             );
@@ -54,18 +52,16 @@ export default function AddressForm({hanleNextStep}){
             // setValidatedAddress(response.data.result)
             
             if (!response.data.result.address.missingComponentTypes) {
-                const formattedAddress = response.data.result.address.formattedAddress   
-                // console.log('Formatted address:')
-                // console.log(formattedAddress)
-                
+                const FormattedAddress = response.data.result.address.formattedAddress      
                 const location = response.data.result.geocode.location
-                // const [lat, lng] = [location.latitude, location.longitude]
-                // console.log('Geolocation:')
-                // console.log(lat, lng)
+                const [Latitude, Longitude] = [location.latitude, location.longitude]
 
-                setValidatedAddress({formattedAddress, location})
-                setAddress(emptyAddress)
+                setValidatedAddress({FormattedAddress, Latitude, Longitude})
+                // setAddress(emptyAddress)
                 setPostCodeValid(true)
+
+                console.log(validatedAddress)
+                addNewProperty(validatedAddress)
 
             } else {
                 console.log('MISSING COMPONENT')
@@ -79,12 +75,20 @@ export default function AddressForm({hanleNextStep}){
 
         } catch (error) {
           console.error(error);
-          setValidationMessage('Error occurred while validating the address');
         }
       };
 
-      function AddNewProperty(){
-        
+      async function addNewProperty(ad){
+        // console.log(ad)
+        try {
+            const data = await axios.post('/api/properties/', ad)
+            console.log(data) //returns the last property that was added
+            setPropertyAdded(true)
+            setValidatedAddress({})
+            
+        } catch(e){
+          console.log(e)
+        }
       }
 
     return (

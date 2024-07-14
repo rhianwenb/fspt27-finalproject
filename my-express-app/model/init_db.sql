@@ -22,17 +22,24 @@ CREATE TABLE users(
     Type VARCHAR(20)  
 );
 
+-- CREATE TABLE properties(
+--     PropertyID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+--     PropertyName VARCHAR(50),
+--     AddressLine1 VARCHAR(100),
+--     AddressLine2 VARCHAR(100),
+--     AddressLine3 VARCHAR(100),
+--     Town VARCHAR(100),
+--     City VARCHAR(100),
+--     County VARCHAR(100),
+--     State VARCHAR(100),
+--     PostCode VARCHAR(20)
+-- );
+
 CREATE TABLE properties(
     PropertyID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    PropertyName VARCHAR(50),
-    AddressLine1 VARCHAR(100),
-    AddressLine2 VARCHAR(100),
-    AddressLine3 VARCHAR(100),
-    Town VARCHAR(100),
-    City VARCHAR(100),
-    County VARCHAR(100),
-    State VARCHAR(100),
-    PostCode VARCHAR(20)
+    FormattedAddress VARCHAR(100) NOT NULL,
+    Latitude DECIMAL (10,7) NOT NULL,
+    Longitude DECIMAL (10, 7) NOT NULL
 );
 
 CREATE TABLE reviews(
@@ -51,3 +58,16 @@ CREATE TABLE reviews(
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
+
+
+-- POPULATE PROPERTY TABLE WITH DUMMY DATA
+INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
+('Flat 9, Basin Mill, Laburnum street, E2 8FP', 51.4987703, -0.0421737),
+('Apartment 3, Claremont House, 28 Quebec Way, London SE16 7FS, UK', 51.4987703, -0.0421737),
+('123A Hammersmith Grove, London W6 0NJ, UK', 51.4990214, -0.2281128),
+('65 Brondesbury Villas, London NW6 6AG, UK', 51.5361797, -0.1971449),
+('119 Ashfield Street, London E1 3EX, UK', 51.5169185, -0.0543013),
+("84 Stork's Road, London SE16 4DP, UK", 51.4954534, -0.0641014),
+('Principle Tower, 2 Shoreditch High Street, London EC2A 2BA, UK', 51.5220985, -0.0788474),
+('40 Osborn Terrace, London SE3 9GB, UK', 51.4577030, 0.0119778),
+('206 Brunel House, 148 Christchurch Way, London SE10 0XG, UK', 51.4900827, 0.0051548);
