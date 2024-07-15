@@ -82,6 +82,13 @@ router.post("/login", async (req, res) => {
 });
 
 
+// GET private data for a specific user
+router.get("/profile", userIsLoggedIn, (req, res) => {
+  res.send({
+    message: "Here is the profile data for user " + req.UserId
+  });
+});
+
 
 // PUT update an existing user record in the database 
 router.put("/:id", userIsLoggedIn, async (req, res, next) => {

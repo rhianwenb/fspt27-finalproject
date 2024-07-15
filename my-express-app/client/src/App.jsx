@@ -16,14 +16,14 @@ import NavContext from './context/NavContext';
 
 
 
+
 function App() {
   const [currentPage, setCurrentPage] = useState("Search");
 
 
   return (
     <>
-      {/* <RegisterUser />
-      <Login /> */}
+
 
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
 
