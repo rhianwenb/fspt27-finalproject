@@ -18,7 +18,7 @@ export default function
         <form>
           <div id="stars" style={{gridArea:"1/1/span 1/span 4"}}>
               {stars.map((s,index)=>(
-                <svg key={index} className={s===1?"orangeStar":"Star"} version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                <svg key={index} className={"Star " + (s===1?"orangeStar":"")} version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                 width="30px" height="30px" viewBox="0 0 64 64" enableBackground="new 0 0 64 64" xmlSpace="preserve" onClick={()=>changeRating(index)}>
                   <path fill="#d9d9d9" d="M62.799,23.737c-0.47-1.399-1.681-2.419-3.139-2.642l-16.969-2.593L35.069,2.265
                   C34.419,0.881,33.03,0,31.504,0c-1.527,0-2.915,0.881-3.565,2.265l-7.623,16.238L3.347,21.096c-1.458,0.223-2.669,1.242-3.138,2.642

@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import "../styles/AddAReview.css"
 
 import Step2 from '../components/FormSteps/Step2';
+import Step3 from '../components/FormSteps/Step3';
 
 export default function AddAReview() {
   const [step,setStep] = useState(1);
@@ -65,14 +66,16 @@ export default function AddAReview() {
         <Step2 changeStep={handleNextStep}/>
       }
 
+      {step===3 &&
+        <Step3 changeStep={handleNextStep} />
+      }
+
       
 
       <div id="stepsAddReview">
-        <div className="activeStep" onClick={()=>setStep(1)}></div> 
+        <div className="activeStep" onClick={()=>setStep(1)} ></div> 
         <div className={step>1&&"activeStep"} onClick={()=>setStep(2)}></div> 
-        <div className={step>2&&"activeStep"} ></div> 
-        <div className={step>3&&"activeStep"}></div> 
-        <div className={step>4&&"activeStep"}></div>
+        <div className={step>2&&"activeStep"} onClick={()=>setStep(3)} ></div> 
       </div>
 
         <NavBar />
