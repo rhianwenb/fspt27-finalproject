@@ -13,6 +13,7 @@ import AddAReview from './pages/AddAReview'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import NavContext from './context/NavContext';
+import Review from './pages/Review.jsx';
 
 
 
@@ -24,8 +25,11 @@ function App() {
     <>
       {/* <RegisterUser />
       <Login /> */}
+      
 
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
+
+        <Review />
 
 
       <NavContext.Provider value={{currentPage, setCurrentPage}}>
