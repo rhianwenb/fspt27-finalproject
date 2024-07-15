@@ -58,7 +58,7 @@ router.put("/:id", userIsLoggedIn, async (req, res, next) => {
       // run sql query
       await db(updateReview); 
       // lookup single entry from ID
-      const result = await db(`SELECT * FROM reviews WHERE id = ${req.params.id}`); 
+      const result = await db(`SELECT * FROM reviews WHERE ReviewID = ${req.params.id}`); 
       // send that data back as an object 
       res.status(201).send(result.data);  
     }

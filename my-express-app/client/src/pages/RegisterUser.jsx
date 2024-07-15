@@ -2,6 +2,8 @@ import React from 'react';
 import axios from "axios"; 
 import '../styles/RegisterUser.css'
 import { useState, useEffect } from 'react';
+import NavBar from '../components/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterUser() {
 
@@ -14,6 +16,8 @@ export default function RegisterUser() {
         Age: "",
         Type: "",
     });
+
+    const navigate = useNavigate();
 
     const handleUserChange = (e) => {
         const {name, value} = e.target;
@@ -41,6 +45,7 @@ export default function RegisterUser() {
                 data: newUser
             });
             console.log("Registration successful");
+            navigate("/profile");
         }
         catch (error) {
             console.log(error.resopnse.data);
@@ -125,7 +130,7 @@ export default function RegisterUser() {
              
             </div>
         </div>
-        
+        <NavBar />
     </div>
   )
 };

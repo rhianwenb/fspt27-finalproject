@@ -58,20 +58,17 @@ router.post("/register", async (req, res, next) => {
 // existing user login 
 router.post("/login", async (req, res) => {
   const {UserName, Password} = req.body;
-
   try {
     const results = await db(
       `SELECT * FROM users WHERE UserName = "${UserName}"`
     );
- 
     const existingUser = results.data[0];
-  
     if (existingUser) {
       const userId = existingUser.UserId;
       const correctPassword = await bcrypt.compare(Password, existingUser.Password);
       if (!correctPassword) throw new Error("Incorrect Password.");
       var token = jwt.sign({userId}, supersecret);
-      res.send({message: "Login successful, here is your token", token})
+      res.send({existingUser, message: "Login successful, here is your token", token});
     } else {
       throw new Error("User does not exist");
     }
@@ -84,9 +81,9 @@ router.post("/login", async (req, res) => {
 
 // GET private data for a specific user
 router.get("/profile", userIsLoggedIn, (req, res) => {
-  res.send({
-    message: "Here is the profile data for user " + req.UserId
-  });
+    res.send({
+      message: "Here is the profile data " +  + req.params.UserName,
+    });
 });
 
 

@@ -1,13 +1,17 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import axios from "axios"; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import AuthContext from '../context/AuthContext';
+
+
 
 export default function Login() {
 
     const auth = useContext(AuthContext);
+    // console.log(auth.isLoggedIn);
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
         UserName: "",
@@ -17,19 +21,23 @@ export default function Login() {
     const {UserName, Password} = credentials;
 
     const handleChange = (e) => {
+        e.preventDefault();
         const {name, value} = e.target;
         setCredentials({...credentials, [name]: value});
     };
 
-    const login = async () => {
+    const login = async (e) => {
+        e.preventDefault();
         auth.login(credentials);
         setCredentials({
             UserName: "",
             Password: "",
           })
+          navigate("/profile");
     };
     
-    const logout = () => {
+    const logout = (e) => {
+        e.preventDefault();
         auth.logout(credentials);
     };
 
@@ -75,6 +83,9 @@ export default function Login() {
 
                 </form>
             </div>        
+            <div className="mt-3">
+                Not a user yet? <a href="/register">Register here. </a>
+            </div>
         </div>
     </div>
   )
