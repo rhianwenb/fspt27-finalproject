@@ -22,7 +22,7 @@ export default function AddAReview() {
 
       {step===1 && 
         <>
-          <h3>Basic informations</h3>
+          <h3>Basic information</h3>
           <AddressForm handleNextStep = {handleNextStep}/>
           {/* <form>
             <label style={{gridArea:"1/1/span 1/span 1"}}>

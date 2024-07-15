@@ -22,17 +22,24 @@ CREATE TABLE users(
     Type VARCHAR(20)  
 );
 
+-- CREATE TABLE properties(
+--     PropertyID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+--     PropertyName VARCHAR(50),
+--     AddressLine1 VARCHAR(100),
+--     AddressLine2 VARCHAR(100),
+--     AddressLine3 VARCHAR(100),
+--     Town VARCHAR(100),
+--     City VARCHAR(100),
+--     County VARCHAR(100),
+--     State VARCHAR(100),
+--     PostCode VARCHAR(20)
+-- );
+
 CREATE TABLE properties(
     PropertyID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    PropertyName VARCHAR(50),
-    AddressLine1 VARCHAR(100),
-    AddressLine2 VARCHAR(100),
-    AddressLine3 VARCHAR(100),
-    Town VARCHAR(100),
-    City VARCHAR(100),
-    County VARCHAR(100),
-    State VARCHAR(100),
-    PostCode VARCHAR(20)
+    FormattedAddress VARCHAR(100) NOT NULL,
+    Latitude DECIMAL (10,7) NOT NULL,
+    Longitude DECIMAL (10, 7) NOT NULL
 );
 
 CREATE TABLE reviews(

@@ -1,13 +1,14 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
 
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useEffect} from 'react';
 import { GoogleMap, useLoadScript , Marker} from "@react-google-maps/api";
 import usePlacesAutocomplete, {getGeocode,getLatLng} from "use-places-autocomplete";
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption} from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
 export default function DisplayOnMap() {
+
 
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -39,7 +40,7 @@ const handleSelect = async (address) => {
 
 if (!isLoaded) return <div>Loading...</div>
 
-  return (
+if (isLoaded)  return (
     <>
       <div className="places-container">
             <Combobox onSelect = {handleSelect}>
@@ -49,7 +50,7 @@ if (!isLoaded) return <div>Loading...</div>
                     //Fix disabled, it was connected to ready
                     disabled={false} 
                     className="combobox-input"
-                    placeholder = "Search an address"
+                    placeholder = "Search for an area"
                 />
                 <ComboboxPopover>
                     <ComboboxList>
@@ -63,7 +64,7 @@ if (!isLoaded) return <div>Loading...</div>
         </div>
   
         <GoogleMap
-          zoom={10}
+          zoom={13}
           center={center}
           mapContainerStyle={{ width: '100%', height: '100vh' }}
           >
