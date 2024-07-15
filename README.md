@@ -21,7 +21,7 @@
   ```
 - Create .env in the client directory and add key for google maps APIs:
 ```
-    
+    VITE_GOOGLE_MAPS_API_KEY = YOUR_KEY
 ```
 
 ### Database Prep
