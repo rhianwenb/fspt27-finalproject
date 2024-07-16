@@ -23,12 +23,14 @@ export default function DisplayMap(){
             geocodes.push({key, location, name})
           }
           setMarkers(geocodes)
-
-
         } catch(e){
           console.log(e)
         }
       }
+
+    function handleClick(id){        
+        console.log('click!')
+    }
 
     return (
         <>
@@ -40,10 +42,12 @@ export default function DisplayMap(){
              disableDefaultUI={true}
              mapId='DEMO_MAP_ID'
              >
-            {markers.map(p =>(
+            {markers && markers.map(p =>(
                 <AdvancedMarker
                     key = {p.key} 
-                    position = {p.location}/>
+                    position = {p.location}
+                    clickable={true}
+                    onClick={handleClick(p.name)}/>
             ))
             }
         </Map>
