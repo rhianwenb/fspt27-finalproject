@@ -74,7 +74,7 @@ export default function AddressForm({hanleNextStep}){
             }
 
         } catch (error) {
-          console.error(error);
+          console.log(error);
         }
       };
 
