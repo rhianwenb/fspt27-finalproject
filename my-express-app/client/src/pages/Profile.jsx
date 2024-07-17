@@ -10,41 +10,22 @@ import AuthContext from '../context/AuthContext.js';
 
 export default function Profile() {
 
-
+  const [userReviews, setUserReviews] = useState();
   const auth = useContext(AuthContext);
 
+  const getUserReviews = async () => {
+    try {
+      const { data } = await axios(`/api/reviews/user/${auth.userData.UserID}`, {
+        method: "GET",
+      });
+      setUserReviews(data);
+      console.log(data.message);
+    }
+    catch (err) {
+      console.log(err.message);
+    };
+  };
 
-    // request private data
-    // const userProfile = async () => {
-    //   try {
-    //     const { data } = await axios("/api/users/profile", {
-    //       headers: {
-    //         authorization: "Bearer " + localStorage.getItem("token"),
-    //       },
-    //     });
-    //     setData(data.message);
-    //   }
-    //   catch (err) {
-    //     console.log(err);
-    //     setData(err.message);
-    //   }
-    //  };
-
-    // // GET user data
-    // const userData = async () => {
-    //   const id = auth.userId;
-    //   try {
-    //     const {data} = await axios(`api/users/${id}`, {
-    //       headers: {
-    //         authorization: "Bearer " + localStorage.getItem("token"),
-    //       },
-    //     });
-    //   }
-    //   catch (err) {
-    //     console.log(err);
-    //     setData(err.message);
-    //   }
-    // }
    
   return (
 
@@ -55,35 +36,46 @@ export default function Profile() {
         
         { auth.isLoggedIn && <div>
           
+          
         <div>
-        <div className="container mt-4 mb-4 p-4 d-flex justify-content-center"> 
-          <div className="card p-4"> 
-            <div className=" image d-flex flex-column justify-content-center align-items-center"> 
-              <button className="btn btn-secondary"> 
+        <div className="container mt-4 mb-4 p-4 justify-content-center" id="profile"> 
+          <div className="card p-5 bg-light"> 
+
+          {/* main profile data */}
+            <div id="btn-profile" className="image d-flex flex-column justify-content-center align-items-center"> 
+              <button className="btn btn-secondary btn-lg "> 
                 <img src="https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg" 
-                 className="rounded" height="100" width="100" />
+                 className="rounded-circle" height="150" width="150" />
               </button> 
-            <span className="name mt-3">{auth.userData.FirstName}   {auth.userData.LastName}</span> 
+            <span id="card-title" className="name mt-3"><h4> {auth.userData.FirstName}   {auth.userData.LastName} </h4></span> 
             <span className="idd">@{auth.userData.UserName}</span> 
-            <div className="d-flex flex-row justify-content-center align-items-center gap-2"> 
-              <span className="idd1">{auth.userData.EmailAddress}</span> 
-              <span><i className="fa fa-copy"></i></span> 
+              
+            <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
+              <span className="info1">{auth.userData.Type}</span> 
             </div> 
-          <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-            <span className="number">Age: {auth.userData.Age}</span> </div> 
-          <div className=" px-2 rounded mt-4 date "> <span className="join">Joined May, 2021</span> </div> 
+            </div> 
+
+          {/* user reviews */}
+          <div id="user-reviews" className="row mt-4"> 
+
+            <span className="">{userReviews}</span> 
           </div> 
+          
+
+
+          </div>
         </div>
         </div>
 
-        </div>
-
-          <button className="btn btn-outline-dark mt-8 ml-2 " onClick={auth.logout}>
-            Log Out
-          </button>
+              <button id="btn-logout" className="btn btn-secondary mt-8 ml-2" onClick={auth.logout}>
+                Log Out
+              </button>
+          
           </div>}
         <NavBar />
     </div>
 
   )
 }
+
+//  d-flex 

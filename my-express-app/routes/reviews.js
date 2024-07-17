@@ -26,6 +26,18 @@ router.get("/:id", async (req, res, next) => {
 });
 
 
+//GET review by UserID  
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const result = await db(`SELECT * FROM reviews WHERE UserID = ${req.params.id}`);
+    res.status(200).send(result.data);
+  }
+  catch (e) {
+    res.status(500).send({error: e.message});
+  };
+});
+
+
 // POST
 router.post("/", async (req, res, next) => {
   // receive values for columns to populate database

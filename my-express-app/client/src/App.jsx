@@ -51,7 +51,7 @@ function App() {
     console.log("Logout successful");
   };
 
-  const authObject = {isLoggedIn, userData, login, logout}
+  const authObject = {isLoggedIn, userData, login, logout};
 
 
   return (
