@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import RegisterUser from './RegisterUser.jsx';
@@ -11,11 +11,37 @@ import AuthContext from '../context/AuthContext.js';
 export default function Profile() {
 
   const [userReviews, setUserReviews] = useState();
+  const [userProfile, setUserProfile] = useState({
+    FirstName: "first name",
+    LastName: "last name",
+    UserName: "username",
+    Type: " "
+  });
+
+
   const auth = useContext(AuthContext);
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("userid");
+    const fetchUserProfile = async () => {
+      if (loggedInUser) {
+        try {
+          const res = await axios.get(`/api/users/${loggedInUser}`);
+          setUserProfile(res.data[0]);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+    };
+    fetchUserProfile();
+    console.log(userProfile);
+  }, []);
+
+
   const getUserReviews = async () => {
+    const loggedInUser = localStorage.getItem("userid");
     try {
-      const { data } = await axios(`/api/reviews/user/${auth.userData.UserID}`, {
+      const { data } = await axios(`/api/reviews/user/${loggedInUser}`, {
         method: "GET",
       });
       setUserReviews(data);
@@ -26,11 +52,15 @@ export default function Profile() {
     };
   };
 
+
+
    
   return (
 
 
     <div>
+
+    <body onload={userProfile}></body>
         
         { !auth.isLoggedIn && <Login/> }
         
@@ -47,11 +77,11 @@ export default function Profile() {
                 <img src="https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg" 
                  className="rounded-circle" height="150" width="150" />
               </button> 
-            <span id="card-title" className="name mt-3"><h4> {auth.userData.FirstName}   {auth.userData.LastName} </h4></span> 
-            <span className="idd">@{auth.userData.UserName}</span> 
+            <span id="card-title" className="name mt-3"><h4> {userProfile.FirstName}   {userProfile.LastName} </h4></span> 
+            <span className="idd">@{userProfile.UserName}</span> 
               
             <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-              <span className="info1">{auth.userData.Type}</span> 
+              <span className="info1">{userProfile.Type}</span> 
             </div> 
             </div> 
 
@@ -59,7 +89,7 @@ export default function Profile() {
           <div id="user-reviews" className="row mt-4"> 
 
             <span className="">{userReviews}</span> 
-          </div> 
+          </div>  
           
 
 

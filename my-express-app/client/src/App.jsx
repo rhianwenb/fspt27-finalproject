@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from './context/AuthContext.js';
@@ -23,10 +23,10 @@ import NavContext from './context/NavContext';
 function App() {
 
   const [currentPage, setCurrentPage] = useState("Search");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [currentUser, setCurrentUser] = useState();
 
-  console.log(userData, isLoggedIn);
+  console.log(currentUser, isLoggedIn);
 
   const login = async (credentials) => {
     try {
@@ -34,9 +34,10 @@ function App() {
         method: "POST",
         data: credentials
       });
+      localStorage.setItem("userid", JSON.stringify(data.existingUser.UserID));
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);
-      setUserData(data.existingUser)
+      setCurrentUser(data.existingUser)
       console.log(data.message);
     }
     catch (error) {
@@ -45,13 +46,16 @@ function App() {
   };
 
   const logout = () => {
+    localStorage.removeItem("userid");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    setUserData(null);
+    setCurrentUser({});
     console.log("Logout successful");
   };
 
-  const authObject = {isLoggedIn, userData, login, logout};
+
+
+  const authObject = {isLoggedIn, currentUser, login, logout};
 
 
   return (
