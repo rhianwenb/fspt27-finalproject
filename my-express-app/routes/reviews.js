@@ -25,6 +25,21 @@ router.get("/:id", async (req, res, next) => {
   };
 });
 
+//Get request for review page
+router.get("/review/:id", async(req, res, next) => {
+  try {
+    const result = await db(`SELECT reviews.*, users.UserName, properties.* 
+    FROM reviews
+    LEFT JOIN users ON reviews.UserID = users.UserID
+    LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID
+    WHERE reviews.ReviewID = ${req.params.id}`)
+
+    res.status(200).send(result.data);
+  } catch(e) {
+    res.status(500).send({error: e.message});
+  }
+})
+
 
 // POST
 router.post("/", async (req, res, next) => {

@@ -1,34 +1,57 @@
 import React, { useEffect, useState } from 'react'
 
 import "../styles/Review.css"
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
+
+import NavBar from "../components/NavBar"
 
 export default function Review() {
 
     useEffect(()=>{
+        getReview(),
         loopInRatings()
     }, [])
+
+    
     
     let sampleProperty = {
-        AddressLine1 : "42-2 Brendon St",
-        City : "London"
+        AddressLine1 : "",
+        City : ""
     }
 
     let sampleUser = {
-        UserName : "CodeOp"
+        UserName : ""
     }
 
     let sampleReview = {
         sampleProperty,
         sampleUser,
-        ReviewDate:"2024-06-18",
-        Rating1 : 4,
-        Rating2 : 1,
-        Rating3 : 3,
-        Rating4 : 4,
-        Rating5 : 2,
-        Rating6 : 3,
-        Rating7 : 2,
-        Comments : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        ReviewDate:"",
+        Rating1 : null,
+        Rating2 : null,
+        Rating3 : null,
+        Rating4 : null,
+        Rating5 : null,
+        Rating6 : null,
+        Rating7 : null,
+        Comments : ""
+    }
+
+    const [review, setReview] = useState(sampleReview);
+
+    const id = useParams().id;
+
+    function getReview (){
+        
+
+        axios.get(`/api/reviews/review/${id}`)
+        .then( response => {
+            setReview(response.data[0])
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     //Pseudo code for ratings
@@ -54,7 +77,7 @@ export default function Review() {
         let index = 1;
 
         for(let key in newRating){
-            let num = sampleReview[`Rating`+index];
+            let num = review[`Rating`+index];
 
             newRating[key] = [];
 
@@ -79,10 +102,10 @@ export default function Review() {
 
   return (
     <div>
-        <h2>{sampleReview.sampleProperty.AddressLine1} - {sampleReview.sampleProperty.City}</h2>
+        <h2>{review.AddressLine1} - {review.City}</h2>
 
-        <p>From <span style={{color:" #4DBEFF", cursor:"pointer"}}>{sampleReview.sampleUser.UserName}</span></p>
-        <p>On the {sampleReview.ReviewDate}</p>
+        <p>From <span style={{color:" #4DBEFF", cursor:"pointer"}}>{review.UserName}</span></p>
+        <p>On the {review.ReviewDate}</p>
 
         
         <div className='callout'>
@@ -100,7 +123,7 @@ export default function Review() {
             ))}
             
 
-        <p>{sampleReview.Comments}</p>
+        <p>{review.Comments}</p>
         </div>
 
         <p>Noise</p>
@@ -145,10 +168,11 @@ export default function Review() {
             ))
         } </div>
 
-        <button className='buttonReview'>Send message to {sampleReview.sampleUser.UserName}</button>
+        <button className='buttonReview'>Send message to <span style={{fontWeight:"bold"}}>{review.UserName}</span></button>
 
         <div style={{height:"200px"}}></div>
         
+        <NavBar />
         
     </div>
   )

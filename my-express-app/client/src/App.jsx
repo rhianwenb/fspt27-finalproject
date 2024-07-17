@@ -29,7 +29,6 @@ function App() {
 
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
 
-        <Review />
 
 
       <NavContext.Provider value={{currentPage, setCurrentPage}}>
@@ -41,6 +40,7 @@ function App() {
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/community" element={<Community />}/>
             <Route path="/profile" element={<Profile />}/>
+            <Route path="/review/:id" element={<Review />} />
           </Routes>
         </Router>
 

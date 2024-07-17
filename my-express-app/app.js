@@ -17,6 +17,10 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
+app.listen(5000, function () {
+    console.log("Server is running on localhost5000");
+}); 
+
 
 app.use('/api/properties', propertyRouter);
 app.use('/api/users', usersRouter);
