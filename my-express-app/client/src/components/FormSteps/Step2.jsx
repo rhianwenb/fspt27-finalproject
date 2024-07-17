@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
+import AddReviewContext from '../../context/AddReviewContext'
 
 export default function 
 ({changeStep}) {
+
+  let {reviewInfo,setReviewInfo} = useContext(AddReviewContext)
 
     const [stars,setStars] = useState([1,0,0,0,0])
 
@@ -11,7 +14,20 @@ export default function
           return i<=index? 1 :0
         })
     
+        let newReview = {...reviewInfo};
+        newReview.Rating1=index+1;
+        setReviewInfo(newReview);
+
         setStars(newRating)
+      }
+
+      function handleChange (event){
+        let {value} = event.target;
+
+        let newReview = {...reviewInfo};
+        newReview.Comments=value;
+
+        setReviewInfo(newReview)
       }
 
   return (
@@ -28,7 +44,7 @@ export default function
              </svg>
               ))}
           </div>
-          <textarea style={{gridArea:"2/2/span 2/span 2"}}></textarea>
+          <textarea style={{gridArea:"2/2/span 2/span 2"}} value={reviewInfo.Comments} onChange={(event)=>handleChange(event)}></textarea>
           <div style={{gridArea:"4/1/span 1/span 4", marginTop:"20px"}}><button style={{width:"fit-content"}}
               onClick={(event)=>changeStep(event)}
             >Next step</button></div>

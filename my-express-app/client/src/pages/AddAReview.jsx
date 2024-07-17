@@ -2,13 +2,25 @@ import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import "../styles/AddAReview.css"
 
+import AddReviewContext from '../context/AddReviewContext';
+
 import Step2 from '../components/FormSteps/Step2';
 import Step3 from '../components/FormSteps/Step3';
 
 export default function AddAReview() {
   const [step,setStep] = useState(1);
   
-
+  const [reviewInfo,setReviewInfo] = useState({
+    ReviewDate:"",
+    Rating1:1,
+    Rating2:3,
+    Rating3:3,
+    Rating4:3,
+    Rating5:3,
+    Rating6:3,
+    Rating7:3,
+    Comments:""
+  })
   
 
   function handleNextStep (event){
@@ -17,12 +29,20 @@ export default function AddAReview() {
     setStep(step+1);
   }
 
+  function postReview (){
+    //Get user's id
+    //Get property's id
+    //Axios post with all info
+  }
 
 
 
   return (
     <div id="addareview">
       <h2>Add a review</h2>
+
+
+      <AddReviewContext.Provider value={{reviewInfo,setReviewInfo}}>
 
       {step===1 && 
         <>
@@ -69,6 +89,7 @@ export default function AddAReview() {
       {step===3 &&
         <Step3 changeStep={handleNextStep} />
       }
+      </AddReviewContext.Provider>
 
       
 
