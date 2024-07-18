@@ -98,12 +98,12 @@ export default function Profile() {
           {/* user reviews */}
           <div className="row">
           <div id="user-reviews " className="row mt-4"> 
-            <ul className="list-group" id="review-list">
+            <ul className="list-group" id="reviews-list">
             <li class="list-group-item list-group-item-dark">
               <h5>Your Reviews</h5>
             </li>
               {userReviews.map(r => (
-                <li className="list-group-item text-start" id="review-item"> 
+                <li className="list-group-item text-start" id="review" key="review"> 
                   ReviewID: {r.ReviewID} <br></br>
                   Property: {r.AddressLine1} <br></br><br></br>
                   Comments: {r.Comments} <br></br>
