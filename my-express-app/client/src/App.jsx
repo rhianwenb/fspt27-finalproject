@@ -17,6 +17,7 @@ import AddAReview from './pages/AddAReview'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import NavContext from './context/NavContext';
+import Review from './pages/Review.jsx';
 
 
 
@@ -73,7 +74,8 @@ function App() {
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/community" element={<Community />}/>
             <Route path="/profile" element={<Profile />}/>
-            <Route path="/register" element={<RegisterUser />}/>          
+            <Route path="/review/:id" element={<Review />} />
+            <Route path="/register" element={<RegisterUser />}/>     
           </Routes>
         </Router>
         
