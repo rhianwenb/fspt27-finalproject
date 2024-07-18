@@ -1,10 +1,17 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from "axios"; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import AuthContext from '../context/AuthContext';
+
+
 
 export default function Login() {
+
+    const auth = useContext(AuthContext);
+    // console.log(auth.isLoggedIn);
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
         UserName: "",
@@ -14,39 +21,32 @@ export default function Login() {
     const {UserName, Password} = credentials;
 
     const handleChange = (e) => {
+        e.preventDefault();
         const {name, value} = e.target;
         setCredentials({...credentials, [name]: value});
     };
 
     const login = async (e) => {
         e.preventDefault();
-        try {
-          const { data } = await axios("/api/users/login", {
-            method: "POST",
-            data: credentials
-          });
-          localStorage.setItem("token", data.token);
-          console.log(data.message);
-          setCredentials({
+        auth.login(credentials);
+        setCredentials({
             UserName: "",
             Password: "",
           })
-        }
-        catch (error) {
-          console.log(error);
-        }   
-      };
-
-      const logout = () => {
+          navigate("/profile");
+    };
+    
+    const logout = (e) => {
         e.preventDefault();
-        localStorage.removeItem("token");
-        console.log("Logout successful");
-      };
+        auth.logout(credentials);
+    };
+
+
 
   return (
     <div>
         <div className="container col-sm-6 offset-md-3" id="login"> 
-        <div className="mb-3"><h4> Login: Enter username or email address </h4></div>
+        <div className="mb-3"><h4> To login enter your username and password: </h4></div>
             
             <div className="col-md">
                 <form>
@@ -60,15 +60,7 @@ export default function Login() {
                             onChange={handleChange}/>
                         </div>
                     </div>
-                    {/* <div className="row mb-3">
-                        <div className="col">
-                        <label className="form-label">Email Address</label>
-                            <input className="form-control"
-                            name="EmailAddress" value={EmailAddress}
-                            placeholder="Email address " type="text"
-                            onChange={handleChange}/>
-                        </div>
-                    </div>     */}
+
                     <div className="row mb-3">                        
                         <div className="col">
                         <label className="form-label">Password</label>
@@ -86,10 +78,14 @@ export default function Login() {
                                 Log Out
                             </button>
                         </div>
+
                     </div>
 
                 </form>
             </div>        
+            <div className="mt-3">
+                Not a user yet? <a href="/register">Register here. </a>
+            </div>
         </div>
     </div>
   )
