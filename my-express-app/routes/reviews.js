@@ -14,7 +14,7 @@ router.get("/all", async (req, res, next) => {
   });
 
 
-//GET review by ReviewID  
+//GET reviews by ReviewID  
 router.get("/:id", async (req, res, next) => {
   try {
     const result = await db(`SELECT * FROM reviews WHERE ReviewID = ${req.params.id}`);
@@ -26,10 +26,11 @@ router.get("/:id", async (req, res, next) => {
 });
 
 
-//GET review by UserID  
+//GET reviews by UserID  
 router.get("/user/:id", async (req, res, next) => {
   try {
-    const result = await db(`SELECT * FROM reviews WHERE UserID = ${req.params.id}`);
+    const result = await db(`SELECT ReviewID, Comments, AddressLine1 FROM reviews 
+      INNER JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE UserID = ${req.params.id}`);
     res.status(200).send(result.data);
   }
   catch (e) {

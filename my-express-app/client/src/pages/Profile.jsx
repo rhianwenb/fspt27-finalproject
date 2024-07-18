@@ -10,12 +10,17 @@ import AuthContext from '../context/AuthContext.js';
 
 export default function Profile() {
 
-  const [userReviews, setUserReviews] = useState();
+  const [userReviews, setUserReviews] = useState([{
+    ReviewID: "",
+    PropertyID: "",
+    Comments: ""
+  }]);
+
   const [userProfile, setUserProfile] = useState({
-    FirstName: "first name",
-    LastName: "last name",
-    UserName: "username",
-    Type: " "
+    FirstName: "",
+    LastName: "",
+    UserName: "",
+    Type: ""
   });
 
 
@@ -34,33 +39,34 @@ export default function Profile() {
       };
     };
     fetchUserProfile();
-    console.log(userProfile);
   }, []);
 
 
-  const getUserReviews = async () => {
-    const loggedInUser = localStorage.getItem("userid");
-    try {
-      const { data } = await axios(`/api/reviews/user/${loggedInUser}`, {
-        method: "GET",
-      });
-      setUserReviews(data);
-      console.log(data.message);
-    }
-    catch (err) {
-      console.log(err.message);
+  useEffect(() => {  
+    const getUserReviews = async () => {
+      const loggedInUser = localStorage.getItem("userid");
+      try {
+        const { data } = await axios(`/api/reviews/user/${loggedInUser}`, {
+          method: "GET",
+        });
+        setUserReviews(data);
+        console.log(data.message);
+      }
+      catch (err) {
+        console.log(err.message);
+      };
     };
-  };
+    getUserReviews();
+  }, []);
 
 
-
+  console.log(userProfile);
+  console.log(userReviews);
    
   return (
 
 
     <div>
-
-    <body onload={userProfile}></body>
         
         { !auth.isLoggedIn && <Login/> }
         
@@ -68,10 +74,13 @@ export default function Profile() {
           
           
         <div>
-        <div className="container mt-4 mb-4 p-4 justify-content-center" id="profile"> 
+        <div className="container mt-4 mb-4 p-4 d-flex justify-content-center" id="profile"> 
+
+
           <div className="card p-5 bg-light"> 
 
           {/* main profile data */}
+          <div className="row">
             <div id="btn-profile" className="image d-flex flex-column justify-content-center align-items-center"> 
               <button className="btn btn-secondary btn-lg "> 
                 <img src="https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg" 
@@ -84,12 +93,25 @@ export default function Profile() {
               <span className="info1">{userProfile.Type}</span> 
             </div> 
             </div> 
+          </div>
 
           {/* user reviews */}
-          <div id="user-reviews" className="row mt-4"> 
-
-            <span className="">{userReviews}</span> 
+          <div className="row">
+          <div id="user-reviews " className="row mt-4"> 
+            <ul className="list-group" id="review-list">
+            <li class="list-group-item list-group-item-dark">
+              <h5>Your Reviews</h5>
+            </li>
+              {userReviews.map(r => (
+                <li className="list-group-item text-start" id="review-item"> 
+                  ReviewID: {r.ReviewID} <br></br>
+                  Property: {r.AddressLine1} <br></br><br></br>
+                  Comments: {r.Comments} <br></br>
+                </li>
+              ))}
+            </ul> 
           </div>  
+          </div>
           
 
 
