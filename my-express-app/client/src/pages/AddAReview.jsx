@@ -26,7 +26,9 @@ export default function AddAReview() {
     Rating5:3,
     Rating6:3,
     Rating7:3,
-    Comments:""
+    Comments:"",
+    MovingIn:"",
+    MovingOut:""
   })
 
 
@@ -47,13 +49,15 @@ export default function AddAReview() {
 
     try {
 
-      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Comments} = reviewInfo;
+      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut} = reviewInfo;
+
+      console.log(MovingIn,MovingOut)
 
       await axios.post("/api/reviews/",{
         UserID:sampleUserID,
         PropertyID:samplePropertyID,
         ReviewDate, Rating1, Rating2, Rating3, 
-        Rating4, Rating5, Rating6, Comments
+        Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut
       })
 
       setCurrentPage("Search");
@@ -125,8 +129,8 @@ export default function AddAReview() {
 
       <div id="stepsAddReview">
         <div className="activeStep" onClick={()=>setStep(1)} ></div> 
-        <div className={step>1&&"activeStep"} onClick={()=>setStep(2)}></div> 
-        <div className={step>2&&"activeStep"} onClick={()=>setStep(3)} ></div> 
+        <div className={step>1?"activeStep":""} onClick={()=>setStep(2)}></div> 
+        <div className={step>2?"activeStep":""} onClick={()=>setStep(3)} ></div> 
       </div>
 
         <NavBar />

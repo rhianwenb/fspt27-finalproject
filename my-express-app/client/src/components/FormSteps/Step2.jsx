@@ -22,10 +22,10 @@ export default function
       }
 
       function handleChange (event){
-        let {value} = event.target;
+        let {name,value} = event.target;
 
         let newReview = {...reviewInfo};
-        newReview.Comments=value;
+        newReview[name]=value;
 
         setReviewInfo(newReview)
       }
@@ -44,8 +44,15 @@ export default function
              </svg>
               ))}
           </div>
-          <textarea style={{gridArea:"2/2/span 2/span 2"}} value={reviewInfo.Comments} onChange={(event)=>handleChange(event)}></textarea>
-          <div style={{gridArea:"4/1/span 1/span 4", marginTop:"20px"}}><button style={{width:"fit-content"}}
+          <textarea style={{gridArea:"2/2/span 2/span 2"}} value={reviewInfo.Comments} name="Comments" onChange={(event)=>handleChange(event)}></textarea>
+
+          <p style={{gridArea:"4/2/span 1/span 2", marginTop:"20px"}}>Renting from 
+                <input type='date' name='MovingIn' value={reviewInfo.MovingIn} onChange={(event)=>handleChange(event)}/> 
+                to 
+                <input type='date' name='MovingOut' value={reviewInfo.MovingOut}  onChange={(event)=>handleChange(event)} />
+          </p>
+
+          <div style={{gridArea:"5/2/span 1/span 2", marginTop:"20px"}}><button style={{width:"fit-content"}}
               onClick={(event)=>changeStep(event)}
             >Next step</button></div>
         </form>

@@ -30,10 +30,10 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   // receive values for columns to populate database
   const { UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, 
-    Rating4, Rating5, Rating6, Comments } = req.body;
+    Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut } = req.body;
   // sql query to insert values into new db entry
-  const addNewReview = `INSERT INTO reviews (UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Comments) 
-  VALUES ("${UserID}", "${PropertyID}", "${ReviewDate}", "${Rating1}", "${Rating2}", "${Rating3}", "${Rating4}", "${Rating5}", "${Rating6}", "${Comments}")`;
+  const addNewReview = `INSERT INTO reviews (UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut) 
+  VALUES ("${UserID}", "${PropertyID}", "${ReviewDate}", "${Rating1}", "${Rating2}", "${Rating3}", "${Rating4}", "${Rating5}", "${Rating6}", "${Rating7}", "${Comments}", "${MovingIn}", "${MovingOut}")`;
   try {
     // run sql query
     await db(addNewReview); 

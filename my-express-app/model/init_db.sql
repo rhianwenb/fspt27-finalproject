@@ -46,7 +46,10 @@ CREATE TABLE reviews(
     Rating4 INT,
     Rating5 INT,
     Rating6 INT,
+    Rating7 INT,
     Comments TEXT,
+    MovingIn DATE,
+    MovingOut DATE,
     PRIMARY KEY (ReviewID),
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
