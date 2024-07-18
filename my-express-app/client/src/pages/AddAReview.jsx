@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar'
 import "../styles/AddAReview.css"
+import axios from "axios"
 
 import AddReviewContext from '../context/AddReviewContext';
+import NavContext from '../context/NavContext';
 
 import Step2 from '../components/FormSteps/Step2';
 import Step3 from '../components/FormSteps/Step3';
 
 export default function AddAReview() {
   const [step,setStep] = useState(1);
+  const currentPage = useContext(NavContext).currentPage;
+  const setCurrentPage = useContext(NavContext).setCurrentPage;
+  const navigate = useNavigate();
   
   const [reviewInfo,setReviewInfo] = useState({
-    ReviewDate:"",
+    ReviewDate:new Date().toISOString().slice(0,10),
     Rating1:1,
     Rating2:3,
     Rating3:3,
@@ -21,6 +28,8 @@ export default function AddAReview() {
     Rating7:3,
     Comments:""
   })
+
+
   
 
   function handleNextStep (event){
@@ -29,10 +38,31 @@ export default function AddAReview() {
     setStep(step+1);
   }
 
-  function postReview (){
+  async function postReview (){
     //Get user's id
     //Get property's id
     //Axios post with all info
+    let sampleUserID = 1;
+    let samplePropertyID = 1;
+
+    try {
+
+      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Comments} = reviewInfo;
+
+      await axios.post("/api/reviews/",{
+        UserID:sampleUserID,
+        PropertyID:samplePropertyID,
+        ReviewDate, Rating1, Rating2, Rating3, 
+        Rating4, Rating5, Rating6, Comments
+      })
+
+      setCurrentPage("Search");
+      navigate("/");
+
+
+    } catch(e){
+      console.log(e.message)
+    }
   }
 
 
@@ -42,7 +72,7 @@ export default function AddAReview() {
       <h2>Add a review</h2>
 
 
-      <AddReviewContext.Provider value={{reviewInfo,setReviewInfo}}>
+      <AddReviewContext.Provider value={{reviewInfo,setReviewInfo,postReview}}>
 
       {step===1 && 
         <>

@@ -4,7 +4,7 @@ import AddReviewContext from '../../context/AddReviewContext';
 
 export default function Step3({changeStep}) {
 
-  let {reviewInfo,setReviewInfo} = useContext(AddReviewContext)
+  let {reviewInfo,setReviewInfo,postReview} = useContext(AddReviewContext)
 
   function handleChange(event){
         let {name, value} = event.target;
@@ -72,7 +72,7 @@ export default function Step3({changeStep}) {
         </div>
 
         <aside style={{ marginTop:"20px", width:"100%"}}><button style={{width:"fit-content",margin:"auto"}}
-              
+              onClick={()=>postReview()}
             >Submit my review</button></aside>
     </div>
   )
