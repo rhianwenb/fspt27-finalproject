@@ -38,15 +38,12 @@ router.get("/:id", propertyMustExist, async (req, res, next) => {
 
 // POST add a new property to the database 
 router.post("/", async (req, res, next) => {
-  // receive values for columns to populate database
-  const { PropertyName, AddressLine1, AddressLine2, AddressLine3, 
-    Town, City, County, State, PostCode } = req.body;
-  // sql query to insert values into new db entry
-  const addNewProperty = `INSERT INTO properties (PropertyName,
-    AddressLine1, AddressLine2, AddressLine3,
-    Town, City, County, State, PostCode) VALUES (
-    "${PropertyName}", "${AddressLine1}", "${AddressLine2}", "${AddressLine3}",
-    "${Town}", "${City}", "${County}", "${State}", "${PostCode}")`;
+  console.log(req.body)
+  const {FormattedAddress, Latitude, Longitude} = req.body
+
+  const addNewProperty = `INSERT INTO properties (FormattedAddress, Latitude, Longitude)
+                VALUES ("${FormattedAddress}", ${Latitude}, ${Longitude})`
+
   try {
     // run sql query
     await db(addNewProperty); 

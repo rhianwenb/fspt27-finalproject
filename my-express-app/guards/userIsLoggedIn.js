@@ -18,7 +18,7 @@ function userIsLoggedIn(req, res, next) {
       if (err) {
         return res.status(401).send({ message: err.message });
       } else {
-        req.userId = decoded.UserID;
+        req.UserID = decoded.UserID;
         next();
       }
     });
