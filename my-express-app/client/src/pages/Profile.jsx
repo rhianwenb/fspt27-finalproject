@@ -26,20 +26,20 @@ export default function Profile() {
 
   const auth = useContext(AuthContext);
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("userid");
-    const fetchUserProfile = async () => {
-      if (loggedInUser) {
-        try {
-          const res = await axios.get(`/api/users/${loggedInUser}`);
-          setUserProfile(res.data[0]);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-    };
-    fetchUserProfile();
-  }, []);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("userid");
+  //   const fetchUserProfile = async () => {
+  //     if (loggedInUser) {
+  //       try {
+  //         const res = await axios.get(`/api/users/${loggedInUser}`);
+  //         setUserProfile(res.data[0]);
+  //       } catch (err) {
+  //         console.error(err);
+  //       }
+  //     };
+  //   };
+  //   fetchUserProfile();
+  // }, []);
 
 
   useEffect(() => {  
@@ -60,7 +60,7 @@ export default function Profile() {
   }, []);
 
 
-  console.log(userProfile);
+  // console.log(userProfile);
   console.log(userReviews);
    
   return (
@@ -86,11 +86,11 @@ export default function Profile() {
                 <img src="https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg" 
                  className="rounded-circle" height="150" width="150" />
               </button> 
-            <span id="card-title" className="name mt-3"><h4> {userProfile.FirstName}   {userProfile.LastName} </h4></span> 
-            <span className="idd">@{userProfile.UserName}</span> 
+            <span id="card-title" className="name mt-3"><h4> {auth?.currentUser?.FirstName}   {auth?.currentUser?.LastName} </h4></span> 
+            <span className="idd">@{auth?.currentUser?.UserName}</span> 
               
             <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-              <span className="info1">{userProfile.Type}</span> 
+              <span className="info1">{auth?.currentUser?.Type}</span> 
             </div> 
             </div> 
           </div>
@@ -112,8 +112,6 @@ export default function Profile() {
             </ul> 
           </div>  
           </div>
-          
-
 
           </div>
         </div>
@@ -123,6 +121,9 @@ export default function Profile() {
                 Log Out
               </button>
           
+
+      <div style={{height:"200px"}}>
+      </div>
           </div>}
         <NavBar />
     </div>

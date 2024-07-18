@@ -28,6 +28,23 @@ function App() {
 
   console.log(currentUser, isLoggedIn);
 
+  
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("userid");
+    const fetchUserProfile = async () => {
+      if (loggedInUser) {
+        try {
+          const res = await axios.get(`/api/users/${loggedInUser}`);
+          setCurrentUser(res.data[0]);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+    };
+    fetchUserProfile();
+  }, []);
+  
+
   const login = async (credentials) => {
     try {
       const { data } = await axios("/api/users/login", {
@@ -37,7 +54,7 @@ function App() {
       localStorage.setItem("userid", JSON.stringify(data.existingUser.UserID));
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);
-      setCurrentUser(data.existingUser)
+      setCurrentUser(data.existingUser);
       console.log(data.message);
     }
     catch (error) {
