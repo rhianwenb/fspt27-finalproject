@@ -8,25 +8,20 @@ import NavBar from "../components/NavBar"
 
 export default function Review() {
 
+
+
     useEffect(()=>{
-        getReview(),
-        loopInRatings()
-    }, [])
+        getReview()
+    },[])
 
-    
-    
-    let sampleProperty = {
-        AddressLine1 : "",
-        City : ""
-    }
 
-    let sampleUser = {
-        UserName : ""
-    }
-
-    let sampleReview = {
-        sampleProperty,
-        sampleUser,
+    let defaultReview = {
+        sampleProperty:{
+            FormattedAddress : ""
+        },
+        sampleUser: {
+            UserName : ""
+        },
         ReviewDate:"",
         Rating1 : null,
         Rating2 : null,
@@ -35,18 +30,25 @@ export default function Review() {
         Rating5 : null,
         Rating6 : null,
         Rating7 : null,
+        MovingIn:"",
+        MovingOut:"",
         Comments : ""
     }
 
-    const [review, setReview] = useState(sampleReview);
+    const [review, setReview] = useState(defaultReview);
+
+    useEffect(()=>{
+        loopInRatings()}
+    , [review])
 
     const id = useParams().id;
 
-    function getReview (){
+    async function getReview (){
         
 
-        axios.get(`/api/reviews/review/${id}`)
+        await axios.get(`/api/reviews/review/${id}`)
         .then( response => {
+            console.log(response.data[0]);
             setReview(response.data[0])
         })
         .catch(err=>{
@@ -54,9 +56,16 @@ export default function Review() {
         })
     }
 
-    //Pseudo code for ratings
-    //Create a function that creates an array for each function with the name and the rating from the object
-    //Use effect for all ratings
+    function formatDate(strDate){
+        let date = new Date(strDate);
+
+        let months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        return `${months[date.getMonth()]} ${date.getFullYear()}`
+    }
 
 
     const [ratings,setRatings]= useState({
@@ -92,20 +101,15 @@ export default function Review() {
 
     }
 
-    // function test(){
-    //     ratings.general.map((s)=>{
-    //         conso
-    //     })
-    // }
 
     
 
   return (
     <div>
-        <h2>{review.AddressLine1} - {review.City}</h2>
+        <h2>{review.FormattedAddress}</h2>
 
         <p>From <span style={{color:" #4DBEFF", cursor:"pointer"}}>{review.UserName}</span></p>
-        <p>On the {review.ReviewDate}</p>
+        <p>On {formatDate(review.ReviewDate)}</p>
 
         
         <div className='callout'>
@@ -124,6 +128,8 @@ export default function Review() {
             
 
         <p>{review.Comments}</p>
+
+        <p style={{color:"grey", fontStyle:"italic"}}>Rented from {formatDate(review.MovingIn)} to {formatDate(review.MovingOut)}</p>
         </div>
 
         <p>Noise</p>
@@ -168,7 +174,7 @@ export default function Review() {
             ))
         } </div>
 
-        <button className='buttonReview'>Send message to <span style={{fontWeight:"bold"}}>{review.UserName}</span></button>
+        {/* <button className='buttonReview'>Send message to <span style={{fontWeight:"bold"}}>{review.UserName}</span></button> */}
 
         <div style={{height:"200px"}}></div>
         
