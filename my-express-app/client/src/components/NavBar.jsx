@@ -12,7 +12,7 @@ export default function NavBar() {
 
   return (
     <div id="navbar">
-        <button className={currentPage==="Search"?"active":"inactive"}
+        {/* <button className={currentPage==="Search"?"active":"inactive"}
                 onClick={()=>setCurrentPage("Search")}
         ><Link to="/">
           <svg xmlnsXlink="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 513.749 513.749" style={{enableBackground:"new 0 0 513.749 513.749", height:"100%"}} xmlSpace="preserve" width="512" height="512">
@@ -20,7 +20,7 @@ export default function NavBar() {
 	<path d="M504.352,459.061l-99.435-99.477c74.402-99.427,54.115-240.344-45.312-314.746S119.261-9.277,44.859,90.15   S-9.256,330.494,90.171,404.896c79.868,59.766,189.565,59.766,269.434,0l99.477,99.477c12.501,12.501,32.769,12.501,45.269,0   c12.501-12.501,12.501-32.769,0-45.269L504.352,459.061z M225.717,385.696c-88.366,0-160-71.634-160-160s71.634-160,160-160   s160,71.634,160,160C385.623,314.022,314.044,385.602,225.717,385.696z"/>
 </g>
 
-          </svg> </Link></button>
+          </svg> </Link></button> */}
 
         <button className={currentPage==="Map"?"active":"inactive"}
                 onClick={()=>setCurrentPage("Map")}
@@ -35,11 +35,11 @@ export default function NavBar() {
         <svg id="Layer_1" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m12 0a12 12 0 1 0 12 12 12.013 12.013 0 0 0 -12-12zm0 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1 -9 9zm5-9a1.5 1.5 0 0 1 -1.5 1.5h-2v2a1.5 1.5 0 0 1 -3 0v-2h-2a1.5 1.5 0 0 1 0-3h2v-2a1.5 1.5 0 0 1 3 0v2h2a1.5 1.5 0 0 1 1.5 1.5z"/></svg>
         </Link></button>
 
-        <button className={currentPage==="Community"?"active":"inactive"}
+        {/* <button className={currentPage==="Community"?"active":"inactive"}
                 onClick={()=>setCurrentPage("Community")}
         ><Link to="/community">
         <svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" width="512" height="512"><path d="M24,11.246A12.011,12.011,0,1,0,12.017,24H18.5A5.507,5.507,0,0,0,24,18.5V11.34ZM21,18.5A2.5,2.5,0,0,1,18.5,21H12.017a9.041,9.041,0,0,1-6.731-3.011,8.926,8.926,0,0,1-2.227-7.034,9.038,9.038,0,0,1,7.788-7.882A9.484,9.484,0,0,1,12.02,3a8.933,8.933,0,0,1,5.739,2.066A9.038,9.038,0,0,1,21,11.389Z"/><path d="M9.5,11h3a1.5,1.5,0,0,0,0-3h-3a1.5,1.5,0,0,0,0,3Z"/><path d="M16.5,13h-7a1.5,1.5,0,0,0,0,3h7a1.5,1.5,0,0,0,0-3Z"/></svg>
-        </Link></button>
+        </Link></button> */}
 
         <button className={currentPage==="Profile"?"active":"inactive"}
                 onClick={()=>setCurrentPage("Profile")}

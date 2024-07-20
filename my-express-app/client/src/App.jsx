@@ -10,11 +10,8 @@ import Login from './components/Login.jsx';
 import './App.css'
 
 
-
-import Search from './pages/Search'
 import DisplayOnMap from './pages/DisplayOnMap'
 import AddAReview from './pages/AddAReview'
-import Community from './pages/Community'
 import Profile from './pages/Profile'
 import NavContext from './context/NavContext';
 
@@ -22,7 +19,7 @@ import NavContext from './context/NavContext';
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState("Search");
+  const [currentPage, setCurrentPage] = useState("displayonmap");
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [currentUser, setCurrentUser] = useState();
 
@@ -85,10 +82,8 @@ function App() {
 
         <Router>
           <Routes>
-            <Route path="/" element={<Search />}/>
-            <Route path="/displayonmap" element={<DisplayOnMap />}/>
+            <Route path="/" element={<DisplayOnMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
-            <Route path="/community" element={<Community />}/>
             <Route path="/profile" element={<Profile />}/>
             <Route path="/register" element={<RegisterUser />}/>          
           </Routes>

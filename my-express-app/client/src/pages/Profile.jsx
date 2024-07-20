@@ -26,22 +26,6 @@ export default function Profile() {
 
   const auth = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("userid");
-  //   const fetchUserProfile = async () => {
-  //     if (loggedInUser) {
-  //       try {
-  //         const res = await axios.get(`/api/users/${loggedInUser}`);
-  //         setUserProfile(res.data[0]);
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
-  //     };
-  //   };
-  //   fetchUserProfile();
-  // }, []);
-
-
   useEffect(() => {  
     const getUserReviews = async () => {
       const loggedInUser = localStorage.getItem("userid");
@@ -61,7 +45,7 @@ export default function Profile() {
 
 
   // console.log(userProfile);
-  console.log(userReviews);
+  // console.log(userReviews);
    
   return (
 
