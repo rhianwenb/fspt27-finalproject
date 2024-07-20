@@ -1,6 +1,43 @@
 
-#login {
-    font-weight: 600;
-    text-align: justify;
+#login form {
+    display: grid;
+    grid-template-columns: 160%;
+    grid-column-start: span;
+    justify-content: center;
+    gap: 0px, 20px;
+    width: 20%;
+    margin: auto;
 }
 
+#login form label {
+    padding: 5px;
+    text-align: left;
+}
+
+#login form input {
+    width:100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border:1px solid #3580D2;
+}
+
+#login form input:active{
+    border-color: #3580D2;
+}
+
+#login form button {
+    background-color: #3580D2;
+    color:white;
+    border:none;
+    padding:10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#login form button:hover {
+    background-color: #4DBEFF;
+}
+
+#linktoregister {
+    font-size: small;
+}

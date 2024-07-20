@@ -44,49 +44,55 @@ export default function Login() {
 
 
   return (
-    <div>
-        <div className="container col-sm-6 offset-md-3" id="login"> 
-        <div className="mb-3"><h4> To login enter your username and password: </h4></div>
+    <div id="login">
+         
+        <div className="mb-3"><h2> Login </h2></div>
+        <div className="mb-3"><h3> Enter username and password </h3></div>
             
-            <div className="col-md">
+            <div>
                 <form>
-                    <div className="form-box">
-                    <div className="row mb-3">
-                        <div className="col">
-                        <label className="form-label">Username</label>
-                            <input className="form-control"
-                            name="UserName" value={UserName}
-                            placeholder="Username " type="text"
-                            onChange={handleChange}/>
-                        </div>
-                    </div>
 
-                    <div className="row mb-3">                        
-                        <div className="col">
-                        <label className="form-label">Password</label>
-                            <input className="form-control"
-                            name="Password" value={Password}
-                            placeholder="Password " type="password"
+                        <label style={{gridArea:"1/ 1 / span 1 /span 6"}}>
+                            <p>Username</p>
+                            <input 
+                            type="text"
+                            name="UserName" 
+                            value={UserName}
+                            placeholder="Username " 
                             onChange={handleChange}/>
-                        </div>
-                    </div>    
-                        <div className="d-flex gap-2 justify-content-center mt-3">
-                            <button className="btn btn-outline-dark ml-2" onClick={login}>
-                                Log In
+                        </label>
+     
+                        <label style={{gridArea:"2/ 1 / span 1 /span 6"}}>
+                            <p>Password</p>
+                            <input 
+                            type="password"
+                            name="Password" 
+                            value={Password}
+                            placeholder="Password " 
+                            onChange={handleChange}/>
+                        </label>    
+           
+                        <div style={{gridArea:"5/1/span 1/span 4", marginTop:"20px"}}>
+                            <button 
+                                style={{width:"fit-content"}} 
+                                onClick={login}>
+                                    Log In
                             </button>
-                            <button className="btn btn-outline-dark ml-2" onClick={logout}>
-                                Log Out
+                            <button 
+                                style={{width:"fit-content"}} 
+                                onClick={logout}>
+                                    Log Out
                             </button>
                         </div>
 
-                    </div>
+                    {/* </div> */}
 
                 </form>
             </div>        
-            <div className="mt-3">
-                Not a user yet? <a href="/register">Register here. </a>
+            <div className="mt-3" id="linktoregister">
+                Not a user yet? <a href="/register"> Register here </a>
             </div>
-        </div>
+       
     </div>
   )
 };
