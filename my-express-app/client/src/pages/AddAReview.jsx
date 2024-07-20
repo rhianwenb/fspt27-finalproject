@@ -50,7 +50,6 @@ export default function AddAReview() {
     let UserID = currentUser.UserID;
     //Get property's id
     //Axios post with all info
-    let sampleUserID = 1;
     let samplePropertyID = 1;
 
     try {

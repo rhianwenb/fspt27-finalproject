@@ -99,7 +99,7 @@ export default function Profile() {
           <div className="row">
           <div id="user-reviews " className="row mt-4"> 
             <ul className="list-group" id="reviews-list">
-            <li class="list-group-item list-group-item-dark">
+            <li className="list-group-item list-group-item-dark">
               <h5>Your Reviews</h5>
             </li>
               {userReviews.map(r => (
