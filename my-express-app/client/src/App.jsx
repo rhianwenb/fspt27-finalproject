@@ -94,7 +94,7 @@ function App() {
             <Route path="/profile" element={<Profile />}/>
             <Route path="/review/:id" element={<Review />} />
             <Route path="/register" element={<RegisterUser />}/> 
-            <Route path="/property" element={<Property />} />    
+            <Route path="/property/:id" element={<Property />} />    
           </Routes>
         </Router>
         

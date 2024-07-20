@@ -53,6 +53,17 @@ router.get("/user/:id", async (req, res, next) => {
   };
 });
 
+//GET reviews by PropertyID
+router.get("/property/:id", async (req,res,next) => {
+  try{
+    const result = await db(`SELECT reviews.*, users.UserName, properties.FormattedAddress FROM reviews LEFT JOIN users ON reviews.UserID = users.UserID LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE reviews.PropertyID = ${req.params.id}`);
+    res.status(200).send(result.data);
+  }
+  catch(e){
+    res.status(500).send({error:e.message})
+  }
+})
+
 
 // POST
 router.post("/", async (req, res, next) => {

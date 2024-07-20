@@ -1,18 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import NavBar from '../components/NavBar'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 import "../styles/Property.css"
 
 export default function Property() {
+    const id = useParams().id;
+    const navigate = useNavigate();
 
-    let sampleRatings = [5,4,3,2,5,4]
+    const [averageReview, setAverageReview] = useState(50);
+    const [reviews, setReviews] = useState();
+
 
     function getAverageRating(){
-        let average = sampleRatings.reduce((a,b)=>a+b) / sampleRatings.length
-        console.log(average)
+      //Loop through all objects in an array, and get Rating 1
+      let ratings = reviews.map(item=>item.Rating1);
+
+      let average = ratings.reduce((a,b)=>a+b) / ratings.length
+
+      setAverageReview((average*100)/5);
+  }
+
+    
+
+     function getReviews(){
+        axios.get(`/api/reviews/property/${id}`)
+        .then(response=>{
+          setReviews(response.data);
+          getAverageRating()
+        })
+        .catch(err=>{
+          console.log(err)
+      })
     }
 
-    getAverageRating()
+    function formatDate(strDate){
+      let date = new Date(strDate);
+
+      let months = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+      ];
+
+      return `${months[date.getMonth()]} ${date.getFullYear()}`
+  }
+
+    
+
+    useEffect(()=>{
+      getReviews()
+    }, [])
 
   return (
     <div id="Property">
@@ -22,15 +61,42 @@ export default function Property() {
         <div style={{textAlign:"left"}}>
             <p>Average Review</p>
 
-            <div id="averageRating">
-            <svg width="600" height="400">
-  <mask id="svgmask2">
-    <polygon fill="#ffffff" points="100,10 40,198 190,78 10,78 160,198"></polygon>
-  </mask>
-  <image xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="https://images.unsplash.com/photo-1721002309163-9daa008925a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOXx8fGVufDB8fHx8fA%3D%3D" mask="url(#svgmask2)"></image>
-</svg>
-            </div>
+            <div className='bg' 
+            style={averageReview>=50?
+              {backgroundImage:`linear-gradient(to right, #FF6600 ${averageReview}%, #d9d9d9 ${100-averageReview}%`}:
+              {backgroundImage:`linear-gradient(to left, #d9d9d9 ${100-averageReview}%, #FF6600 ${averageReview}%`}
+            }
+            ></div>
+
+
         </div>
+
+          <p style={{textAlign:"left", marginTop:"45px"}}>Reviews</p>
+        {reviews && 
+          reviews.map(r=>(
+            <div key={r.ReviewID} className='review'>
+              <div>
+                <p style={{margin:"0"}}>From {r.UserName}</p>
+                <p style={{fontSize:"0.8em", color:"#aaaaaa", margin:"8px 0"}}>{formatDate(r.MovingIn)} - {formatDate(r.MovingOut)}</p>
+                
+
+                  <div className='bg' 
+                  style={r.Rating1>=3?
+                  {backgroundImage:`linear-gradient(to right, #FF6600 ${r.Rating1*20}%, #d9d9d9 ${100-(r.Rating1*20)}%`, width:"100px", height:"20px"}:
+                  {backgroundImage:`linear-gradient(to left, #d9d9d9 ${100-(r.Rating1*20)}%, #FF6600 ${(r.Rating1*20)}%`}
+                  }
+                  ></div>
+
+                  <button onClick={()=>navigate(`/review/${r.ReviewID}`)}>See review</button>
+              </div>
+
+              <p style={{margin:"0"}}>{r.Comments}</p>
+              
+            </div>
+          ))
+        }
+
+        <div style={{height:"200px"}}></div>
         
 
 
