@@ -18,6 +18,7 @@ import Community from './pages/Community'
 import Profile from './pages/Profile'
 import NavContext from './context/NavContext';
 import Review from './pages/Review.jsx';
+import Property from './pages/Property.jsx';
 
 
 
@@ -92,7 +93,8 @@ function App() {
             <Route path="/community" element={<Community />}/>
             <Route path="/profile" element={<Profile />}/>
             <Route path="/review/:id" element={<Review />} />
-            <Route path="/register" element={<RegisterUser />}/>     
+            <Route path="/register" element={<RegisterUser />}/> 
+            <Route path="/property" element={<Property />} />    
           </Routes>
         </Router>
         
