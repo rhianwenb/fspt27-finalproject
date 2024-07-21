@@ -44,7 +44,7 @@ router.get("/review/:id", async(req, res, next) => {
 //GET reviews by UserID  
 router.get("/user/:id", async (req, res, next) => {
   try {
-    const result = await db(`SELECT ReviewID, Comments, AddressLine1 FROM reviews 
+    const result = await db(`SELECT ReviewID, Comments, FormattedAddress FROM reviews 
       INNER JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE UserID = ${req.params.id}`);
     res.status(200).send(result.data);
   }

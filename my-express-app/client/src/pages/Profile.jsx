@@ -44,17 +44,24 @@ export default function Profile() {
 
   useEffect(() => {  
     const getUserReviews = async () => {
-      const loggedInUser = localStorage.getItem("userid");
-      try {
+
+      //If the user is logged in
+      if(auth.isLoggedIn){
+
+        const loggedInUser = localStorage.getItem("userid");
+
+        try {
         const { data } = await axios(`/api/reviews/user/${loggedInUser}`, {
           method: "GET",
         });
         setUserReviews(data);
         console.log(data.message);
+        }
+        catch (err) {
+          console.log(err.message);
+        };
       }
-      catch (err) {
-        console.log(err.message);
-      };
+    
     };
     getUserReviews();
   }, []);
@@ -99,11 +106,13 @@ export default function Profile() {
           <div className="row">
           <div id="user-reviews " className="row mt-4"> 
             <ul className="list-group" id="reviews-list">
-            <li class="list-group-item list-group-item-dark">
+            <li className="list-group-item list-group-item-dark">
               <h5>Your Reviews</h5>
             </li>
-              {userReviews.map(r => (
-                <li className="list-group-item text-start" id="review" key="review"> 
+              {userReviews && 
+              
+              userReviews.map(r => (
+                <li className="list-group-item text-start" id="review" key={r.ReviewID}> 
                   ReviewID: {r.ReviewID} <br></br>
                   Property: {r.AddressLine1} <br></br><br></br>
                   Comments: {r.Comments} <br></br>

@@ -74,6 +74,8 @@ export default function Step3({changeStep}) {
         <aside style={{ marginTop:"20px", width:"100%"}}><button style={{width:"fit-content",margin:"auto"}}
               onClick={()=>postReview()}
             >Submit my review</button></aside>
+
+        <div style={{height:"200px"}}></div>
     </div>
   )
 }
