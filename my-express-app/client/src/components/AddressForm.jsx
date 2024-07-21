@@ -24,14 +24,18 @@ export default function AddressForm({hanleNextStep}){
         });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
+        const validateAddress01 = await validateAddress(address)
+        if(validateAddress01){
+            addNewProperty(validateAddress01)
+            if (propertyAdded) handleNextStep(e)
+        }
+
         // console.log(address)
-
-        validateAddress(address)
-
+        // validateAddress(address)
         // if successful -> handleNextStep(e)
-        if (propertyAdded) handleNextStep(e)
+        // if (propertyAdded) handleNextStep(e)
     }
 
     const validateAddress = async (a) => {
@@ -61,7 +65,8 @@ export default function AddressForm({hanleNextStep}){
                 setPostCodeValid(true)
 
                 console.log(validatedAddress)
-                addNewProperty(validatedAddress)
+                return validatedAddress
+                // addNewProperty(validatedAddress)
 
             } else {
                 console.log('MISSING COMPONENT')
@@ -75,6 +80,7 @@ export default function AddressForm({hanleNextStep}){
 
         } catch (error) {
           console.log(error);
+          return null
         }
       };
 

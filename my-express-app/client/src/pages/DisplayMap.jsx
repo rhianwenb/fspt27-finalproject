@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {APIProvider, Map,  AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map,  AdvancedMarker, Pin} from '@vis.gl/react-google-maps';
 import axios from 'axios'
 
 import NavBar from '../components/NavBar'
@@ -28,7 +28,8 @@ export default function DisplayMap(){
         }
       }
 
-    function handleClick(id){        
+    function handleClick(id){ 
+        // https://developers.google.com/codelabs/maps-platform/maps-platform-101-react-js#0    
         console.log('click!')
     }
 
@@ -47,7 +48,10 @@ export default function DisplayMap(){
                     key = {p.key} 
                     position = {p.location}
                     clickable={true}
-                    onClick={handleClick(p.name)}/>
+                    // onClick={handleClick(p.name)} 
+                    >
+                    <Pin background={'#3580D2'} glyphColor={'#3580D2'} borderColor={'#3580D2'} /> 
+                    </AdvancedMarker>
             ))
             }
         </Map>
