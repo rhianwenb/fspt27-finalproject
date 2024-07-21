@@ -61,3 +61,16 @@ CREATE TABLE reviews(
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
+
+INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
+('Flat 9, Basin Mill, Laburnum Street, London E2 8FP, UK', 51.4987703, -0.0421737),
+('123A Hammersmith Grove, London W6 0NJ, UK', 51.4990214, -0.2281128),
+('65-89 Brondesbury Villas, London NW6 6AG, UK', 51.5361797, -0.1971449),
+('119 Ashfield Street, London E1 3EX, UK', 51.5169185, -0.0543013),
+("84 Stork's Road, London SE16 4DP, UK", 51.4954534, -0.0641014),
+('2 Shoreditch High Street, London EC2A 2BA, UK', 51.5220985, -0.0788474),
+('40 Osborn Terrace, London SE3 9GB, UK', 51.4577030, 0.0119778),
+('206, 148 Christchurch Way, London SE10 0XG, UK', 51.4900827, 0.0051548),
+('Apartment 3, Claremont House, 28 Quebec Way, London SE16 7FS, UK', 51.4987703, -0.0421737),
+('Flat 32, Reliance Wharf, London N1 5EW, UK', 51.5369553, -0.0788002);
+

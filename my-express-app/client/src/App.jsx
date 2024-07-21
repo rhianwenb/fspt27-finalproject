@@ -9,10 +9,9 @@ import RegisterUser from './pages/RegisterUser.jsx';
 import Login from './components/Login.jsx';
 import './App.css'
 
-
-
 import Search from './pages/Search'
-import DisplayOnMap from './pages/DisplayOnMap'
+// import DisplayOnMap from './pages/DisplayOnMap'
+import DisplayMap from './pages/DisplayMap'
 import AddAReview from './pages/AddAReview'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
@@ -88,7 +87,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Search />}/>
-            <Route path="/displayonmap" element={<DisplayOnMap />}/>
+            <Route path="/displayonmap" element={<DisplayMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/community" element={<Community />}/>
             <Route path="/profile" element={<Profile />}/>
