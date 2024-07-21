@@ -4,7 +4,7 @@
 
 SET foreign_key_checks = 0;
 
-DROP TABLE IF EXISTS users, properties, reviews;
+DROP TABLE IF EXISTS users, properties, reviews,comments;
 SET foreign_key_checks = 1;
 
 --
@@ -61,3 +61,14 @@ CREATE TABLE reviews(
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
+
+
+CREATE TABLE comments(
+    CommentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    PropertyID INT,
+    CommentDate DATE,
+    Text VARCHAR(140),
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
+)

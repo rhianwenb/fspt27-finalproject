@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import "../styles/Review.css"
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import NavBar from "../components/NavBar"
 
 export default function Review() {
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getReview()
@@ -99,6 +101,10 @@ export default function Review() {
         { review &&
         <div>
         <h2>{review.FormattedAddress}</h2>
+
+        <button className='buttonReview' 
+            onClick={()=>navigate(`/property/${review.PropertyID}`)}
+        >See all reviews for that property</button>
 
         <p>From <span style={{color:" #4DBEFF", cursor:"pointer"}}>{review.UserName}</span></p>
         <p>On {formatDate(review.ReviewDate)}</p>

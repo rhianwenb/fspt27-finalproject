@@ -7,6 +7,7 @@ const cors = require('cors');
 var propertyRouter = require('./routes/properties');
 var usersRouter = require('./routes/users');
 var reviewsRouter = require('./routes/reviews');
+var commentsRouter = require('./routes/comments');
 
 var app = express();
 
@@ -24,5 +25,6 @@ app.listen(5000, function () {
 app.use('/api/properties', propertyRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use("/api/comments", commentsRouter);
 
 module.exports = app;
