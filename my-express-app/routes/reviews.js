@@ -14,7 +14,7 @@ router.get("/all", async (req, res, next) => {
   });
 
 
-//GET review by ReviewID  
+//GET reviews by ReviewID  
 router.get("/:id", async (req, res, next) => {
   try {
     const result = await db(`SELECT * FROM reviews WHERE ReviewID = ${req.params.id}`);
@@ -25,15 +25,54 @@ router.get("/:id", async (req, res, next) => {
   };
 });
 
+//Get request for review page
+router.get("/review/:id", async(req, res, next) => {
+  try {
+    const result = await db(`SELECT reviews.*, users.UserName, properties.* 
+    FROM reviews
+    LEFT JOIN users ON reviews.UserID = users.UserID
+    LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID
+    WHERE reviews.ReviewID = ${req.params.id}`)
+
+    res.status(200).send(result.data);
+  } catch(e) {
+    res.status(500).send({error: e.message});
+  }
+})
+
+
+//GET reviews by UserID  
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const result = await db(`SELECT ReviewID, Comments, FormattedAddress FROM reviews 
+      INNER JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE UserID = ${req.params.id}`);
+    res.status(200).send(result.data);
+  }
+  catch (e) {
+    res.status(500).send({error: e.message});
+  };
+});
+
+//GET reviews by PropertyID
+router.get("/property/:id", async (req,res,next) => {
+  try{
+    const result = await db(`SELECT reviews.*, users.UserName, properties.FormattedAddress FROM reviews LEFT JOIN users ON reviews.UserID = users.UserID LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE reviews.PropertyID = ${req.params.id}`);
+    res.status(200).send(result.data);
+  }
+  catch(e){
+    res.status(500).send({error:e.message})
+  }
+})
+
 
 // POST
 router.post("/", async (req, res, next) => {
   // receive values for columns to populate database
   const { UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, 
-    Rating4, Rating5, Rating6, Comments } = req.body;
+    Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut } = req.body;
   // sql query to insert values into new db entry
-  const addNewReview = `INSERT INTO reviews (UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Comments) 
-  VALUES ("${UserID}", "${PropertyID}", "${ReviewDate}", "${Rating1}", "${Rating2}", "${Rating3}", "${Rating4}", "${Rating5}", "${Rating6}", "${Comments}")`;
+  const addNewReview = `INSERT INTO reviews (UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut) 
+  VALUES ("${UserID}", "${PropertyID}", "${ReviewDate}", "${Rating1}", "${Rating2}", "${Rating3}", "${Rating4}", "${Rating5}", "${Rating6}", "${Rating7}", "${Comments}", "${MovingIn}", "${MovingOut}")`;
   try {
     // run sql query
     await db(addNewReview); 
@@ -58,7 +97,7 @@ router.put("/:id", userIsLoggedIn, async (req, res, next) => {
       // run sql query
       await db(updateReview); 
       // lookup single entry from ID
-      const result = await db(`SELECT * FROM reviews WHERE id = ${req.params.id}`); 
+      const result = await db(`SELECT * FROM reviews WHERE ReviewID = ${req.params.id}`); 
       // send that data back as an object 
       res.status(201).send(result.data);  
     }
