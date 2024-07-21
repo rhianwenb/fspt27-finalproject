@@ -5,7 +5,7 @@ var jwt = require("jsonwebtoken");
 require("dotenv").config();
 const userIsLoggedIn = require("../guards/userIsLoggedIn");
 const propertyMustExist = require("../guards/propertyMustExist");
-
+const checkPropertyDB = require("../guards/checkPropertyDB");
 
 
 // GET all properties listed within database 
@@ -32,7 +32,7 @@ router.get("/:id", propertyMustExist, async (req, res, next) => {
 
 
 // POST add a new property to the database 
-router.post("/", async (req, res, next) => {
+router.post("/", checkPropertyDB, async (req, res, next) => {
   console.log(req.body)
   const {FormattedAddress, Latitude, Longitude} = req.body
 

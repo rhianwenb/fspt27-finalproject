@@ -1,11 +1,9 @@
 import { useState} from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar'
-import RegisterUser from './components/RegisterUser.jsx';
-import Login from './components/Login.jsx';
+// import NavBar from './components/NavBar'
+// import RegisterUser from './components/RegisterUser.jsx';
+// import Login from './components/Login.jsx';
 import './App.css'
-
-
 
 import Search from './pages/Search'
 // import DisplayOnMap from './pages/DisplayOnMap'

@@ -60,7 +60,7 @@ CREATE TABLE reviews(
 );
 
 INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
-('Flat 9, Basin Mill, Laburnum street, E2 8FP', 51.4987703, -0.0421737),
+('Flat 9, Basin Mill, Laburnum Street, London E2 8FP, UK', 51.4987703, -0.0421737),
 ('123A Hammersmith Grove, London W6 0NJ, UK', 51.4990214, -0.2281128),
 ('65-89 Brondesbury Villas, London NW6 6AG, UK', 51.5361797, -0.1971449),
 ('119 Ashfield Street, London E1 3EX, UK', 51.5169185, -0.0543013),

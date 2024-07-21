@@ -60,10 +60,11 @@ export default function AddressForm({handleNextStep}){
                 const location = response.data.result.geocode.location
                 const [Latitude, Longitude] = [location.latitude, location.longitude]
 
-                setValidatedAddress({FormattedAddress, Latitude, Longitude})
+                // setValidatedAddress({FormattedAddress, Latitude, Longitude})
                 // setAddress(emptyAddress)
                 setPostCodeValid(true)
-
+                
+                const validatedAddress = { FormattedAddress, Latitude, Longitude };
                 console.log(validatedAddress)
                 return validatedAddress
                 // addNewProperty(validatedAddress)
