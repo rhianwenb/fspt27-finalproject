@@ -1,5 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from "axios"
+
+import AddReviewContext from '../context/AddReviewContext'
+import AddPropertyContext from '../context/AddPropertyContext'
 
 export default function AddressForm({handleNextStep}){
     
@@ -10,6 +13,8 @@ export default function AddressForm({handleNextStep}){
         city:'',
         postcode:'',
     }
+
+    let {propertyID} = useContext(AddReviewContext)
 
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
@@ -30,11 +35,6 @@ export default function AddressForm({handleNextStep}){
             addNewProperty(validateAddress01)
             handleNextStep(e)
         }
-
-        // console.log(address)
-        // validateAddress(address)
-        // if successful -> handleNextStep(e)
-        // if (propertyAdded) handleNextStep(e)
     }
 
     const validateAddress = async (a) => {
@@ -59,9 +59,7 @@ export default function AddressForm({handleNextStep}){
                 const location = response.data.result.geocode.location
                 const [Latitude, Longitude] = [location.latitude, location.longitude]
 
-                // setValidatedAddress({FormattedAddress, Latitude, Longitude})
-                // setAddress(emptyAddress)
-                setPostCodeValid(true)
+                setPostCodeValid(true) // for styling purposes only
 
                 const validatedAddress = { FormattedAddress, Latitude, Longitude };
                 console.log(validatedAddress)
@@ -88,8 +86,9 @@ export default function AddressForm({handleNextStep}){
         // console.log(ad)
         try {
             const data = await axios.post('/api/properties/', ad)
-            console.log(data) //returns the last property that was added
-            setPropertyAdded(true)
+            console.log("adding property with id: ", data.data[0].PropertyID) //returns the last property that was added
+            // setPropertyAdded(true)
+            propertyID = data.data[0].PropertyID
             setAddress({})
             
         } catch(e){
