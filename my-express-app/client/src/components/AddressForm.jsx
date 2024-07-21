@@ -13,7 +13,6 @@ export default function AddressForm({handleNextStep}){
 
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
-    const [propertyAdded, setPropertyAdded] = useState(false)
     const [postCodeValid, setPostCodeValid] = useState(true) // use this to change styling of input ?
 
     function handleChange(e){
@@ -29,7 +28,7 @@ export default function AddressForm({handleNextStep}){
         const validateAddress01 = await validateAddress(address)
         if(validateAddress01){
             addNewProperty(validateAddress01)
-            if (propertyAdded) handleNextStep(e)
+            handleNextStep(e)
         }
 
         // console.log(address)
@@ -63,7 +62,7 @@ export default function AddressForm({handleNextStep}){
                 // setValidatedAddress({FormattedAddress, Latitude, Longitude})
                 // setAddress(emptyAddress)
                 setPostCodeValid(true)
-                
+
                 const validatedAddress = { FormattedAddress, Latitude, Longitude };
                 console.log(validatedAddress)
                 return validatedAddress
@@ -91,7 +90,7 @@ export default function AddressForm({handleNextStep}){
             const data = await axios.post('/api/properties/', ad)
             console.log(data) //returns the last property that was added
             setPropertyAdded(true)
-            setValidatedAddress({})
+            setAddress({})
             
         } catch(e){
           console.log(e)

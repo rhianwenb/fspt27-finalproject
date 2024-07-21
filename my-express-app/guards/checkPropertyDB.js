@@ -3,7 +3,7 @@ const db = require('../model/helper');
 async function checkPropertyDB (req, res, next) {
     const {FormattedAddress, Latitude, Longitude} = req.body
     try {
-    const result = await db(`SELECT * FROM properties WHERE FormattedAddress = "${FormattedAddress}"`);
+    const result = await db(`SELECT * FROM properties WHERE Latitude = ${Latitude} AND Longitude = ${Longitude}`);
     if (result.data.length === 0) {
         console.log('Propery does not exist')
         next();
