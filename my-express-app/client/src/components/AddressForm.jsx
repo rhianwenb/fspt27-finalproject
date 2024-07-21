@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios"
 
-export default function AddressForm({hanleNextStep}){
+export default function AddressForm({handleNextStep}){
     
     const emptyAddress = {
         line1:'',
