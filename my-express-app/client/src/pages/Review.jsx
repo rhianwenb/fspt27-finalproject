@@ -8,48 +8,30 @@ import NavBar from "../components/NavBar"
 
 export default function Review() {
 
-
-
     useEffect(()=>{
         getReview()
     },[])
 
 
-    let defaultReview = {
-        sampleProperty:{
-            FormattedAddress : ""
-        },
-        sampleUser: {
-            UserName : ""
-        },
-        ReviewDate:"",
-        Rating1 : null,
-        Rating2 : null,
-        Rating3 : null,
-        Rating4 : null,
-        Rating5 : null,
-        Rating6 : null,
-        Rating7 : null,
-        MovingIn:"",
-        MovingOut:"",
-        Comments : ""
-    }
-
-    const [review, setReview] = useState(defaultReview);
+    const [review, setReview] = useState();
+    const [wrongId, setWrongId] = useState(false);
 
     useEffect(()=>{
-        loopInRatings()}
+        loopInRatings() }
     , [review])
 
     const id = useParams().id;
 
     async function getReview (){
-        
 
         await axios.get(`/api/reviews/review/${id}`)
         .then( response => {
             console.log(response.data[0]);
             setReview(response.data[0])
+
+            if(!response.data[0]){
+                setWrongId(true)
+            }
         })
         .catch(err=>{
             console.log(err)
@@ -82,22 +64,26 @@ export default function Review() {
 
     function loopInRatings(){
 
-        let newRating = {...ratings};
-        let index = 1;
+        if(review){
 
-        for(let key in newRating){
-            let num = review[`Rating`+index];
+            let newRating = {...ratings};
+            let index = 1;
 
-            newRating[key] = [];
+            for(let key in newRating){
+                let num = review[`Rating`+index];
 
-            for(let i = 0;i<5;i++){
-                i>=num? newRating[key].push(0) : newRating[key].push(1)
+                newRating[key] = [];
+
+                for(let i = 0;i<5;i++){
+                    i>=num? newRating[key].push(0) : newRating[key].push(1)
+                }
+
+                index++;
             }
 
-            index++;
-        }
+            setRatings(newRating)
 
-        setRatings(newRating)
+        }
 
     }
 
@@ -106,6 +92,12 @@ export default function Review() {
 
   return (
     <div>
+        { wrongId &&
+            <p>This review does not exists.</p>
+        }
+        
+        { review &&
+        <div>
         <h2>{review.FormattedAddress}</h2>
 
         <p>From <span style={{color:" #4DBEFF", cursor:"pointer"}}>{review.UserName}</span></p>
@@ -177,6 +169,9 @@ export default function Review() {
         {/* <button className='buttonReview'>Send message to <span style={{fontWeight:"bold"}}>{review.UserName}</span></button> */}
 
         <div style={{height:"200px"}}></div>
+        
+        </div>
+        }
         
         <NavBar />
         
