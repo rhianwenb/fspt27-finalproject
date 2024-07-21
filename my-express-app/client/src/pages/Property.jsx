@@ -56,7 +56,8 @@ export default function Property() {
   return (
     <div id="Property">
         <h2>Property</h2>
-        <h3>Address</h3>
+        { reviews && 
+          <h3>{reviews[0].FormattedAddress}</h3>}
 
         <div style={{textAlign:"left"}}>
             <p>Average Review</p>
