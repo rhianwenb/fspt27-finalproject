@@ -19,8 +19,6 @@ import NavContext from './context/NavContext';
 import Review from './pages/Review.jsx';
 import Property from './pages/Property.jsx';
 
-
-
 function App() {
 
   const [currentPage, setCurrentPage] = useState("Search");
@@ -70,8 +68,6 @@ function App() {
     setCurrentUser({});
     console.log("Logout successful");
   };
-
-
 
   const authObject = {isLoggedIn, currentUser, login, logout};
 
