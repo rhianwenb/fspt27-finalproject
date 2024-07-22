@@ -1,0 +1,43 @@
+#Property {
+    width:60%;
+    margin: auto;
+}
+
+.bg {
+    width: 250px;
+    height:50px;
+    background-image: linear-gradient(to right, red 30%, blue 30%);
+    -webkit-mask-image: url('../assets/star.svg');
+    mask-image: url('../assets/star.svg'); /* Standard */
+    mask-size: contain;
+    mask-repeat: repeat-x;
+    mask-position: 0 0, 100px 0; /* Position masks side by side */
+}
+
+#Property .review {
+    padding:30px;
+    border: 1px solid #4DBEFF;
+    margin : 20px auto;
+    display: flex;
+    align-items: center;
+}
+
+#Property .review :first-child {
+    flex:25%;
+    text-align: left;
+}
+
+#Property .review :last-child {
+    flex:75%
+}
+
+#Property .review button {
+    margin-top: 15px;
+    border:none;
+    background-color: #3580D2;
+    color:white
+}
+
+#Property .review button:hover {
+    background-color: #4DBEFF;
+}

@@ -1,13 +1,43 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar'
 import "../styles/AddAReview.css"
+import axios from "axios"
+
+import AddReviewContext from '../context/AddReviewContext';
+import NavContext from '../context/NavContext';
+
+import Step2 from '../components/FormSteps/Step2';
+import Step3 from '../components/FormSteps/Step3';
 
 import AddressForm from '../components/AddressForm'
+import AuthContext from '../context/AuthContext';
 
 export default function AddAReview() {
   const [step,setStep] = useState(1);
+  const currentPage = useContext(NavContext).currentPage;
+  const setCurrentPage = useContext(NavContext).setCurrentPage;
+  const navigate = useNavigate();
 
-  let stars = [1,1,0,0,0]
+  const currentUser=useContext(AuthContext).currentUser;
+  
+  const [reviewInfo,setReviewInfo] = useState({
+    ReviewDate:new Date().toISOString().slice(0,10),
+    Rating1:1,
+    Rating2:3,
+    Rating3:3,
+    Rating4:3,
+    Rating5:3,
+    Rating6:3,
+    Rating7:3,
+    Comments:"",
+    MovingIn:"",
+    MovingOut:""
+  })
+
+
+  
 
   function handleNextStep (event){
     event.preventDefault();
@@ -15,10 +45,43 @@ export default function AddAReview() {
     setStep(step+1);
   }
 
+  async function postReview (){
+    //Get user's id
+    let UserID = currentUser.UserID;
+    //Get property's id
+    //Axios post with all info
+    let samplePropertyID = 1;
+
+    try {
+
+      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut} = reviewInfo;
+
+      console.log(MovingIn,MovingOut)
+
+      await axios.post("/api/reviews/",{
+        UserID,
+        PropertyID:samplePropertyID,
+        ReviewDate, Rating1, Rating2, Rating3, 
+        Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut
+      })
+
+      setCurrentPage("Search");
+      navigate("/");
+
+
+    } catch(e){
+      console.log(e.message)
+    }
+  }
+
+
 
   return (
     <div id="addareview">
       <h2>Add a review</h2>
+
+
+      <AddReviewContext.Provider value={{reviewInfo,setReviewInfo,postReview}}>
 
       {step===1 && 
         <>
@@ -59,27 +122,20 @@ export default function AddAReview() {
       }
 
       {step===2 && 
-        <form>
-          <div id="stars" style={{gridArea:"1/1/span 1/span 4"}}>
-              {stars.map((s,index)=>(
-                <svg className={s===1&&"orangeStar"} version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                width="30px" height="30px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
-                  <path fill="#d9d9d9" d="M62.799,23.737c-0.47-1.399-1.681-2.419-3.139-2.642l-16.969-2.593L35.069,2.265
-                  C34.419,0.881,33.03,0,31.504,0c-1.527,0-2.915,0.881-3.565,2.265l-7.623,16.238L3.347,21.096c-1.458,0.223-2.669,1.242-3.138,2.642
-                  c-0.469,1.4-0.115,2.942,0.916,4l12.392,12.707l-2.935,17.977c-0.242,1.488,0.389,2.984,1.62,3.854
-                  c1.23,0.87,2.854,0.958,4.177,0.228l15.126-8.365l15.126,8.365c0.597,0.33,1.254,0.492,1.908,0.492c0.796,0,1.592-0.242,2.269-0.72
-                  c1.231-0.869,1.861-2.365,1.619-3.854l-2.935-17.977l12.393-12.707C62.914,26.68,63.268,25.138,62.799,23.737z"/>
-             </svg>
-              ))}
-          </div>
-          <textarea style={{gridArea:"2/2/span 2/span 2"}}></textarea>
-        </form>
+        <Step2 changeStep={handleNextStep}/>
       }
+
+      {step===3 &&
+        <Step3 changeStep={handleNextStep} />
+      }
+      </AddReviewContext.Provider>
 
       
 
       <div id="stepsAddReview">
-        <div className="activeStep" onClick={()=>setStep(1)}></div> <div className={step>1&&"activeStep"}></div> <div className={step>2&&"activeStep"}></div> <div className={step>3&&"activeStep"}></div> <div className={step>4&&"activeStep"}></div>
+        <div className="activeStep" onClick={()=>setStep(1)} ></div> 
+        <div className={step>1?"activeStep":""} onClick={()=>setStep(2)}></div> 
+        <div className={step>2?"activeStep":""} onClick={()=>setStep(3)} ></div> 
       </div>
 
         <NavBar />

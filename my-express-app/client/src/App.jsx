@@ -11,11 +11,16 @@ import Login from './components/Login.jsx';
 import './App.css'
 
 
-import DisplayOnMap from './pages/DisplayOnMap'
+
+
+import DisplayMap from './pages/DisplayMap'
 import AddAReview from './pages/AddAReview'
 import Profile from './pages/Profile';
 import NavContext from './context/NavContext';
 import EditUser from './components/EditUser.jsx';
+import Review from './pages/Review.jsx';
+import Property from './pages/Property.jsx';
+
 
 
 
@@ -87,11 +92,15 @@ function App() {
 
         <Router>
           <Routes>
-            <Route path="/" element={<DisplayOnMap />}/>
+
+            <Route path="/" element={<DisplayMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
-            <Route path="/profile" element={<Profile />}/>
-            <Route path="/register" element={<RegisterUser />}/>   
+            <Route path="/profile" element={<Profile />}/>   
             <Route path="/edituser" element={<EditUser/>} />      
+            <Route path="/review/:id" element={<Review />} />
+            <Route path="/register" element={<RegisterUser />}/> 
+            <Route path="/property/:id" element={<Property />} />    
+
           </Routes>
         </Router>
         

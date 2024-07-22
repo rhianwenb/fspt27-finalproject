@@ -12,6 +12,7 @@ export default function NavBar() {
 
   return (
     <div id="navbar">
+
         {/* <button className={currentPage==="Search"?"active":"inactive"}
                 onClick={()=>setCurrentPage("Search")}
         ><Link to="/">
@@ -50,6 +51,7 @@ export default function NavBar() {
 	<path d="M256.008,256c70.692,0,128-57.308,128-128S326.7,0,256.008,0s-128,57.308-128,128   C128.078,198.663,185.345,255.929,256.008,256z M256.008,64c35.346,0,64,28.654,64,64s-28.654,64-64,64s-64-28.654-64-64   S220.662,64,256.008,64z"/>
 </g></svg>
         </Link></button>
+
         
     </div>
   )
