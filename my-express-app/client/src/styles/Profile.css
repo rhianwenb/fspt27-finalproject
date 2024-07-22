@@ -1,9 +1,53 @@
 #profile {
-    width:50%;
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
 }
 
-#profile .btn-logout {
-    color: white;
+
+#profile .card-user .card-reviews {
+    /* max-width: 80%; */
+    box-sizing: border-box;
+    border-color: #4DBEFF;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
+#profile .card img {
+    margin: 50px;
+    
+}
+
+
+#profile .card-title {
+    margin: 10px;
+}
+
+#profile ul {
+    list-style-type: none; /* Remove bullets */
+}
+  
+#profile ul li {
+    border: 1px solid #4DBEFF; /* Add a thin border to each list item */
+    margin-top: -1px; /* Prevent double borders */
+    border-radius: 4px;
+    background-color: #4DBEFF1A; 
+    padding: 12px; /* Add some padding */
+    text-align: start;
+ }
+
+#profile .profile-btn {
+    background-color: #3580D2;
+    color:white;
+    border:none;
+    padding:10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#profile .profile-btn:hover {
+    background-color: #4DBEFF;
+}
