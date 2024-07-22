@@ -14,7 +14,7 @@ export default function AddressForm({handleNextStep}){
         postcode:'',
     }
 
-    let {propertyID} = useContext(AddReviewContext)
+    let {reviewInfo,setReviewInfo} = useContext(AddReviewContext)
 
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
@@ -88,7 +88,11 @@ export default function AddressForm({handleNextStep}){
             const data = await axios.post('/api/properties/', ad)
             console.log("adding property with id: ", data.data[0].PropertyID) //returns the last property that was added
             // setPropertyAdded(true)
-            propertyID = data.data[0].PropertyID
+            let propertyID = data.data[0].PropertyID
+            let newReview = {...reviewInfo};
+            newReview.PropertyID=propertyID
+            setReviewInfo(newReview);
+
             setAddress({})
             
         } catch(e){

@@ -34,7 +34,8 @@ export default function AddAReview() {
     Rating7:3,
     Comments:"",
     MovingIn:"",
-    MovingOut:""
+    MovingOut:"",
+    PropertyID:null
   })
 
   function handleNextStep (event){
@@ -48,17 +49,17 @@ export default function AddAReview() {
     let UserID = currentUser.UserID;
     //Get property's id
     //Axios post with all info
-    let samplePropertyID = useContext(AddReviewContext).propertyID
+    // let samplePropertyID = useContext(AddReviewContext).propertyID
 
     try {
 
-      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut} = reviewInfo;
+      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut, PropertyID} = reviewInfo;
 
       console.log(MovingIn,MovingOut)
 
       await axios.post("/api/reviews/", {
         UserID,
-        PropertyID:samplePropertyID,
+        PropertyID,
         ReviewDate, Rating1, Rating2, Rating3, 
         Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut
       })

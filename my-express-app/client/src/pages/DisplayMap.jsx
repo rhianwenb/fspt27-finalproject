@@ -10,7 +10,6 @@ export default function DisplayMap(){
     useEffect(()=>{
         getMarkers()
     }, [])
-    const map = useMap();
 
     const [markers, setMarkers] = useState([])
 
@@ -29,23 +28,35 @@ export default function DisplayMap(){
           console.log(e)
         }
       }
+    
+      const [popupInfo, setPopupInfo] = useState('')
 
     function handleClick(p){ 
         // https://developers.google.com/codelabs/maps-platform/maps-platform-101-react-js#0    
-        console.log('click!', p)
+        console.log('click!')
 
     }
 
-    // const handleClick = useCallback((ev) => {
-    //   console.log('marker clicked:', ev.latLng.toString());
-    //   if (!map) return;
-    //   if (!ev.latLng) return;
-    // }, [map])
-
-    const [popupInfo, setPopupInfo] = useState('')
 
     return (
         <>
+        {/* MORE INFORMATION */}
+          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+          </button>
+
+          <div className="modal-dialog modal-dialog-centered" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
           <Map style={{width: '100%', height: '60vh'}}
               defaultCenter={{lat: 51.5, lng: -0.12}}
@@ -59,7 +70,7 @@ export default function DisplayMap(){
                       key = {p.key} 
                       position = {p.location}
                       clickable={true}
-                      onClick={()=>setPopupInfo(p)} 
+                      onClick={()=>{setPopupInfo(p), handleClick}} 
                       >
                       <Pin background={'#3580D2'} glyphColor={'#3580D2'} borderColor={'#3580D2'} /> 
                       </AdvancedMarker>
