@@ -28,14 +28,14 @@ router.get("/:id", async (req, res, next) => {
 
 //GET reviews by UserID  
 router.get("/user/:id", async (req, res, next) => {
-  try {
-    const result = await db(`SELECT ReviewID, Comments, AddressLine1 FROM reviews 
-      INNER JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE UserID = ${req.params.id}`);
-    res.status(200).send(result.data);
-  }
-  catch (e) {
-    res.status(500).send({error: e.message});
-  };
+    try {
+      const result = await db(`SELECT ReviewID, Comments FROM reviews 
+        INNER JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE UserID = ${req.params.id}`);
+      res.status(200).send(result.data);
+    }
+    catch (e) {
+      res.status(500).send({error: e.message});
+    };
 });
 
 

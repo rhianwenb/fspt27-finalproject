@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 import RegisterUser from './RegisterUser.jsx';
 import Login from '../components/Login.jsx';
 import AuthContext from '../context/AuthContext.js';
+import '../styles/Profile.css'
 
 
 export default function Profile() {
@@ -23,6 +24,18 @@ export default function Profile() {
     Type: ""
   });
 
+  const profilePhotos = {
+    1: "/profile-photos/cat-user-1.png",
+    2: "/profile-photos/wolf-user-2.png",
+    3: "/profile-photos/sea-lion-user-3.png",
+    4: "/profile-photos/sloth-user-4.png",
+    5: "/profile-photos/puffer-fish-user-5.png",
+    6: "/profile-photos/bear-user-6.png",
+    7: "/profile-photos/cow-user-7.png",
+    8: "/profile-photos/lion-user-8.png",
+    9: "/profile-photos/hedgehog-user-9.png"
+  };
+  
 
   const auth = useContext(AuthContext);
 
@@ -49,67 +62,65 @@ export default function Profile() {
    
   return (
 
-
     <div>
+
+      <div id="profile">
         
-        { !auth.isLoggedIn && <Login/> }
-        
+        { !auth.isLoggedIn && <Login/> }       
         { auth.isLoggedIn && <div>
-          
-          
+                   
+          <div style={{height:"50px"}}></div>
+
         <div>
-        <div className="container mt-4 mb-4 p-4 d-flex justify-content-center" id="profile"> 
-
-
-          <div className="card p-5 bg-light"> 
-
+          
           {/* main profile data */}
-          <div className="row">
-            <div id="btn-profile" className="image d-flex flex-column justify-content-center align-items-center"> 
-              <button className="btn btn-secondary btn-lg "> 
-                <img src="https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg" 
+          <div className="card-user">
+          {/* style={{gridArea: "2 / 1 / span 2 / span 3"}} */}
+            <div > 
+                <img src={profilePhotos[localStorage.getItem("userid")]} 
                  className="rounded-circle" height="150" width="150" />
-              </button> 
-            <span id="card-title" className="name mt-3"><h4> {auth?.currentUser?.FirstName}   {auth?.currentUser?.LastName} </h4></span> 
-            <span className="idd">@{auth?.currentUser?.UserName}</span> 
-              
-            <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-              <span className="info1">{auth?.currentUser?.Type}</span> 
-            </div> 
-            </div> 
+            </div>
+
+            <span className="card-title"><h4 style={{color: "#3580D2", fontWeight: "500"}}> {auth?.currentUser?.FirstName}   {auth?.currentUser?.LastName} </h4></span> 
+            <span >@{auth?.currentUser?.UserName}  </span> <br></br>
+            <span >{auth?.currentUser?.Type}</span> 
+           
           </div>
 
+          <div style={{height:"50px"}}></div>
           {/* user reviews */}
-          <div className="row">
-          <div id="user-reviews " className="row mt-4"> 
-            <ul className="list-group" id="reviews-list">
-            <li class="list-group-item list-group-item-dark">
-              <h5>Your Reviews</h5>
-            </li>
-              {userReviews.map(r => (
-                <li className="list-group-item text-start" id="review" key="review"> 
-                  ReviewID: {r.ReviewID} <br></br>
-                  Property: {r.AddressLine1} <br></br><br></br>
-                  Comments: {r.Comments} <br></br>
+
+          <div className="card-reviews" > 
+            <ul className="reviews-list">
+              
+            <li className="list-group-item"><h5 style={{color: "#3580D2", fontWeight: "500"}}>Your Reviews</h5></li>
+              {userReviews?.map(r => (
+                <li className="list-group-item" 
+                 
+                key="user-review"> 
+                  ReviewID: {r?.ReviewID} <br></br>
+                  <br></br>
+                  Comments: {r?.Comments} <br></br>
                 </li>
               ))}
             </ul> 
           </div>  
-          </div>
 
-          </div>
-        </div>
         </div>
 
-              <button id="btn-logout" className="btn btn-secondary mt-8 ml-2" onClick={auth.logout}>
-                Log Out
+              <button 
+                style={{width:"fit-content"}}
+                onClick={auth.logout}>
+                  Log Out
               </button>
           
 
-      <div style={{height:"200px"}}>
-      </div>
+      <div style={{height:"200px"}}></div>
           </div>}
+        
         <NavBar />
+
+        </div>
     </div>
 
   )

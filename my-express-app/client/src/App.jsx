@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Message } from 'rsuite';
 import AuthContext from './context/AuthContext.js';
 import NavBar from './components/NavBar'
 import RegisterUser from './pages/RegisterUser.jsx';
@@ -56,6 +57,9 @@ function App() {
     }
     catch (error) {
       console.log(error);
+      <Message type="warning">
+      <strong>User Not Found!</strong> Please register at the link below.
+      </Message>
     }   
   };
 

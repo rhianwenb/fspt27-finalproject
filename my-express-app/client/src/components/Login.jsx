@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import axios from "axios"; 
+import { Message } from 'rsuite';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import AuthContext from '../context/AuthContext';
@@ -28,12 +29,21 @@ export default function Login() {
 
     const login = async (e) => {
         e.preventDefault();
-        auth.login(credentials);
-        setCredentials({
-            UserName: "",
-            Password: "",
-          })
-          navigate("/profile");
+        if (auth.login(credentials)) { 
+            setCredentials({
+                UserName: "",
+                Password: "",
+              });
+              <Message type="success">
+                <strong>Success!</strong> Redirecting you to your profile.
+              </Message>
+              navigate("/profile");
+        }
+        else if (auth.error) {
+        <Message type="warning">
+            <strong>User Not Found!</strong> Please register at the link below.
+        </Message>
+        }
     };
     
     const logout = (e) => {
@@ -45,6 +55,7 @@ export default function Login() {
 
   return (
     <div id="login">
+        <br></br>
          
         <div className="mb-3"><h2> Login </h2></div>
         <div className="mb-3"><h3> Enter username and password </h3></div>

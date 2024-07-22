@@ -53,83 +53,103 @@ export default function RegisterUser() {
     };
 
   return (
-    <div> 
-        <div><h1></h1></div>
-        
 
-        <div className="container col-md-8 offset-md-2" id="registeruser">
-        <div className="mb-3"><h4>Enter your details below to create an account:</h4></div>
-            <div className="row ">
+    <div id="registeruser"> 
+    <br></br>
+        <div><h2>Register</h2></div>
+        <div className="mb-3"><h3>Enter your details to create an account:</h3></div>
 
                 <form>
-                <div className="form-box"> 
 
-                  <div className="row mb-3">
+                  <label style={{gridArea:"1/1/span 1/span 7"}}>
+                      <p> First Name </p>
+                    <input 
+                    type="text" 
+                    placeholder="First name" 
+                    name="FirstName" 
+                    value={newUser.FirstName} 
+                    onChange={handleUserChange}/>
+                  </label>           
+    
+                  <label style={{gridArea:"2/1/span 1/span 7"}}>
+                      <p>Last Name</p>
+                    <input 
+                    type="text" 
+                    placeholder="Last name" 
+                    name="LastName" 
+                    value={newUser.LastName} 
+                    onChange={handleUserChange}/>
+                  </label>  
 
-                  <div className="col">
-                    <label className="form-label">First Name</label>
-                    <input type="text" placeholder="First name" className="form-control"
-                    name="FirstName" value={newUser.FirstName} onChange={handleUserChange}/>
-                  </div>  
-                  <div className="col">
-                    <label className="form-label">Last Name</label>
-                    <input type="text" placeholder="Last name" className="form-control"
-                    name="LastName" value={newUser.LastName} onChange={handleUserChange}/>
-                  </div>  
-                  </div>
-                  
-                  <div className="row mb-3">
-                  <div className="col">  
-                    <label className="form-label">Username</label>
-                    <input type="text" placeholder="Create a username" className="form-control"
-                    name="UserName" value={newUser.UserName} onChange={handleUserChange}/>
-                  </div>
-                  <div className="col">  
-                    <label className="form-label">Age</label>
-                    <input type="text" placeholder="Age" className="form-control"
-                    name="Age" value={newUser.Age} onChange={handleUserChange}/>
-                  </div>  
-                  </div>
-                  
-                  <div className="row mb-3">  
-                  <div className="col">  
-                    <label className="form-label">Email Address</label>
-                    <input type="text" placeholder="Enter your email" className="form-control"
-                    name="EmailAddress" value={newUser.EmailAddress} onChange={handleUserChange}/>
-                  </div>
-                  <div className="col"> 
-                    <label className="form-label">Password</label>
-                    <input type="password" placeholder="Enter a secure password" className="form-control"
-                    name="Password" value={newUser.Password} onChange={handleUserChange}/>
-                  </div>
-                  </div>
-
-                  <div className="row mb-6">
-                  <div className="col">  
-                    <label className="form-label me-4">Are you a tenant or a landlord?</label>
-                    <label className="form-label me-2">Tenant</label>
-                    <input type="radio" className="form-check-input me-4"
-                    name="Type" value="Tenant" checked={newUser.Type === "Tenant"} onChange={handleUserChange}></input>
-
-                    <label className="form-label me-2">Landlord</label>
-                    <input type="radio" className="form-check-input"
-                    name="Type" value="Landlord" checked={newUser.Type === "Landlord"} onChange={handleUserChange}></input>
-
-                    <div className="d-flex gap-2 justify-content-center mt-3">  
-                        <button type="submit" className="btn btn-outline-dark ml-2" 
-                        onClick={handleUserSubmit}>Submit</button>
-                    </div> 
-
-                  </div>  
-                  </div>
- 
-                </div>  
+                  <label style={{gridArea:"3/1/span 1/span 7"}}>
+                      <p>Username</p>
+                    <input 
+                    type="text" 
+                    placeholder="Create a username" 
+                    name="UserName" 
+                    value={newUser.UserName} 
+                    onChange={handleUserChange}/>
+                  </label>
+                   
+                  <label style={{gridArea:"4/1/span 1/span 7"}}>
+                      <p>Age</p> 
+                    <input 
+                    type="text" 
+                    placeholder="Age" 
+                    name="Age" 
+                    value={newUser.Age} 
+                    onChange={handleUserChange}/>
+                  </label>
                 
+                  <label style={{gridArea:"5/1/span 1/span 7"}}>
+                      <p>Email Address</p>
+                    <input 
+                    type="text" 
+                    placeholder="Enter your email" 
+                    name="EmailAddress" 
+                    value={newUser.EmailAddress} 
+                    onChange={handleUserChange}/>
+                  </label>
+
+                  <label style={{gridArea:"6/1/span 1/span 7"}}>
+                      <p>Password</p>
+                    <input 
+                    type="password" 
+                    placeholder="Enter a secure password" 
+                    name="Password" 
+                    value={newUser.Password} 
+                    onChange={handleUserChange}/>
+                  </label>
+           
+            
+                  <span style={{gridArea:"7/1/span 1/span 7"}} id="radioinput">
+                  <label>Are you a tenant or a landlord?</label><br></br>
+                  <label>Tenant</label>
+                    <input type="radio" 
+                    name="Type" value="Tenant" 
+                    checked={newUser.Type === "Tenant"} 
+                    onChange={handleUserChange}></input>
+
+                  <label>Landlord</label>
+                    <input type="radio" 
+                    name="Type" value="Landlord" 
+                    checked={newUser.Type === "Landlord"} 
+                    onChange={handleUserChange}></input>
+                  </span>
+
+                  <div style={{gridArea:"8/1/span 1/span 4", marginTop:"20px"}}>  
+                    <button 
+                      style={{width:"fit-content"}}
+                      type="submit" 
+                      onClick={handleUserSubmit}>
+                        Submit
+                    </button>
+                  </div>
+
                 </form>
 
-             
-            </div>
-        </div>
+            <div style={{height:"250px"}}></div>
+
         <NavBar />
     </div>
   )
