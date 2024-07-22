@@ -20,8 +20,8 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^3.1.4",
+    "react-leaflet": "^4.2.1",
     "react": "^18.3.1",
-    "rsuite": "^5.67.0",
-    "react-leaflet": "^4.2.1"
+    "rsuite": "^5.67.0"
   }
 }

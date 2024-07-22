@@ -21,9 +21,6 @@ import EditUser from './components/EditUser.jsx';
 import Review from './pages/Review.jsx';
 import Property from './pages/Property.jsx';
 
-
-
-
 function App() {
 
   const [currentPage, setCurrentPage] = useState("displayonmap");
@@ -76,8 +73,6 @@ function App() {
     setCurrentUser({});
     console.log("Logout successful");
   };
-
-
 
   const authObject = {isLoggedIn, currentUser, login, logout};
 
