@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
+    width: 100%;
 }
 
 
@@ -37,7 +38,7 @@
     text-align: start;
  }
 
-#profile button {
+#profile .profile-btn {
     background-color: #3580D2;
     color:white;
     border:none;
@@ -47,6 +48,6 @@
     border-radius: 4px;
 }
 
-#profile button:hover {
+#profile .profile-btn:hover {
     background-color: #4DBEFF;
 }

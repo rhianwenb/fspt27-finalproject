@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import RegisterUser from './RegisterUser.jsx';
 import Login from '../components/Login.jsx';
+import EditUser from '../components/EditUser.jsx';
 import AuthContext from '../context/AuthContext.js';
-import '../styles/Profile.css'
+import '../styles/Profile.css';
 
 
 export default function Profile() {
@@ -36,7 +36,7 @@ export default function Profile() {
     9: "/profile-photos/hedgehog-user-9.png"
   };
   
-
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
   useEffect(() => {  
@@ -57,9 +57,7 @@ export default function Profile() {
   }, []);
 
 
-  // console.log(userProfile);
-  // console.log(userReviews);
-   
+
   return (
 
     <div>
@@ -74,8 +72,8 @@ export default function Profile() {
         <div>
           
           {/* main profile data */}
-          <div className="card-user">
-          {/* style={{gridArea: "2 / 1 / span 2 / span 3"}} */}
+          <div className="card-user"
+          style={{gridArea: "2 / 1 / span 2 / span 3"}}>
             <div > 
                 <img src={profilePhotos[localStorage.getItem("userid")]} 
                  className="rounded-circle" height="150" width="150" />
@@ -91,9 +89,10 @@ export default function Profile() {
           {/* user reviews */}
 
           <div className="card-reviews" > 
-            <ul className="reviews-list">
+            <ul className="reviews-list" >
               
-            <li className="list-group-item"><h5 style={{color: "#3580D2", fontWeight: "500"}}>Your Reviews</h5></li>
+            <li className="list-group-item">
+              <h5 style={{color: "#3580D2", fontWeight: "500"}}>Your Reviews</h5></li>
               {userReviews?.map(r => (
                 <li className="list-group-item" 
                  
@@ -108,10 +107,15 @@ export default function Profile() {
 
         </div>
 
-              <button 
+              <button className="profile-btn"
                 style={{width:"fit-content"}}
                 onClick={auth.logout}>
                   Log Out
+              </button>
+              <button className="profile-btn"
+                onClick={() => navigate("/edituser")}
+                style={{width:"fit-content"}}>
+                  Edit Profile
               </button>
           
 

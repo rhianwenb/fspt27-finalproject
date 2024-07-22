@@ -40,9 +40,9 @@ export default function Login() {
               navigate("/profile");
         }
         else if (auth.error) {
-        <Message type="warning">
+        alert(<Message type="warning">
             <strong>User Not Found!</strong> Please register at the link below.
-        </Message>
+        </Message>)
         }
     };
     
@@ -100,6 +100,7 @@ export default function Login() {
 
                 </form>
             </div>        
+            <br></br>
             <div className="mt-3" id="linktoregister">
                 Not a user yet? <a href="/register"> Register here </a>
             </div>

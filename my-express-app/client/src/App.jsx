@@ -13,8 +13,9 @@ import './App.css'
 
 import DisplayOnMap from './pages/DisplayOnMap'
 import AddAReview from './pages/AddAReview'
-import Profile from './pages/Profile'
+import Profile from './pages/Profile';
 import NavContext from './context/NavContext';
+import EditUser from './components/EditUser.jsx';
 
 
 
@@ -89,7 +90,8 @@ function App() {
             <Route path="/" element={<DisplayOnMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/profile" element={<Profile />}/>
-            <Route path="/register" element={<RegisterUser />}/>          
+            <Route path="/register" element={<RegisterUser />}/>   
+            <Route path="/edituser" element={<EditUser/>} />      
           </Routes>
         </Router>
         
