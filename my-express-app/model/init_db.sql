@@ -63,12 +63,23 @@ CREATE TABLE reviews(
 );
 
 
-CREATE TABLE comments(
+CREATE TABLE questions(
     CommentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     UserID INT,
     PropertyID INT,
     CommentDate DATE,
     Text VARCHAR(140),
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
+)
+
+CREATE TABLE answers(
+    AnswerID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    CommentID INT,
+    UserID INT,
+    PropertyID INT,
+    Text VARCHAR(140),
+    FOREIGN KEY (CommentID) REFERENCES comments (CommentID),
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 )
