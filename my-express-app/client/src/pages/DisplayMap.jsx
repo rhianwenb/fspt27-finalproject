@@ -5,7 +5,10 @@ import {APIProvider, Map,  AdvancedMarker, Pin} from '@vis.gl/react-google-maps'
 import axios from 'axios'
 
 import NavBar from '../components/NavBar'
+import CheckOut from './CheckOut'
 import PropertyPopup from  '../components/PropertyPopup'
+
+import coffee from '../assets/coffee.png'
 
 import '../styles/DisplayMap.css'
 
@@ -45,6 +48,10 @@ export default function DisplayMap(){
 
     const navigate = useNavigate();
 
+    // function tipMe(){
+    //   console.log('take my money')
+    // }
+
     return (
         <>
         {/* MORE INFORMATION */}
@@ -82,36 +89,43 @@ export default function DisplayMap(){
                   </div>
               </div>
             </div>
+        <div className="row">
+          <div className={popup ? "column left":""}>
+            <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
+              <Map style={{width: '100%', height: '60vh', margin:'auto'}}
+                  defaultCenter={{lat: 51.5, lng: -0.12}}
+                  defaultZoom={12}
+                  gestureHandling={'greedy'}
+                  disableDefaultUI={true}
+                  mapId='DEMO_MAP_ID'
+                  >
+                  {markers && markers.map(p =>(
+                      <AdvancedMarker
+                          key = {p.key} 
+                          position = {p.location}
+                          clickable={true}
+                          onClick={()=>{handleClick(p)}} 
+                          >
+                          <Pin // if the key that you click
+                            background={popupKey !== p.key ? '#3580D2' : '#FF6600'} 
+                            glyphColor={popupKey !== p.key ? '#3580D2' : '#FF6600'} 
+                            borderColor={popupKey !== p.key ? '#3580D2' : '#FF6600'} /> 
+                        </AdvancedMarker>
+                  ))
+                  }
+              </Map>
+            </APIProvider>
 
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
-          <Map style={{width: '95%', height: '55vh', margin:'auto'}}
-              defaultCenter={{lat: 51.5, lng: -0.12}}
-              defaultZoom={11}
-              gestureHandling={'greedy'}
-              disableDefaultUI={true}
-              mapId='DEMO_MAP_ID'
-              >
-              {markers && markers.map(p =>(
-                  <AdvancedMarker
-                      key = {p.key} 
-                      position = {p.location}
-                      clickable={true}
-                      onClick={()=>{handleClick(p)}} 
-                      >
-                      <Pin // if the key that you click
-                        background={popupKey !== p.key ? '#3580D2' : '#FF6600'} 
-                        glyphColor={popupKey !== p.key ? '#3580D2' : '#FF6600'} 
-                        borderColor={popupKey !== p.key ? '#3580D2' : '#FF6600'} /> 
-                    </AdvancedMarker>
-              ))
-              }
-          </Map>
-        </APIProvider>
-        
-        <div>
-          {popup && (<PropertyPopup store={popupInfo} />)}
-        </div> 
-
+          </div>
+          <div className="column right">
+            <div>
+            {popup && (<PropertyPopup store={popupInfo} />)}
+            </div>
+          </div>
+        </div>
+        {/* <div >
+        <img className="tip-me" src = {coffee} onClick={tipMe}/>
+        </div> */}
         <div>
           <NavBar />
         </div>
