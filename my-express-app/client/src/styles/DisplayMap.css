@@ -1,0 +1,37 @@
+.button {
+    background-color: #3580D2;
+    color:white;
+    border:none;
+    padding:10px;
+    cursor: pointer;
+    /* margin: 40px auto; */
+}
+
+.button:hover {
+    background-color: #4DBEFF ;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.left {
+    width: 75%;
+}
+
+.right {
+    width: 25%;
+    border: 1px sold ;
+}
+
+.tip-me {
+    position: absolute;
+    height: 60px; 
+    bottom: 20vh ; 
+    right:12vw;
+    border:1px solid;
+    border-radius:100%;
+    padding:10px;
+    background-color: white;
+}

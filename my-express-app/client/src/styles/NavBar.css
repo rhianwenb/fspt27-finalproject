@@ -8,7 +8,7 @@
     box-sizing: border-box;
     position: fixed;
     left: 5%;
-    top:80vh;
+    bottom:1vh;
 }
 
 #navbar button {

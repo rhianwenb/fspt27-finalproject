@@ -95,7 +95,7 @@ function App() {
       </header>
           <Routes>           
 
-            <Route path="/" element={<DisplayMap />}/>
+            <Route path="/" element={<DisplayMap/>}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/login" element={<Login/>} />     
             <Route path="/profile" element={<Profile />}/>   
