@@ -1,15 +1,34 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import '../styles/PropertyPopup.css'
 // import home from '../assets/home.png'
 
 export default function PropertyPopup( {store}) {
-    console.log(store)
+
+    useEffect(() => {
+        getReview(store.key)
+      }, [store.key]);
+    // console.log(store)
+    const navigate = useNavigate();
 
     // get review information based on propertyID
+    const [reviewInfo, setReviewInfo] = useState({})
+    const [numberOfReviews, setNumberOfReviews] = useState(0)
 
-    // get username info (necessary?) 
+    async function getReview(id){
+        // console.log('getting review info')
+        try {
+            const result = await axios.get(`/api/reviews/property/${id}`)
+            console.log(result.data[0])
+            setReviewInfo(result.data[0])
+            setNumberOfReviews(result.data.length)
+        } catch(e){
+            console.log(e)
+        }
+    }
 
-    // go to review / property page
 
     return (
         <div className="popup">
@@ -18,20 +37,14 @@ export default function PropertyPopup( {store}) {
         </div>
         <div className="popup-body">
             <div className="rating">
-                ★★★★☆
+                ★★★★☆ ({numberOfReviews})
             </div>
             <div className="tags">
-                <div className="tag">Noisy</div>
-                <div className="tag">Family Friendly</div>
-                <div className="tag">Secure</div>
+                <em>"{reviewInfo.Comments}"</em>
             </div>
-            <div className="buttons">
-                <a className="button">See review</a> 
-                <a className="button">See property</a>
-            </div>
-            <div className="username">
-                Username
-            </div>
+        </div>
+        <div className= "popup-footer">
+            <div><button className="button" onClick={()=> navigate(`/property/${store.key}`)}>See all reviews</button></div>    
         </div>
     </div>
     )

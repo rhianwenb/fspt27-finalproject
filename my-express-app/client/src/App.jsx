@@ -88,7 +88,7 @@ function App() {
         <Router>
           <Routes>
 
-            <Route path="/" element={<DisplayMap />}/>
+            <Route path="/" element={<DisplayMap/>}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/profile" element={<Profile />}/>   
             <Route path="/edituser" element={<EditUser/>} />      

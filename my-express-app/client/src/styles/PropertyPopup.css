@@ -1,8 +1,9 @@
 .popup {
     position: absolute;
-    top: 60vh;;
-    left: 10px;
-    width: 70%;
+    margin: auto;
+    bottom: 23vh;;
+    left: 60px;
+    width: 40%;
     border: 3px solid #3580D2;;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -23,36 +24,13 @@
 .tags {
     margin-top: 10px;
 }
-.tag {
-    display: inline-block;
-    background-color: #d9d9d9;
-    color: black;
-    padding: 3px 7px;
-    border-radius: 3px;
-    margin-right: 5px;
-    font-size: 12px;
-}
-.buttons {
-    display: flex;
-    /* justify-content: space-between; */
-    margin-top: 10px;
-}
-.button {
-    display: inline-block;
-    background-color: #4DBEFF;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    text-decoration: none;
-    font-size: 12px;
-    margin-right: 5px;
-}
-.button:hover {
-    background-color: #3580D2;
+
+.popup-footer .button {
+    text-align:right;
+    margin:5px;
 }
 
-.username {
-    font-size: 12px;
-    text-align: right;
-    font-style: italic;
+.p{
+    vertical-align: sub;
 }
+
