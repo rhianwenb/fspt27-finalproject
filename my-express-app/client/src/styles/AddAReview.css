@@ -44,7 +44,7 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    top:70vh;
+    bottom:16vh;
     width:50%;
     left:25%;
 }

@@ -125,7 +125,11 @@ export default function Profile() {
                 style={{width:"fit-content"}}>
                   Edit Profile
               </button>
-          
+              <button className="profile-btn"
+                onClick={() => navigate("/addareview")}
+                style={{width:"fit-content"}}>
+                  Add a review
+              </button>
 
       <div style={{height:"200px"}}></div>
           </div>}
