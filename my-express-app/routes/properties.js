@@ -32,24 +32,27 @@ router.get("/:id", propertyMustExist, async (req, res, next) => {
 
 
 // POST add a new property to the database 
-router.post("/", checkPropertyDB, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   console.log(req.body)
   const {FormattedAddress, Latitude, Longitude} = req.body
 
-  const addNewProperty = `INSERT INTO properties (FormattedAddress, Latitude, Longitude)
-                VALUES ("${FormattedAddress}", ${Latitude}, ${Longitude});`
-
   try {
-    // run sql query
-    await db(addNewProperty); 
-    // lookup properties in decending order by id and return one entry from bottom of list (will be the newest entry)
-    const result = await db("SELECT * FROM properties AS latest_property ORDER BY PropertyID DESC LIMIT 1;"); 
-    // send that data back as an object 
-    res.status(201).send(result.data);  
+    const result = await db(`SELECT * FROM properties WHERE Latitude = ${Latitude} AND Longitude = ${Longitude}`);
+    if (result.data.length === 0) {
+        console.log('Propery does not exist')
+        const addNewProperty = `INSERT INTO properties (FormattedAddress, Latitude, Longitude)
+                                VALUES ("${FormattedAddress}", ${Latitude}, ${Longitude});`
+        await db(addNewProperty); 
+        const newProperty = await db(`SELECT * FROM properties WHERE Latitude = ${Latitude} AND Longitude = ${Longitude}`); 
+        // send that data back as an object 
+        res.status(201).send(newProperty.data);  
+    } else {
+      console.log('Propery already in db')
+      res.status(201).send(result.data);  
+    }
+  } catch (e) {
+    res.status(500).send({ error: e.message });
   }
-  catch (e) {
-    res.status(500).send({error: e.message});
-  };
 });
 
 
