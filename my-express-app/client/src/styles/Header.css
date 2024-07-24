@@ -1,0 +1,19 @@
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .header button {
+    background-color: white;
+    border: 0px;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 2em;
+  }
+  
+  .header button:hover {
+    color: #4DBEFF;
+    background-color: white;
+  }
+  
