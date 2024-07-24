@@ -22,7 +22,8 @@ import Property from './pages/Property.jsx'
 import NavContext from './context/NavContext';
 import EditUser from './components/EditUser.jsx';
 import Header from './components/Header.jsx';
-
+import Review from './pages/Review.jsx';
+import Property from './pages/Property.jsx';
 
 
 function App() {
@@ -78,7 +79,6 @@ function App() {
     console.log("Logout successful");
   };
 
-  // const navigate = useNavigate();
 
   const authObject = {isLoggedIn, currentUser, login, logout};
   
@@ -97,7 +97,7 @@ function App() {
       </header>
           <Routes>           
 
-            <Route path="/" element={<DisplayMap />}/>
+            <Route path="/" element={<DisplayMap/>}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/login" element={<Login/>} />     
             <Route path="/profile" element={<Profile />}/>   

@@ -13,6 +13,7 @@ import Step3 from '../components/FormSteps/Step3';
 
 import AddressForm from '../components/AddressForm'
 import AuthContext from '../context/AuthContext';
+// import AddPropertyContext from '../context/AddPropertyContext';
 
 export default function AddAReview() {
   const [step,setStep] = useState(1);
@@ -33,11 +34,9 @@ export default function AddAReview() {
     Rating7:3,
     Comments:"",
     MovingIn:"",
-    MovingOut:""
+    MovingOut:"",
+    PropertyID:null
   })
-
-
-  
 
   function handleNextStep (event){
     event.preventDefault();
@@ -50,17 +49,17 @@ export default function AddAReview() {
     let UserID = currentUser.UserID;
     //Get property's id
     //Axios post with all info
-    let samplePropertyID = 1;
+    // let samplePropertyID = useContext(AddReviewContext).propertyID
 
     try {
 
-      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut} = reviewInfo;
+      const {ReviewDate, Rating1, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut, PropertyID} = reviewInfo;
 
       console.log(MovingIn,MovingOut)
 
-      await axios.post("/api/reviews/",{
+      await axios.post("/api/reviews/", {
         UserID,
-        PropertyID:samplePropertyID,
+        PropertyID,
         ReviewDate, Rating1, Rating2, Rating3, 
         Rating4, Rating5, Rating6, Rating7, Comments, MovingIn, MovingOut
       })
@@ -80,46 +79,14 @@ export default function AddAReview() {
     <div id="addareview">
       <h2>Add a review</h2>
 
-
       <AddReviewContext.Provider value={{reviewInfo,setReviewInfo,postReview}}>
 
-      {step===1 && 
-        <>
-          <h3>Basic information</h3>
-          <AddressForm handleNextStep = {handleNextStep}/>
-          {/* <form>
-            <label style={{gridArea:"1/1/span 1/span 1"}}>
-              <p>Number*</p>
-              <input type='number'/>
-            </label>
-
-            <label style={{gridArea:"1/2/span 1/span 3"}}>
-              <p>Street Name*</p>
-              <input type='text'/>
-            </label>
-
-            <label style={{gridArea:"2/1/span 1/span 4"}}>
-              <p>More adress info</p>
-              <input type='text'/>
-            </label>
-
-            <label style={{gridArea:"3/1/span 1/span 2"}}>
-              <p>City/Town*</p>
-              <input type='text'/>
-            </label>
-
-            <label style={{gridArea:"3/3/span 1/span 2"}}>
-              <p>Post Code*</p>
-              <input type='number'/>
-            </label>
-            
-            <div style={{gridArea:"4/1/span 1/span 4", marginTop:"20px"}}><button style={{width:"fit-content"}}
-              onClick={(event)=>handleNextStep(event)}
-            >Next step</button></div>
-
-          </form> */}
-        </>
-      }
+        {step===1 && 
+          <>
+            <h3>Basic information</h3>
+            <AddressForm handleNextStep = {handleNextStep}/>
+          </>
+        }     
 
       {step===2 && 
         <Step2 changeStep={handleNextStep}/>
