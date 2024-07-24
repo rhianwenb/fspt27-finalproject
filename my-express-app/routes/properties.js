@@ -5,18 +5,13 @@ var jwt = require("jsonwebtoken");
 require("dotenv").config();
 const userIsLoggedIn = require("../guards/userIsLoggedIn");
 const propertyMustExist = require("../guards/propertyMustExist");
-
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send({ title: 'Express' });
-});
+const checkPropertyDB = require("../guards/checkPropertyDB");
 
 
 // GET all properties listed within database 
-router.get("/all", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const result = await db("SELECT * FROM properties");
+    const result = await db("SELECT * FROM properties;");
     res.status(200).send(result.data);
   } catch(e) {
     res.status(500).send({error: e.message});
@@ -27,7 +22,7 @@ router.get("/all", async (req, res, next) => {
 // GET property by ID
 router.get("/:id", propertyMustExist, async (req, res, next) => {
   try {
-    const result = await db(`SELECT * FROM properties WHERE PropertyID = ${req.params.id}`);
+    const result = await db(`SELECT * FROM properties WHERE PropertyID = ${req.params.id};`);
     res.status(200).send(result.data);
   } 
   catch(e) {
@@ -37,18 +32,18 @@ router.get("/:id", propertyMustExist, async (req, res, next) => {
 
 
 // POST add a new property to the database 
-router.post("/", async (req, res, next) => {
+router.post("/", checkPropertyDB, async (req, res, next) => {
   console.log(req.body)
   const {FormattedAddress, Latitude, Longitude} = req.body
 
   const addNewProperty = `INSERT INTO properties (FormattedAddress, Latitude, Longitude)
-                VALUES ("${FormattedAddress}", ${Latitude}, ${Longitude})`
+                VALUES ("${FormattedAddress}", ${Latitude}, ${Longitude});`
 
   try {
     // run sql query
     await db(addNewProperty); 
     // lookup properties in decending order by id and return one entry from bottom of list (will be the newest entry)
-    const result = await db("SELECT * FROM properties AS latest_property ORDER BY PropertyID DESC LIMIT 1"); 
+    const result = await db("SELECT * FROM properties AS latest_property ORDER BY PropertyID DESC LIMIT 1;"); 
     // send that data back as an object 
     res.status(201).send(result.data);  
   }

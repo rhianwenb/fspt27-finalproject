@@ -41,17 +41,24 @@ export default function Profile() {
 
   useEffect(() => {  
     const getUserReviews = async () => {
-      const loggedInUser = localStorage.getItem("userid");
-      try {
+
+      //If the user is logged in
+      if(auth.isLoggedIn){
+
+        const loggedInUser = localStorage.getItem("userid");
+
+        try {
         const { data } = await axios(`/api/reviews/user/${loggedInUser}`, {
           method: "GET",
         });
         setUserReviews(data);
         console.log(data.message);
+        }
+        catch (err) {
+          console.log(err.message);
+        };
       }
-      catch (err) {
-        console.log(err.message);
-      };
+    
     };
     getUserReviews();
   }, []);
@@ -100,6 +107,7 @@ export default function Profile() {
                   ReviewID: {r?.ReviewID} <br></br>
                   <br></br>
                   Comments: {r?.Comments} <br></br>
+
                 </li>
               ))}
             </ul> 

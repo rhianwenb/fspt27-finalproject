@@ -1,5 +1,7 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
+import axios from "axios"
+
 
 import {useState, useMemo, useEffect} from 'react';
 import { GoogleMap, useLoadScript , Marker} from "@react-google-maps/api";
@@ -9,11 +11,25 @@ import "@reach/combobox/styles.css";
 
 export default function DisplayOnMap() {
 
+  useEffect(()=>{
+    getMarkers()
+  }, [])
 
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries:["places"]
 });
+const [markers, setMarkers] = useState([])
+
+async function getMarkers(){
+  try {
+    const result = await axios.get('/api/properties/')
+    console.log(result.data)
+    setMarkers(result.data)
+  } catch(e){
+    console.log(e)
+  }
+}
 
 // const center = useMemo(()=>({lat: 51.5, lng: -0.12}), []);
 const [center, setCenter] = useState({lat: 51.5, lng: -0.12})
@@ -68,7 +84,11 @@ if (isLoaded)  return (
           center={center}
           mapContainerStyle={{ width: '100%', height: '100vh' }}
           >
-          {selected && <Marker position={selected} />}
+          <Marker coordinates={
+            markers.map(p=>{
+              [p.Latitude, p.Longitude]
+            })
+            } />
         </GoogleMap>
 
       <div>DisplayOnMap

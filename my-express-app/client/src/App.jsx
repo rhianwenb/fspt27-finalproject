@@ -12,13 +12,14 @@ import Login from './components/Login.jsx';
 import './App.css'
 
 
-import DisplayOnMap from './pages/DisplayOnMap'
+
+
+import DisplayMap from './pages/DisplayMap'
 import AddAReview from './pages/AddAReview'
 import Profile from './pages/Profile';
 import NavContext from './context/NavContext';
 import EditUser from './components/EditUser.jsx';
 import Header from './components/Header.jsx';
-
 
 
 
@@ -93,12 +94,16 @@ function App() {
         <h1 style={{margin:"5px auto"}}>NextTenant</h1>
       </header>
           <Routes>           
-            <Route path="/" element={<DisplayOnMap />}/>
+
+            <Route path="/" element={<DisplayMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
-            <Route path="/profile" element={<Profile />}/>
-            <Route path="/register" element={<RegisterUser />}/>   
-            <Route path="/edituser" element={<EditUser/>} /> 
             <Route path="/login" element={<Login/>} />     
+            <Route path="/profile" element={<Profile />}/>   
+            <Route path="/edituser" element={<EditUser/>} />      
+            <Route path="/review/:id" element={<Review />} />
+            <Route path="/register" element={<RegisterUser />}/> 
+            <Route path="/property/:id" element={<Property />} />    
+
           </Routes>
         </Router>
         

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios"
 
-export default function AddressForm({hanleNextStep}){
+export default function AddressForm({handleNextStep}){
     
     const emptyAddress = {
         line1:'',
@@ -13,7 +13,6 @@ export default function AddressForm({hanleNextStep}){
 
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
-    const [propertyAdded, setPropertyAdded] = useState(false)
     const [postCodeValid, setPostCodeValid] = useState(true) // use this to change styling of input ?
 
     function handleChange(e){
@@ -24,14 +23,18 @@ export default function AddressForm({hanleNextStep}){
         });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
+        const validateAddress01 = await validateAddress(address)
+        if(validateAddress01){
+            addNewProperty(validateAddress01)
+            handleNextStep(e)
+        }
+
         // console.log(address)
-
-        validateAddress(address)
-
+        // validateAddress(address)
         // if successful -> handleNextStep(e)
-        if (propertyAdded) handleNextStep(e)
+        // if (propertyAdded) handleNextStep(e)
     }
 
     const validateAddress = async (a) => {
@@ -56,12 +59,14 @@ export default function AddressForm({hanleNextStep}){
                 const location = response.data.result.geocode.location
                 const [Latitude, Longitude] = [location.latitude, location.longitude]
 
-                setValidatedAddress({FormattedAddress, Latitude, Longitude})
+                // setValidatedAddress({FormattedAddress, Latitude, Longitude})
                 // setAddress(emptyAddress)
                 setPostCodeValid(true)
 
+                const validatedAddress = { FormattedAddress, Latitude, Longitude };
                 console.log(validatedAddress)
-                addNewProperty(validatedAddress)
+                return validatedAddress
+                // addNewProperty(validatedAddress)
 
             } else {
                 console.log('MISSING COMPONENT')
@@ -74,7 +79,8 @@ export default function AddressForm({hanleNextStep}){
             }
 
         } catch (error) {
-          console.error(error);
+          console.log(error);
+          return null
         }
       };
 
@@ -84,7 +90,7 @@ export default function AddressForm({hanleNextStep}){
             const data = await axios.post('/api/properties/', ad)
             console.log(data) //returns the last property that was added
             setPropertyAdded(true)
-            setValidatedAddress({})
+            setAddress({})
             
         } catch(e){
           console.log(e)
