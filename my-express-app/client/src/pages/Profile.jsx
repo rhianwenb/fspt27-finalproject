@@ -73,7 +73,7 @@ export default function Profile() {
           
           {/* main profile data */}
           <div className="card-user"
-          style={{gridArea: "2 / 1 / span 2 / span 3"}}>
+            style={{gridArea: "2 / 1 / span 2 / span 3"}}>
             <div > 
                 <img src={profilePhotos[localStorage.getItem("userid")]} 
                  className="rounded-circle" height="150" width="150" />

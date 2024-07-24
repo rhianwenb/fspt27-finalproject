@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Message } from 'rsuite';
 import AuthContext from './context/AuthContext.js';
 import NavBar from './components/NavBar'
@@ -16,6 +17,8 @@ import AddAReview from './pages/AddAReview'
 import Profile from './pages/Profile';
 import NavContext from './context/NavContext';
 import EditUser from './components/EditUser.jsx';
+import Header from './components/Header.jsx';
+
 
 
 
@@ -72,26 +75,30 @@ function App() {
     console.log("Logout successful");
   };
 
-
+  // const navigate = useNavigate();
 
   const authObject = {isLoggedIn, currentUser, login, logout};
+  
 
 
   return (
-    <>
-
-        <h1 style={{margin:"5px auto"}}>NextTenant</h1>
+    <>  
 
       <NavContext.Provider value={{currentPage, setCurrentPage}}>
       <AuthContext.Provider value={authObject}>
-
+  
         <Router>
-          <Routes>
+            <Header/>
+      <header> 
+        <h1 style={{margin:"5px auto"}}>NextTenant</h1>
+      </header>
+          <Routes>           
             <Route path="/" element={<DisplayOnMap />}/>
             <Route path="/addareview" element={<AddAReview />}/>
             <Route path="/profile" element={<Profile />}/>
             <Route path="/register" element={<RegisterUser />}/>   
-            <Route path="/edituser" element={<EditUser/>} />      
+            <Route path="/edituser" element={<EditUser/>} /> 
+            <Route path="/login" element={<Login/>} />     
           </Routes>
         </Router>
         
