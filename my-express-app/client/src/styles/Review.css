@@ -48,9 +48,10 @@
     background-color: #3580D2;
     color:white;
     border:none;
-    padding:10px;
+    padding:5px;
     cursor: pointer;
-    margin: 40px auto;
+    margin: 5px auto;
+    font-size: 0.9em;
 }
 
 .buttonReview:hover {

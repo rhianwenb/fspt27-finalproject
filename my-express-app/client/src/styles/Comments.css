@@ -1,0 +1,72 @@
+#Comments {
+    margin: 50px 0;
+}
+
+.comment {
+    width: 60%;
+    background-color: #ebebeb;
+    text-align: left;
+    padding:10px;
+    border-radius: 3px;
+    margin:15px 0
+}
+
+.answer {
+    width:60%;
+    text-align: right;
+    background-color: #d9d9d9;
+    padding:10px;
+    border-radius: 3px;
+    margin: 15px 0 15px 40%
+}
+
+.comment p {
+    margin: 5px 0px
+}
+
+
+.comment .username, .comment .date, .answer .username, .answer .date {
+    font-size: 0.8em;
+    margin:0
+}
+
+.comment .username, .answer .username {
+    color:  #4DBEFF;
+}
+
+#Comments form{
+    width:100%;
+    margin-top: 50px;
+}
+
+#Comments form input {
+    width:75%
+}
+
+#Comments form button {
+    width: 20%;
+    margin-left: 5%;
+    border:none;
+    color:white;
+    background-color: #3580D2;
+}
+
+#Comments form button:hover {
+    background-color: #4DBEFF;
+}
+
+
+.buttonsComments *{
+    border:none;
+    padding:0;
+    background-color: transparent;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color:#3580D2;
+}
+
+.buttonsComments *:hover{
+    color:#FF9900
+}
