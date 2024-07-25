@@ -24,6 +24,9 @@ export default function Profile() {
     Type: ""
   });
 
+  const [showReviews, setShowReviews] = useState(false);
+  const [buttonText, setButtonText] = useState("Show My Reviews");
+
   const profilePhotos = {
     1: "/profile-photos/cat-user-1.png",
     2: "/profile-photos/wolf-user-2.png",
@@ -52,7 +55,7 @@ export default function Profile() {
           method: "GET",
         });
         setUserReviews(data);
-        console.log(data.message);
+        // console.log(data);  // reviews linked to user currently logged in
         }
         catch (err) {
           console.log(err.message);
@@ -63,6 +66,11 @@ export default function Profile() {
     getUserReviews();
   }, []);
 
+  const toggleShowReviews = (e) => {
+    setShowReviews(showReviews === false ? true : false); 
+    setButtonText(buttonText === "Show My Reviews" ? "Hide My Reviews" : "Show My Reviews");
+    console.log(showReviews);
+  };
 
 
   return (
@@ -76,8 +84,7 @@ export default function Profile() {
                    
           <div style={{height:"50px"}}></div>
 
-        <div>
-          
+        <div>         
           {/* main profile data */}
           <div className="card-user"
             style={{gridArea: "2 / 1 / span 2 / span 3"}}>
@@ -88,51 +95,60 @@ export default function Profile() {
 
             <span className="card-title"><h4 style={{color: "#3580D2", fontWeight: "500"}}> {auth?.currentUser?.FirstName}   {auth?.currentUser?.LastName} </h4></span> 
             <span >@{auth?.currentUser?.UserName}  </span> <br></br>
-            <span >{auth?.currentUser?.Type}</span> 
-           
-          </div>
+            <span >{auth?.currentUser?.Type}</span> <br></br><br></br>
 
-          <div style={{height:"50px"}}></div>
-          {/* user reviews */}
-
-          <div className="card-reviews" > 
-            <ul className="reviews-list" >
-              
-            <li className="list-group-item">
-              <h5 style={{color: "#3580D2", fontWeight: "500"}}>Your Reviews</h5></li>
-              {userReviews?.map(r => (
-                <li className="list-group-item" 
-                 
-                key="user-review"> 
-                  ReviewID: {r?.ReviewID} <br></br>
-                  <br></br>
-                  Comments: {r?.Comments} <br></br>
-
-                </li>
-              ))}
-            </ul> 
-          </div>  
-
-        </div>
-
+            <div>    
               <button className="profile-btn"
                 style={{width:"fit-content"}}
-                onClick={auth.logout}>
-                  Log Out
+                onClick={() => navigate("/addareview")}>
+                  Add New Review
+              </button>
+              <button className="profile-btn"
+                onClick={toggleShowReviews}
+                style={{width:"fit-content"}}>
+                  {buttonText}
               </button>
               <button className="profile-btn"
                 onClick={() => navigate("/edituser")}
                 style={{width:"fit-content"}}>
                   Edit Profile
               </button>
-              <button className="profile-btn"
-                onClick={() => navigate("/addareview")}
-                style={{width:"fit-content"}}>
-                  Add a review
-              </button>
+            </div>
+
+
+          </div>
+
+          <div style={{height:"50px"}}></div>
+
+          {/* user reviews */}
+
+        {  auth.isLoggedIn && showReviews &&        
+          <div className="card-reviews" > 
+            <ul className="reviews-list" >
+              
+            <li className="list-group-item">
+              <h5 style={{color: "#3580D2", fontWeight: "500", textAlign:"center"}}>
+                Your Reviews </h5></li>
+              {userReviews?.map(r => (
+                <li className="list-group-item" 
+                  key={r?.ReviewID.toString()}
+                  onClick={() => navigate(`/review/${r?.ReviewID}`)}> 
+                  
+                  {r?.FormattedAddress} 
+                  <br></br>
+                  Comments: {r?.Comments} <br></br>
+
+                </li>
+              ))}
+            </ul> 
+          </div>  }
+
+        </div>
+
+  
 
       <div style={{height:"200px"}}></div>
-          </div>}
+          </div> }
         
         <NavBar />
 

@@ -71,7 +71,7 @@ export default function EditUser() {
                 <br></br>
                 
                   <label style={{gridArea:"1/1/span 1/span 7"}}>
-                  <p>You only need to enter the information you want to change!git pus</p>
+                  <p>You only need to enter the information you want to change!</p>
                     <input 
                     type="text" 
                     placeholder={auth?.currentUser?.FirstName}
