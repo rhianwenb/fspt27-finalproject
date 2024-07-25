@@ -9,7 +9,6 @@ import PropertyPopup from  '../components/PropertyPopup'
 import AuthContext from '../context/AuthContext.js';
 
 import coffee from '../assets/coffee.png'
-
 import '../styles/DisplayMap.css'
 
 export default function DisplayMap(){
