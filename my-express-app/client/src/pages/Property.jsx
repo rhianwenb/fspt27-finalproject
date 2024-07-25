@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Questions from '../components/Questions'
 
 import "../styles/Property.css"
 
@@ -13,19 +14,36 @@ export default function Property() {
     const [averageReview, setAverageReview] = useState(50);
     const [reviews, setReviews] = useState();
 
+  //   function getReviews(){
+  //     axios.get(`/api/reviews/property/${id}`)
+  //     .then(response=>{
+  //       setReviews(response.data)
+  //       console.log(response.data)
+  //     })
+  //     .catch(err=>{
+  //       console.log(err)
+  //   })
+  // }
+
 
     function getAverageRating(review){
       //Loop through all objects in an array, and get Rating 1
       // console.log(review)
       let ratings = review.map(item=>item.Rating1);
-
       let average = ratings.reduce((a,b)=>a+b) / ratings.length
 
       setAverageReview((average*100)/5);
-  }
+      }
+      
+  
 
+
+      useEffect(()=>{
+        getAverageRating()
+      }, [reviews])
     
 
+     
      function getReviews(){
         axios.get(`/api/reviews/property/${id}`)
         .then(response=>{
@@ -97,6 +115,8 @@ export default function Property() {
             </div>
           ))
         }
+
+          <Questions id={id}/>
 
         <div style={{height:"200px"}}></div>
         

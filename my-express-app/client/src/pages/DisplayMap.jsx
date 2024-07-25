@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {APIProvider, Map,  AdvancedMarker, Pin} from '@vis.gl/react-google-maps';
 import axios from 'axios'
 
 import NavBar from '../components/NavBar'
-// import CheckOut from './CheckOut'
-// import PropertyPopup from  '../components/PropertyPopup'
+import PropertyPopup from  '../components/PropertyPopup'
+import AuthContext from '../context/AuthContext.js';
 
-// import coffee from '../assets/coffee.png'
-
+import coffee from '../assets/coffee.png'
 import '../styles/DisplayMap.css'
 
 export default function DisplayMap(){
@@ -51,6 +50,16 @@ export default function DisplayMap(){
     // function tipMe(){
     //   console.log('take my money')
     // }
+    const auth = useContext(AuthContext);
+
+    function getStarted(){
+      //if user logged in
+      if (auth.isLoggedIn) {
+        navigate('/addareview')
+      } else {
+          navigate('/profile')
+      }
+    }
 
     return (
         <>
@@ -84,7 +93,7 @@ export default function DisplayMap(){
                       <br/> 
                     </div>
                     <div className="modal-footer">
-                        <button className="button" data-bs-dismiss="modal" onClick = {()=> navigate('/addareview')}>Get started!</button>
+                        <button className="button" data-bs-dismiss="modal" onClick = {()=> getStarted()}>Get started!</button>
                     </div>
                   </div>
               </div>
@@ -92,7 +101,7 @@ export default function DisplayMap(){
         <div className="row">
           <div className={popup ? "column left":""}>
             <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
-              <Map style={{width: '100%', height: '60vh', margin:'auto'}}
+              <Map style={{width: '90%', height: '58vh', margin:'auto'}}
                   defaultCenter={{lat: 51.5, lng: -0.12}}
                   defaultZoom={12}
                   gestureHandling={'greedy'}
@@ -123,9 +132,8 @@ export default function DisplayMap(){
             </div>
           </div>
         </div>
-        {/* <div >
-        <img className="tip-me" src = {coffee} onClick={tipMe}/>
-        </div> */}
+        <div style={{height:'100px'}}>
+        </div>
         <div>
           <NavBar />
         </div>

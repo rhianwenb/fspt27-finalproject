@@ -76,6 +76,8 @@ export default function Step3({changeStep}) {
               onClick={()=>functionPostReview()}
             >Submit my review</button></aside>
 
+
+
         <div style={{height:"200px"}}></div>
     </div>
   )

@@ -30,7 +30,18 @@
     margin:5px;
 }
 
-.p{
+.p {
     vertical-align: sub;
 }
 
+.sm {
+    width: 100px;
+    height:20px;
+    background-image: linear-gradient(to right, red 30%, blue 30%);
+    -webkit-mask-image: url('../assets/star.svg');
+    mask-image: url('../assets/star.svg'); /* Standard */
+    mask-size: contain;
+    mask-repeat: repeat-x;
+    mask-position: 0 0, 100px 0; /* Position masks side by side */
+    margin:auto;
+}
