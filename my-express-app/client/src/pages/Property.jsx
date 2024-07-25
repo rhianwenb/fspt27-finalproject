@@ -13,7 +13,6 @@ export default function Property() {
 
     const [averageReview, setAverageReview] = useState(50);
     const [reviews, setReviews] = useState();
-    const [commentsDisplay, setCommentsDisplay] = useState("Questions");
 
     function getReviews(){
       axios.get(`/api/reviews/property/${id}`)
@@ -108,10 +107,7 @@ export default function Property() {
           ))
         }
 
-        {commentsDisplay==="Questions" &&
-          <Questions id={id} />
-        }
-        
+          <Questions id={id}/>
 
         <div style={{height:"200px"}}></div>
         

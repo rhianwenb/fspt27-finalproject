@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../styles/Comments.css"
 import AuthContext from '../context/AuthContext';
 
-export default function Comments({id}) {
+export default function Comments({id, input}) {
 
 
     const [comments, setComments] = useState();
@@ -68,7 +68,7 @@ export default function Comments({id}) {
 
                         <div style={{display:"flex", justifyContent:"left"}} className='buttonsComments'>
                             <button>Answer</button>
-                            <button>See all answers</button>
+                            {/* <button>See all answers</button> */}
                         </div>
                         
                     </div>
