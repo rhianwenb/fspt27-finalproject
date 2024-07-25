@@ -26,7 +26,7 @@ import Property from './pages/Property.jsx';
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState("displayonmap");
+  const [currentPage, setCurrentPage] = useState("Map");
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [currentUser, setCurrentUser] = useState();
 

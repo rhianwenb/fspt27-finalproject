@@ -21,6 +21,7 @@ export default function AddAReview() {
   const setCurrentPage = useContext(NavContext).setCurrentPage;
   const navigate = useNavigate();
 
+  const isLoggedIn = useContext(AuthContext).isLoggedIn;
   const currentUser=useContext(AuthContext).currentUser;
   
   const [reviewInfo,setReviewInfo] = useState({
@@ -45,11 +46,8 @@ export default function AddAReview() {
   }
 
   async function postReview (){
-    //Get user's id
     let UserID = currentUser.UserID;
-    //Get property's id
-    //Axios post with all info
-    // let samplePropertyID = useContext(AddReviewContext).propertyID
+
 
     try {
 
@@ -73,37 +71,57 @@ export default function AddAReview() {
     }
   }
 
+  function goToLogin(event){
+    event.preventDefault();
+    navigate("/profile");
+    setCurrentPage("Profile")
+  }
+
 
 
   return (
     <div id="addareview">
       <h2>Add a review</h2>
 
-      <AddReviewContext.Provider value={{reviewInfo,setReviewInfo,postReview}}>
 
-        {step===1 && 
-          <>
-            <h3>Basic information</h3>
-            <AddressForm handleNextStep = {handleNextStep}/>
-          </>
-        }     
-
-      {step===2 && 
-        <Step2 changeStep={handleNextStep}/>
-      }
-
-      {step===3 &&
-        <Step3 changeStep={handleNextStep} />
-      }
-      </AddReviewContext.Provider>
-
+      {isLoggedIn &&
       
+      <div>
+          <AddReviewContext.Provider value={{reviewInfo,setReviewInfo,postReview}}>
 
-      <div id="stepsAddReview">
-        <div className="activeStep" onClick={()=>setStep(1)} ></div> 
-        <div className={step>1?"activeStep":""} onClick={()=>setStep(2)}></div> 
-        <div className={step>2?"activeStep":""} onClick={()=>setStep(3)} ></div> 
-      </div>
+          {step===1 && 
+            <>
+              <h3>Basic information</h3>
+              <AddressForm handleNextStep = {handleNextStep}/>
+            </>
+          }     
+
+        {step===2 && 
+          <Step2 changeStep={handleNextStep}/>
+        }
+
+        {step===3 &&
+          <Step3 changeStep={handleNextStep} />
+        }
+        </AddReviewContext.Provider>
+
+        
+
+        <div id="stepsAddReview">
+          <div className="activeStep" onClick={()=>setStep(1)} ></div> 
+          <div className={step>1?"activeStep":""} onClick={()=>setStep(2)}></div> 
+          <div className={step>2?"activeStep":""} onClick={()=>setStep(3)} ></div> 
+        </div>
+    </div>
+
+      }
+      
+      {!isLoggedIn &&
+        <div style={{marginTop:"100px"}}>
+        <p>Please log in to add a review</p>
+        <button id="loginToReview" onClick={(event)=>goToLogin(event)}>Log in</button>
+        </div>
+      }
 
         <NavBar />
 

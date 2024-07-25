@@ -41,12 +41,14 @@
 }
 
 #stepsAddReview {
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     justify-content: center;
-    bottom:16vh;
-    width:50%;
-    left:25%;
+    width:100%;
+    margin-top: 50px;
+    /* bottom:16vh; */
+   
+    /* left:25%; */
 }
 
 #stepsAddReview div {
@@ -112,6 +114,16 @@
     color:#aaaaaa;
     margin: 0;
 }
+
+#loginToReview {
+    background-color: #3580D2;
+    color:white;
+    border:none;
+    padding:10px;
+    cursor: pointer;
+    margin: auto;
+}
+
 
 
 
