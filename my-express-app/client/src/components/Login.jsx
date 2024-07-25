@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import axios from "axios"; 
-import { Message } from 'rsuite';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import AuthContext from '../context/AuthContext';
@@ -27,6 +26,7 @@ export default function Login() {
         setCredentials({...credentials, [name]: value});
     };
 
+
     const login = async (e) => {
         e.preventDefault();
         if (auth.login(credentials)) { 
@@ -34,16 +34,11 @@ export default function Login() {
                 UserName: "",
                 Password: "",
               });
-              <Message type="success">
-                <strong>Success!</strong> Redirecting you to your profile.
-              </Message>
               navigate("/profile");
         }
         else if (auth.error) {
-        alert(<Message type="warning">
-            <strong>User Not Found!</strong> Please register at the link below.
-        </Message>)
-        }
+        alert("User Not Found! Please register at the link below.")
+        };
     };
     
     const logout = (e) => {
@@ -91,8 +86,8 @@ export default function Login() {
                             </button>
                             <button 
                                 style={{width:"fit-content"}} 
-                                onClick={logout}>
-                                    Log Out
+                                onClick={() => navigate("/register")}>
+                                    Register
                             </button>
                         </div>
 
@@ -101,9 +96,9 @@ export default function Login() {
                 </form>
             </div>        
             <br></br>
-            <div className="mt-3" id="linktoregister">
+            {/* <div className="mt-3" id="linktoregister">
                 Not a user yet? <a href="/register"> Register here </a>
-            </div>
+            </div> */}
        
     </div>
   )

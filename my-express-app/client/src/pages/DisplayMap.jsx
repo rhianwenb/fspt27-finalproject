@@ -5,10 +5,10 @@ import {APIProvider, Map,  AdvancedMarker, Pin} from '@vis.gl/react-google-maps'
 import axios from 'axios'
 
 import NavBar from '../components/NavBar'
-import CheckOut from './CheckOut'
-import PropertyPopup from  '../components/PropertyPopup'
+// import CheckOut from './CheckOut'
+// import PropertyPopup from  '../components/PropertyPopup'
 
-import coffee from '../assets/coffee.png'
+// import coffee from '../assets/coffee.png'
 
 import '../styles/DisplayMap.css'
 

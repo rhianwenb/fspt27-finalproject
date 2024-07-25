@@ -4,16 +4,18 @@
     justify-content: flex-end;
   }
   
-  .header button {
+  #header button {
     background-color: white;
+    color: #3580D2;
     border: 0px;
     cursor: pointer;
     padding: 5px;
     font-size: 2em;
   }
   
-  .header button:hover {
+  #header button:hover {
     color: #4DBEFF;
+    font-size: 2.5em;
     background-color: white;
   }
   

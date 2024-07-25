@@ -12,8 +12,6 @@ import Login from './components/Login.jsx';
 import './App.css'
 
 
-
-
 import DisplayMap from './pages/DisplayMap'
 import AddAReview from './pages/AddAReview'
 import Profile from './pages/Profile';
@@ -22,8 +20,7 @@ import Property from './pages/Property.jsx'
 import NavContext from './context/NavContext';
 import EditUser from './components/EditUser.jsx';
 import Header from './components/Header.jsx';
-import Review from './pages/Review.jsx';
-import Property from './pages/Property.jsx';
+
 
 
 function App() {

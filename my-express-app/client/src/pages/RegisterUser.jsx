@@ -57,7 +57,8 @@ export default function RegisterUser() {
     <div id="registeruser"> 
     <br></br>
         <div><h2>Register</h2></div>
-        <div className="mb-3"><h3>Enter your details to create an account:</h3></div>
+        <div className="mb-3"><h4>Enter your details to create an account. <br></br>
+          You will then be redirected back to the login page. </h4></div>
 
                 <form>
 
