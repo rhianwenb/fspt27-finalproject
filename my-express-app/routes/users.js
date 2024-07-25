@@ -40,7 +40,7 @@ router.post("/register", async (req, res, next) => {
   const hash = await bcrypt.hash(Password, saltRounds);
   // sql query to insert values into new db entry
   const addNewUser = `INSERT INTO users (FirstName, LastName, UserName, EmailAddress, Password, Age, Type) 
-  VALUES ("${FirstName}", "${LastName}", "${UserName}", "${EmailAddress}", "${hash}", "${Age}", "${Type}")`;
+  VALUES ("${FirstName}", "${LastName}", "${UserName}", "${EmailAddress}", "${hash}", ${Age}, "${Type}")`;
   try {
     // run sql query
     await db(addNewUser); 
@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
   const {UserName, Password} = req.body;
   try {
     const results = await db(
-      `SELECT * FROM users WHERE UserName = "${UserName}"`
+      `SELECT * FROM users WHERE UserName = "${UserName}"` 
     );
     const existingUser = results.data[0];
     if (existingUser) {

@@ -1,13 +1,18 @@
 import React from 'react';
 import axios from "axios"; 
-import '../styles/RegisterUser.css'
-import { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
+import '../styles/EditUser.css';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext.js';
+import NavBar from '../components/NavBar';
+import Profile from '../pages/Profile';
 
-export default function RegisterUser() {
 
-    const [newUser, setNewUser] = useState({
+
+export default function EditUser() {
+
+
+    const [updatedUser, setUpdatedUser] = useState({
         FirstName: "",
         LastName: "",
         UserName: "",
@@ -21,13 +26,13 @@ export default function RegisterUser() {
 
     const handleUserChange = (e) => {
         const {name, value} = e.target;
-        setNewUser((user) => ({ ...user, [name]: value}));
+        setUpdatedUser((user) => ({ ...user, [name]: value}));
     }
 
     const handleUserSubmit = (e) => {
       e.preventDefault();
-        registerUser(newUser);
-        setNewUser({    
+        editUser(updatedUser);
+        setUpdatedUser({    
             FirstName: "",
             LastName: "",
             UserName: "",
@@ -38,13 +43,13 @@ export default function RegisterUser() {
         });
     };
 
-    const registerUser = async (e) => {
+    const editUser = async (e) => {
         try {
-            const {data} = await axios("api/users/register", {
+            const {data} = await axios(`api/users/${localStorage.getItem("userid")}`, {
                 method: "POST",
                 data: newUser
             });
-            console.log("Registration successful");
+            console.log("Update successful");
             navigate("/profile");
         }
         catch (error) {
@@ -52,92 +57,86 @@ export default function RegisterUser() {
         };
     };
 
+    const auth = useContext(AuthContext);
+
   return (
 
     <div id="registeruser"> 
-    <br></br>
-        <div><h2>Register</h2></div>
-        <div className="mb-3"><h3>Enter your details to create an account:</h3></div>
+    
+    <div style={{height:"20px"}}></div>
+        
+        <div className="mb-3"><h3>Update your profile information</h3></div>
 
                 <form>
-
+                <br></br>
+                
                   <label style={{gridArea:"1/1/span 1/span 7"}}>
-                      <p> First Name </p>
+                  <p>You only need to enter the information you want to change!git pus</p>
                     <input 
                     type="text" 
-                    placeholder="First name" 
+                    placeholder={auth?.currentUser?.FirstName}
                     name="FirstName" 
-                    value={newUser.FirstName} 
+                    value={updatedUser.FirstName} 
                     onChange={handleUserChange}/>
                   </label>           
     
                   <label style={{gridArea:"2/1/span 1/span 7"}}>
-                      <p>Last Name</p>
+                      {/* <p>Last Name</p> */}
                     <input 
                     type="text" 
-                    placeholder="Last name" 
+                    placeholder={auth?.currentUser?.LastName}
                     name="LastName" 
-                    value={newUser.LastName} 
+                    value={updatedUser.LastName} 
                     onChange={handleUserChange}/>
                   </label>  
 
                   <label style={{gridArea:"3/1/span 1/span 7"}}>
-                      <p>Username</p>
+                      {/* <p>Username</p> */}
                     <input 
                     type="text" 
-                    placeholder="Create a username" 
+                    placeholder={auth?.currentUser?.UserName}
                     name="UserName" 
-                    value={newUser.UserName} 
+                    value={updatedUser.UserName} 
                     onChange={handleUserChange}/>
                   </label>
                    
                   <label style={{gridArea:"4/1/span 1/span 7"}}>
-                      <p>Age</p> 
+                      {/* <p>Age</p>  */}
                     <input 
                     type="text" 
-                    placeholder="Age" 
+                    placeholder={auth?.currentUser?.Age}
                     name="Age" 
-                    value={newUser.Age} 
+                    value={updatedUser.Age} 
                     onChange={handleUserChange}/>
                   </label>
                 
                   <label style={{gridArea:"5/1/span 1/span 7"}}>
-                      <p>Email Address</p>
+                      {/* <p>Email Address</p> */}
                     <input 
                     type="text" 
-                    placeholder="Enter your email" 
+                    placeholder={auth?.currentUser?.EmailAddress} 
                     name="EmailAddress" 
-                    value={newUser.EmailAddress} 
+                    value={updatedUser.EmailAddress} 
                     onChange={handleUserChange}/>
                   </label>
-
+                  
                   <label style={{gridArea:"6/1/span 1/span 7"}}>
-                      <p>Password</p>
+                      {/* <p>Password</p> */}
                     <input 
                     type="password" 
                     placeholder="Enter a secure password" 
                     name="Password" 
-                    value={newUser.Password} 
+                    value={updatedUser.Password} 
                     onChange={handleUserChange}/>
-                  </label>
+                  </label> 
            
             
-                  <span style={{gridArea:"7/1/span 1/span 7"}} id="radioinput">
-                  <label>Are you a tenant or a landlord?</label><br></br>
-                  <label>Tenant</label>
-                    <input type="radio" 
-                    name="Type" value="Tenant" 
-                    checked={newUser.Type === "Tenant"} 
-                    onChange={handleUserChange}></input>
-
-                  <label>Landlord</label>
-                    <input type="radio" 
-                    name="Type" value="Landlord" 
-                    checked={newUser.Type === "Landlord"} 
-                    onChange={handleUserChange}></input>
-                  </span>
-
                   <div style={{gridArea:"8/1/span 1/span 4", marginTop:"20px"}}>  
+                    <button 
+                        onClick={() => navigate("/profile")}
+                        style={{width:"fit-content"}}>
+                        Back to Profile
+                    </button>
                     <button 
                       style={{width:"fit-content"}}
                       type="submit" 

@@ -5,8 +5,14 @@
   text-align: center;
 }
 
-h1 {
+@font-face {
   font-family: OceanWide;
+  src: url(./assets/Oceanwide-Semibold.otf);
+}
+
+
+h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h2,h3,h4,h5,h6,p{

@@ -66,6 +66,7 @@ CREATE TABLE reviews(
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
 
+<<<<<<< HEAD
 
 CREATE TABLE comments(
     CommentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -89,12 +90,18 @@ CREATE TABLE answers(
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
 
+=======
+>>>>>>> main
 INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
 ('Flat 9, Basin Mill, Laburnum Street, London E2 8FP, UK', 51.4987703, -0.0421737),
 ('123A Hammersmith Grove, London W6 0NJ, UK', 51.4990214, -0.2281128),
 ('65-89 Brondesbury Villas, London NW6 6AG, UK', 51.5361797, -0.1971449),
 ('119 Ashfield Street, London E1 3EX, UK', 51.5169185, -0.0543013),
+<<<<<<< HEAD
 ('84 Stork''s Road, London SE16 4DP, UK', 51.4954534, -0.0641014),
+=======
+("84 Stork's Road, London SE16 4DP, UK", 51.4954534, -0.0641014),
+>>>>>>> main
 ('2 Shoreditch High Street, London EC2A 2BA, UK', 51.5220985, -0.0788474),
 ('40 Osborn Terrace, London SE3 9GB, UK', 51.4577030, 0.0119778),
 ('206, 148 Christchurch Way, London SE10 0XG, UK', 51.4900827, 0.0051548),
@@ -108,7 +115,10 @@ INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
 ('112A Copenhagen Street, London N1 0SG, UK', 51.5369680, -0.1155448),
 ('3B, 39 Petherton Road, London N5 2QX, UK', 51.5524279, -0.0906993);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 INSERT INTO users (FirstName, LastName, UserName, EmailAddress, Password, Age, Type) VALUES
 ('John', 'Doe', 'johndoe', 'john.doe@example.com', '$2b$10$Bfsl/pQiO0B06TBy/hugWe7wRSKbtXYxehmBPu6cV91gu1x0Us2WS', 30, 'Tenant'),
 ('Jane', 'Smith', 'janesmith', 'jane.smith@example.com', '$2b$10$Ow9VbSdjtwg4Yc8i0DI9x.r9z7hN2/5iGtLMLt84lAVjuF5Z0eK9i', 25, 'Tenant'),
@@ -138,6 +148,7 @@ INSERT INTO reviews (UserID, PropertyID, ReviewDate, Rating1, Rating2, Rating3, 
 (6, 1, '2023-08-30', 3, 3, 3, 3, 3, 3, 3, 'It was okay, not great.', '2021-08-01', '2023-08-01'),
 (1, 9, '2023-09-01', 5, 5, 5, 5, 5, 5, 5, 'Fantastic place, highly recommend.', '2021-09-01', '2023-09-01'),
 (2, 2, '2023-09-05', 4, 4, 4, 4, 4, 4, 4, 'Good location, decent stay.', '2021-10-01', '2023-10-01'),
+(4, 16, '2023-09-05', 4, 4, 4, 4, 4, 4, 4, 'Good location, decent stay.', '2021-10-01', '2023-10-01'),
 (3, 1, '2023-09-10', 3, 3, 3, 3, 3, 3, 3, 'Average place, had some issues.', '2021-11-01', '2023-11-01'),
 (4, 12, '2023-09-15', 5, 5, 5, 5, 5, 5, 5, 'Excellent property, very satisfied.', '2021-12-01', '2023-12-01'),
 (5, 13, '2023-09-20', 4, 4, 4, 4, 4, 4, 4, 'Good place, would recommend.', '2022-01-01', '2024-01-01');

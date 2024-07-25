@@ -1,7 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from "axios"
 
-export default function AddressForm({hanleNextStep}){
+import AddReviewContext from '../context/AddReviewContext'
+import AddPropertyContext from '../context/AddPropertyContext'
+
+export default function AddressForm({handleNextStep}){
     
     const emptyAddress = {
         line1:'',
@@ -11,9 +14,10 @@ export default function AddressForm({hanleNextStep}){
         postcode:'',
     }
 
+    let {reviewInfo,setReviewInfo} = useContext(AddReviewContext)
+
     const [address, setAddress] = useState(emptyAddress)
     const [validatedAddress, setValidatedAddress] = useState({});
-    const [propertyAdded, setPropertyAdded] = useState(false)
     const [postCodeValid, setPostCodeValid] = useState(true) // use this to change styling of input ?
 
     function handleChange(e){
@@ -24,14 +28,13 @@ export default function AddressForm({hanleNextStep}){
         });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        // console.log(address)
-
-        validateAddress(address)
-
-        // if successful -> handleNextStep(e)
-        if (propertyAdded) handleNextStep(e)
+        const validateAddress01 = await validateAddress(address)
+        if(validateAddress01){
+            addNewProperty(validateAddress01)
+            handleNextStep(e)
+        }
     }
 
     const validateAddress = async (a) => {
@@ -56,12 +59,12 @@ export default function AddressForm({hanleNextStep}){
                 const location = response.data.result.geocode.location
                 const [Latitude, Longitude] = [location.latitude, location.longitude]
 
-                setValidatedAddress({FormattedAddress, Latitude, Longitude})
-                // setAddress(emptyAddress)
-                setPostCodeValid(true)
+                setPostCodeValid(true) // for styling purposes only
 
+                const validatedAddress = { FormattedAddress, Latitude, Longitude };
                 console.log(validatedAddress)
-                addNewProperty(validatedAddress)
+                return validatedAddress
+                // addNewProperty(validatedAddress)
 
             } else {
                 console.log('MISSING COMPONENT')
@@ -74,7 +77,8 @@ export default function AddressForm({hanleNextStep}){
             }
 
         } catch (error) {
-          console.error(error);
+          console.log(error);
+          return null
         }
       };
 
@@ -82,9 +86,14 @@ export default function AddressForm({hanleNextStep}){
         // console.log(ad)
         try {
             const data = await axios.post('/api/properties/', ad)
-            console.log(data) //returns the last property that was added
-            setPropertyAdded(true)
-            setValidatedAddress({})
+            console.log("adding property with id: ", data.data[0].PropertyID) //returns the last property that was added
+            // setPropertyAdded(true)
+            let propertyID = data.data[0].PropertyID
+            let newReview = {...reviewInfo};
+            newReview.PropertyID=propertyID
+            setReviewInfo(newReview);
+
+            setAddress({})
             
         } catch(e){
           console.log(e)

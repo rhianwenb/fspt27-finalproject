@@ -1,5 +1,4 @@
-
-#registeruser form {
+#edituser form {
     display: grid;
     grid-template-columns: 160%;
     grid-column-start: span;
@@ -9,12 +8,12 @@
     margin: auto;
 }
 
-#registeruser form label {
+#edituser form label {
     padding: 5px;
     text-align: left;
 }
 
-#registeruser form input[type=text] {
+#edituser form input[type=text] {
     width:100%;
     box-sizing: border-box;
     padding: 5px;
@@ -22,11 +21,11 @@
 }
 
 
-#registeruser form input:active{
+#edituser form input:active{
     border-color: #3580D2;
 }
 
-#registeruser form button {
+#edituser form button {
     background-color: #3580D2;
     color:white;
     border:none;
@@ -36,6 +35,6 @@
     border-radius: 2px;
 }
 
-#registeruser form button:hover {
+#edituser form button:hover {
     background-color: #4DBEFF;
 }

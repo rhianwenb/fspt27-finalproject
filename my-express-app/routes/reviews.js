@@ -55,8 +55,14 @@ router.get("/user/:id", async (req, res, next) => {
 
 //GET reviews by PropertyID
 router.get("/property/:id", async (req,res,next) => {
+  let propertyID = req.params.id
+  console.log(propertyID)
   try{
-    const result = await db(`SELECT reviews.*, users.UserName, properties.FormattedAddress FROM reviews LEFT JOIN users ON reviews.UserID = users.UserID LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID WHERE reviews.PropertyID = ${req.params.id}`);
+    const result = await db(
+      `SELECT reviews.*, users.UserName, properties.FormattedAddress FROM reviews 
+      LEFT JOIN users ON reviews.UserID = users.UserID 
+      LEFT JOIN properties ON reviews.PropertyID = properties.PropertyID 
+      WHERE reviews.PropertyID = ${propertyID}`);
     res.status(200).send(result.data);
   }
   catch(e){

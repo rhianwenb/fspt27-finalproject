@@ -1,0 +1,47 @@
+.popup {
+    /* position: absolute;
+    margin: auto;
+    bottom: 18vh;;
+    left: 10vw;
+    width: 25%; */
+    border: 3px solid #3580D2;;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.popup-header h2 {
+    padding-top:5px;
+    margin: 0;
+    font-size: 16px;
+}
+.popup-body {
+    padding: 10px;
+}
+.rating {
+    color: #FF9900;
+}
+.tags {
+    margin-top: 10px;
+}
+
+.popup-footer .button {
+    text-align:right;
+    margin:5px;
+}
+
+.p {
+    vertical-align: sub;
+}
+
+.sm {
+    width: 100px;
+    height:20px;
+    background-image: linear-gradient(to right, red 30%, blue 30%);
+    -webkit-mask-image: url('../assets/star.svg');
+    mask-image: url('../assets/star.svg'); /* Standard */
+    mask-size: contain;
+    mask-repeat: repeat-x;
+    mask-position: 0 0, 100px 0; /* Position masks side by side */
+    margin:auto;
+}

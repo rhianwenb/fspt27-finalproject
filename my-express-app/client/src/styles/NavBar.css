@@ -8,7 +8,7 @@
     box-sizing: border-box;
     position: fixed;
     left: 5%;
-    top:85vh;
+    bottom:1vh;
 }
 
 #navbar button {
@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-#navbar .inactive svg:hover{
+#navbar .inactive svg:hover {
     fill: #4DBEFF;
 } 
 
