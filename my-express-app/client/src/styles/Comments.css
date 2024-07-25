@@ -3,7 +3,7 @@
 }
 
 .comment {
-    width: 50%;
+    width: 60%;
     background-color: #ebebeb;
     text-align: left;
     padding:10px;
@@ -11,14 +11,27 @@
     margin:15px 0
 }
 
+.answer {
+    width:60%;
+    text-align: right;
+    background-color: #d9d9d9;
+    padding:10px;
+    border-radius: 3px;
+    margin: 15px 0 15px 40%
+}
+
 .comment p {
     margin: 5px 0px
 }
 
 
-.comment .username, .comment .date {
+.comment .username, .comment .date, .answer .username, .answer .date {
     font-size: 0.8em;
     margin:0
+}
+
+.comment .username, .answer .username {
+    color:  #4DBEFF;
 }
 
 #Comments form{

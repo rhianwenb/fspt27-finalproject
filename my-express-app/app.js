@@ -8,6 +8,7 @@ var propertyRouter = require('./routes/properties');
 var usersRouter = require('./routes/users');
 var reviewsRouter = require('./routes/reviews');
 var commentsRouter = require('./routes/comments');
+var answersRouter = require('./routes/answers');
 
 var app = express();
 
@@ -26,5 +27,6 @@ app.use('/api/properties', propertyRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use("/api/comments", commentsRouter);
+app.use("/api/answers", answersRouter);
 
 module.exports = app;
