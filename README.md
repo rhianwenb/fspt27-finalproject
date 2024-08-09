@@ -49,11 +49,11 @@ This app was created by Rhianwen, Orlane and Clio as our final project for the C
 - Check that migration has been successful in Postman by running the following requests:  
 
     GET:
-        http://localhost:4000/api/properties
-        http://localhost:4000/api/users
-        http://localhost:4000/api/reviews
-        http://localhost:4000/api/comments
-        http://localhost:4000/api/answers
+  - http://localhost:4000/api/properties
+  - http://localhost:4000/api/users
+  - http://localhost:4000/api/reviews
+  - http://localhost:4000/api/comments
+  - http://localhost:4000/api/answers
 
 ## Usage
 
@@ -64,8 +64,6 @@ This app was created by Rhianwen, Orlane and Clio as our final project for the C
 ## Acknowledgements
 
 We would like to thank [**CodeOp**](https://codeop.tech) for their support in developing this project.
-
-*(Additional acknowledgements, including our names, will be added here.)*
 
 ## Contact
 
