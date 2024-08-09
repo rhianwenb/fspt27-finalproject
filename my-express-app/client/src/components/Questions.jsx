@@ -124,7 +124,7 @@ export default function Comments({id}) {
                                 {/* <button>See all answers</button> */}
                         </div>
                         </div>
-                        {answers.filter(a=>a.CommentID===c.CommentID).map(a=>(
+                        {answers && answers.filter(a=>a.CommentID===c.CommentID).map(a=>(
                             <div key={a.AnswerID} className='answer'>
                                 <p className='username'>{a.UserName}</p>
                                 <p>{a.Text}</p>

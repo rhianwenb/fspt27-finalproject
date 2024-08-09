@@ -28,11 +28,15 @@ export default function Property() {
 
     function getAverageRating(review){
       //Loop through all objects in an array, and get Rating 1
-      // console.log(review)
-      let ratings = review.map(item=>item.Rating1);
+      console.log(review)
+      if(review){
+        let ratings = review.map(item=>item.Rating1);
       let average = ratings.reduce((a,b)=>a+b) / ratings.length
-
       setAverageReview((average*100)/5);
+
+      }
+      
+
       }
       
   
@@ -47,8 +51,11 @@ export default function Property() {
      function getReviews(){
         axios.get(`/api/reviews/property/${id}`)
         .then(response=>{
-          setReviews(response.data);
+          if(response.data[0]){
+            setReviews(response.data);
           getAverageRating(response.data)
+          }
+          
         })
         .catch(err=>{
           console.log(err)

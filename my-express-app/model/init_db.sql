@@ -66,7 +66,6 @@ CREATE TABLE reviews(
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
 
-<<<<<<< HEAD
 
 CREATE TABLE comments(
     CommentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -90,18 +89,12 @@ CREATE TABLE answers(
     FOREIGN KEY (PropertyID) REFERENCES properties(PropertyID)
 );
 
-=======
->>>>>>> main
 INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
 ('Flat 9, Basin Mill, Laburnum Street, London E2 8FP, UK', 51.4987703, -0.0421737),
 ('123A Hammersmith Grove, London W6 0NJ, UK', 51.4990214, -0.2281128),
 ('65-89 Brondesbury Villas, London NW6 6AG, UK', 51.5361797, -0.1971449),
 ('119 Ashfield Street, London E1 3EX, UK', 51.5169185, -0.0543013),
-<<<<<<< HEAD
-('84 Stork''s Road, London SE16 4DP, UK', 51.4954534, -0.0641014),
-=======
-("84 Stork's Road, London SE16 4DP, UK", 51.4954534, -0.0641014),
->>>>>>> main
+('84 Storks Road, London SE16 4DP, UK', 51.4954534, -0.0641014),
 ('2 Shoreditch High Street, London EC2A 2BA, UK', 51.5220985, -0.0788474),
 ('40 Osborn Terrace, London SE3 9GB, UK', 51.4577030, 0.0119778),
 ('206, 148 Christchurch Way, London SE10 0XG, UK', 51.4900827, 0.0051548),
@@ -115,10 +108,7 @@ INSERT INTO properties (FormattedAddress, Latitude, Longitude) VALUES
 ('112A Copenhagen Street, London N1 0SG, UK', 51.5369680, -0.1155448),
 ('3B, 39 Petherton Road, London N5 2QX, UK', 51.5524279, -0.0906993);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 INSERT INTO users (FirstName, LastName, UserName, EmailAddress, Password, Age, Type) VALUES
 ('John', 'Doe', 'johndoe', 'john.doe@example.com', '$2b$10$Bfsl/pQiO0B06TBy/hugWe7wRSKbtXYxehmBPu6cV91gu1x0Us2WS', 30, 'Tenant'),
 ('Jane', 'Smith', 'janesmith', 'jane.smith@example.com', '$2b$10$Ow9VbSdjtwg4Yc8i0DI9x.r9z7hN2/5iGtLMLt84lAVjuF5Z0eK9i', 25, 'Tenant'),
@@ -163,7 +153,7 @@ INSERT INTO comments (UserID, PropertyID, CommentDate, Text) VALUES
 (6, 3, '2023-07-06', 'Is parking easily available here?'),
 (1, 4, '2023-07-07', 'Are there good schools near Ashfield Street?'),
 (2, 4, '2023-07-08', 'How is the nightlife in this area?'),
-(3, 5, '2023-07-09', 'Is the public transport reliable around Stork\'s Road?'),
+(3, 5, '2023-07-09', 'Is the public transport reliable around Storks Road?'),
 (4, 5, '2023-07-10', 'Any issues with damp or mold in the property?'),
 (5, 6, '2023-07-11', 'Is Shoreditch High Street noisy during weekends?'),
 (6, 6, '2023-07-12', 'How is the internet connectivity here?'),
@@ -176,7 +166,7 @@ INSERT INTO comments (UserID, PropertyID, CommentDate, Text) VALUES
 (1, 10, '2023-07-19', 'How is the commute from Reliance Wharf to central London?'),
 (2, 10, '2023-07-20', 'Is it a pet-friendly neighborhood?'),
 (3, 11, '2023-07-21', 'Are there frequent power cuts in this area?'),
-(4, 11, '2023-07-22', 'Any good cafes around Saint James\'s Road?'),
+(4, 11, '2023-07-22', 'Any good cafes around Saint James Road?'),
 (5, 12, '2023-07-23', 'How is the water pressure in the property?'),
 (6, 12, '2023-07-24', 'Is there a playground for kids nearby?'),
 (1, 13, '2023-07-25', 'Are there any upcoming construction projects near Gloucester Street?'),
@@ -193,8 +183,8 @@ INSERT INTO comments (UserID, PropertyID, CommentDate, Text) VALUES
 -- Insert dummy data into answers table
 INSERT INTO answers (CommentID, UserID, PropertyID, AnswerDate, Text) VALUES
 (1, 2, 1, '2023-07-02', 'I lived there for two years and always felt safe, even when walking home late at night.'),
-(1, 3, 1, '2023-07-03', 'It\'s generally safe, but there was a break-in a few months ago.'),
-(2, 3, 1, '2023-07-03', 'There\'s a fantastic local grocery store just around the corner that has everything you need.'),
+(1, 3, 1, '2023-07-03', 'Its generally safe, but there was a break-in a few months ago.'),
+(2, 3, 1, '2023-07-03', 'Theres a fantastic local grocery store just around the corner that has everything you need.'),
 (4, 1, 2, '2023-07-05', 'The parks are beautiful and great for a morning jog or an evening stroll.'),
 (4, 5, 2, '2023-07-06', 'There are a few parks, but they can get quite crowded on weekends.'),
 (5, 1, 3, '2023-07-06', 'I never had issues with noise, but I heard that the street can be busy during rush hours.'),
