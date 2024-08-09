@@ -36,7 +36,7 @@ This app was created by Rhianwen, Orlane and Clio as our final project for the C
 - Access the MySQL interface in your terminal by running `mysql -u root -p`
 - Create a new database called Next Tenant: `create database next_tenant `
 - Check the `.env` file has YOUR MySQL password and username.
-- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create five tables called 'users', 'properties', 'reviews', 'comments' and 'answers' in your database. When this command is run, dummy data is also added to the database. 
+- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create five tables called 'users', 'properties', 'reviews', 'comments' and 'answers' in your database. When this command is run, dummy data is also added to the database. The passwords for all users in the dummy data is 'password123'. 
 
 ### Development
 
@@ -73,5 +73,7 @@ You can reach us through our GitHub or LinkedIn page for any inquiries or feedba
 - [Clio von Petersdorff](www.linkedin.com/in/clio-von-petersdorff)
 
 ## Screenshots
-
+![screencapture-add-review](https://github.com/user-attachments/assets/5c278d02-4f20-488b-8c7c-0e0f46d3cdb2)
+![screencapture-map](https://github.com/user-attachments/assets/2697f124-3ebf-4c5b-9b48-88043424f79a)
+![screencapture-profile](https://github.com/user-attachments/assets/04100657-908a-44a6-a5c1-0008b2099d13)
 
