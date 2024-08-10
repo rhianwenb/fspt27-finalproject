@@ -130,6 +130,12 @@
 @media screen and (max-width:500px){
     #addareview form {
         width:100%;
+        grid-template-columns: 1fr 4fr 4fr 1fr;
+    }
+
+    #addareview textarea {
+        margin-top: 20px;
+        min-height: 100px;
     }
 
     #stepsAddReview {
@@ -138,5 +144,14 @@
 
     #addareview form p {
         margin:8px  0px;
+    }
+
+    #step3 div {
+        width: 100%;
+    }
+
+
+    #step3 p {
+        font-size: 0.8em;
     }
 }

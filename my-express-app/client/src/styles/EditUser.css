@@ -1,10 +1,10 @@
 #edituser form {
     display: grid;
-    grid-template-columns: 160%;
-    grid-column-start: span;
+    /* grid-template-columns: repeat(1,1fr);
+    grid-column-start: span; */
     justify-content: center;
-    gap: 0px, 20px;
-    width: max-content;
+    /* gap: 0px, 20px; */
+    /* width: max-content; */
     margin: auto;
 }
 
@@ -14,7 +14,6 @@
 }
 
 #edituser form input[type=text] {
-    width:100%;
     box-sizing: border-box;
     padding: 5px;
     border:1px solid #3580D2;

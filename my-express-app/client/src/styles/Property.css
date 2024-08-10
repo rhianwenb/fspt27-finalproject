@@ -41,3 +41,11 @@
 #Property .review button:hover {
     background-color: #4DBEFF;
 }
+
+
+
+@media screen and (max-width:600px) {
+    #Property {
+        width:100%;
+    }
+}
