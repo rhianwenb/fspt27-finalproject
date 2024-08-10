@@ -57,3 +57,9 @@
 .buttonReview:hover {
     background-color: #4DBEFF ;
 }
+
+@media screen and (max-width:600px) {
+    .callout {
+        width: 100%;
+    }
+}

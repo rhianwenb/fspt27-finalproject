@@ -131,7 +131,7 @@ export default function EditUser() {
                   </label> 
            
             
-                  <div style={{gridArea:"8/1/span 1/span 4", marginTop:"20px"}}>  
+                  <div style={{gridArea:"8/1/span 1/span 7", marginTop:"20px"}}>  
                     <button 
                         onClick={() => navigate("/profile")}
                         style={{width:"fit-content"}}>

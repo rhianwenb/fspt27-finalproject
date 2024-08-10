@@ -138,7 +138,7 @@ export default function RegisterUser() {
                     onChange={handleUserChange}></input>
                   </span>
 
-                  <div style={{gridArea:"8/1/span 1/span 4", marginTop:"20px"}}>  
+                  <div style={{gridArea:"8/1/span 1/span 7", marginTop:"20px"}}>  
                     <button 
                       style={{width:"fit-content"}}
                       type="submit" 

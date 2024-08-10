@@ -1,11 +1,13 @@
 
+
 #registeruser form {
     display: grid;
-    grid-template-columns: 160%;
-    grid-column-start: span;
+    width: 100%;
+    /* grid-template-columns: 160%;
+    grid-column-start: span; */
     justify-content: center;
-    gap: 0px, 20px;
-    width: max-content;
+    /* gap: 0px, 20px; */
+    /* width: max-content; */
     margin: auto;
 }
 
@@ -38,4 +40,14 @@
 
 #registeruser form button:hover {
     background-color: #4DBEFF;
+}
+
+@media screen and (max-width:600px) {
+    #registeruser form {
+        justify-content: stretch;
+    }
+
+    #registeruser h4{
+        font-size: 1.2em;
+    }
 }

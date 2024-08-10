@@ -70,3 +70,13 @@
 .buttonsComments *:hover{
     color:#FF9900
 }
+
+@media screen and (max-width:600px) {
+    .comment {
+        width:80%;
+    }
+    .answer {
+        width: 80%;
+        margin: 15px 0 15px 20%
+    }
+}
